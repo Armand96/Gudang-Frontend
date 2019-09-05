@@ -1,0 +1,58 @@
+<ion-content scoll-x="true">
+    <div class="container-fluid" class="m-3">
+      
+      <div class="row mb-2">
+        <div class="col text-center text-sm-left">
+          <ion-button shape="round" routerLink="/menu/tambahbarang">
+            <ion-icon slot="start" name="add"></ion-icon>
+            Tambah Barang Baru
+          </ion-button>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="landscape">
+        <div class="col">
+            <div class="table-responsive">
+              <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+                <thead class="bg-primary text-white">
+                  <tr>
+                    <th>Nomor Barang</th>
+                    <th>Nama Barang</th>
+                    <th>Satuan</th>
+                    <th>Kuantitas</th>
+                    <th>Harga per Satuan</th>
+                    <th>Detail</th>
+                  </tr>
+                </thead>
+                <!-- <tfoot class="bg-primary text-white">
+                  <tr>
+                    <th>Nomor Barang</th>
+                    <th>Deskripsi Barang</th>
+                    <th>Satuan</th>
+                    <th>Kuantitas</th>
+                    <th>Harga per Satuan</th>
+                    <th>Detail</th>
+                  </tr>
+                </tfoot> -->
+              </table>
+            </div>
+        </div>
+      </div>  
+        
+    </div>
+
+    <ion-list lines="full">
+
+      <ion-item *ngFor="let item of data">
+        <ion-label>
+          <h3> <b>Nomor Barang:</b>  {{item.nomor_barang}}</h3>
+          <h4> <b>Nama Barang: </b>  {{item.nama_barang}}</h4>
+          <h4> <b>Satuan : </b>  {{item.satuan}}</h4>
+          <h4> <b>Kuantitas : </b>  {{item.kuantitas}}</h4>
+          <h4> <b>Harga : </b>  {{item.harga_satuan | currency:'Rp '}}</h4>
+        </ion-label>
+      </ion-item>
+
+    </ion-list>
+
+</ion-content>

@@ -1,0 +1,59 @@
+<ion-content class="container-fluid">
+
+    <div class="row d-flex justify-content-center m-2">
+      <ion-card class="col-lg-5 p-0">
+  
+        <ion-card-header color="primary p-2">
+          <ion-card-title>              
+            <h3 class="text-center">Detail Barang</h3>
+          </ion-card-title>
+        </ion-card-header>
+  
+        <ion-card-content>
+  
+          <form [formGroup]="editbarang" (ngSubmit)="editBarang(editbarang.value)">
+  
+            <ion-item>
+              <ion-label position="floating">Nomor Barang</ion-label>
+              <ion-input type="text" name="nomorbarang" maxlength="10" clearInput formControlName="nomor_barang" required disabled></ion-input>
+            </ion-item>
+  
+            <ion-item>
+              <ion-label position="floating">Nama Barang</ion-label>
+              <ion-input type="text" name="namabarang" maxlength="100" clearInput formControlName="nama_barang" required [disabled]="!editmode"></ion-input>
+            </ion-item>
+  
+            <ion-item>
+              <ion-label position="floating">Satuan</ion-label>
+              <ion-input type="text" name="satuan" clearInput formControlName="satuan" maxlength="5" required [disabled]="!editmode"></ion-input>
+            </ion-item>
+  
+            <ion-item>
+              <ion-label position="floating">Kuantitas</ion-label>
+              <ion-input type="number" inputmode="numeric" name="kuantitas" clearInput formControlName="kuantitas" disabled></ion-input>
+            </ion-item>
+  
+            <ion-item>
+              <ion-label position="floating">Harga(Rp)</ion-label>
+              <ion-input type="number" inputmode="numeric" name="harga_satuan" clearInput formControlName="harga_satuan" disabled></ion-input>
+            </ion-item>
+  
+            <br>
+  
+            <ion-button expand="block" type="button" color="primary" [disabled]="editmode" (click)="editmode = true">
+              Edit
+            </ion-button>
+
+            <ion-button expand="block" type="submit" color="primary" [disabled]="!editbarang.valid || !editmode">
+              Simpan
+            </ion-button>
+  
+          </form>
+  
+        </ion-card-content>
+  
+      </ion-card>
+    </div>
+    
+  
+  </ion-content>
