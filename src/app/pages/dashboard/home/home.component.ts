@@ -10,15 +10,22 @@ export class HomeComponent implements OnInit {
 
   constructor(private func:FunctionService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.isLoading = true;
+
     this.loadCountBarangKeluar();
     this.loadCountBarangMasuk();
     this.loadCountJenisBarang();
+
+    await this.func.delay(2000);
+    
+    this.isLoading = false;
   }
 
   jenisbarang;
   barangmasuk;
   barangkeluar;
+  isLoading:Boolean;
 
   loadCountJenisBarang(){
     var LTJB = this.func.getDataWithoutParams('countbarang').subscribe(

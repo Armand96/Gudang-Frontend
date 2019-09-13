@@ -3,6 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastController, LoadingController, Platform } from '@ionic/angular';
 import { Subject } from 'rxjs';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
 
 
 @Injectable({
@@ -10,16 +15,18 @@ import { Subject } from 'rxjs';
 })
 export class FunctionService {
 
+  // ================================================ HTTP SEND REQUEST SETTING ================================================
   public api_token = (localStorage.getItem('api_token') == null) ? "" : localStorage.getItem('api_token');
   public url:string = "http://api.data/api/";
   public dtHeaders = {
     'Authorization':'apl '+this.api_token,
     'Content-Type':'application/json'
   }
+  // ================================================ HTTP SEND REQUEST SETTING ================================================
+
   public user = (localStorage.getItem('username') == null) ? "" : localStorage.getItem('username');
   public landscape = new Subject<Boolean>();
-  
-  func: any;
+  public widths = Math.round(this.plat.width() / 2);
   
   constructor(
     public plat: Platform,
@@ -29,16 +36,33 @@ export class FunctionService {
     private toast:ToastController,
     public loading: LoadingController
   ) {
-    window.onresize = (e) =>
-    {
+    window.onresize = (e) => {
         //ngZone.run will help to run change detection
         this.ngZone.run(() => {
             this.landscape.next(this.plat.isLandscape());
         });
     };
-   }
+  }
 
-  async presentToast(msg:string, txtpos:string, clr?:string, dur?: number) {
+  // ========================================== EXCEL EXPORT ==========================================
+  public exportAsExcelFile(json: any[], excelFileName: string): void {
+    
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+    console.log('worksheet',worksheet);
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    //const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
+    this.saveAsExcelFile(excelBuffer, excelFileName);
+  }
+
+  private saveAsExcelFile(buffer: any, fileName: string): void {
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+  }
+  // ========================================== EXCEL EXPORT ==========================================  
+  public async presentToast(msg:string, txtpos:string, clr?:string, dur?: number) {
     
     dur = (dur) ? dur : 2000;
 
@@ -52,23 +76,23 @@ export class FunctionService {
     toast.present();
   }
 
-  postData(data, path:string){
+  public postData(data, path:string){
     return this.http.post(this.url+path, data, {headers:this.dtHeaders});
   }
 
-  getDataWithoutParams(path:string){ 
+  public getDataWithoutParams(path:string){ 
     return this.http.get(this.url+path, {headers:this.dtHeaders});
   }
 
-  getDataWithParams(params:string, path:string){
+  public getDataWithParams(params:string, path:string){
     return this.http.get(this.url+path+params, {headers:this.dtHeaders});
   }
 
-  delay(ms: number) {
+  public delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
-  checkLogin(token){
+  public checkLogin(token){
     
     if (token == ""){
       this.router.navigateByUrl('/login');
@@ -93,7 +117,7 @@ export class FunctionService {
 
   }
 
-  async presentLoadingWithOptions() {
+  public async presentLoadingWithOptions() {
     const loading = await this.loading.create({
       spinner: "crescent",
       duration: 1000,
@@ -105,7 +129,7 @@ export class FunctionService {
   }
   
   // ================== Mengubah angka menjadi kalimat
-  terbilang(bilangan:any) {
+  public terbilang(bilangan:any) {
 
     bilangan    = String(bilangan);
     var angka   = new Array('0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0');

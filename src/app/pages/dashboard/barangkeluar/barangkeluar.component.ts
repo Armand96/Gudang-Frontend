@@ -12,35 +12,37 @@ import { EventEmitterService } from 'src/app/core/event-emitter.service';
 export class BarangkeluarComponent implements OnInit, OnDestroy {
   
   ngOnDestroy(): void {
-    this.func.landscape.unsubscribe();
-    this.eventEmitterService.invokeFirstComponentFunction.unsubscribe();
+    this.subsEvent.unsubscribe();
+    this.screenEvent.unsubscribe();
   }
+
+  subsEvent;
+  screenEvent; 
 
   landscape:Boolean;
   data;
   temp = [];
 
-  constructor(
-    private router:Router, 
-    private renderer:Renderer, 
+  constructor( 
     private func:FunctionService,
     private plat:Platform,
     private eventEmitterService:EventEmitterService 
-  ) {
-    this.func.landscape.subscribe(
+  ) {}
+
+  ngOnInit() {
+    this.screenEvent = this.func.landscape.subscribe(
       resp=>{
         this.landscape = resp;
       }
     )
-  }
-
-  ngOnInit() {
-    if (this.eventEmitterService.subsVar==undefined) {    
-      this.eventEmitterService.subsVar = this.eventEmitterService.    
+    
+    if (this.subsEvent==undefined) {    
+      this.subsEvent = this.eventEmitterService.    
       invokeFirstComponentFunction.subscribe(() => {  
         this.reinit();
       });    
     }
+
     this.reinit();
   }
 
@@ -68,6 +70,14 @@ export class BarangkeluarComponent implements OnInit, OnDestroy {
     this.data = temp;
     // Whenever the filter changes, always go back to the first page
     // this.table.offset = 0;
+  }
+
+  exportAsXLSX():void {
+    this.data = this.data.filter( (props) =>{
+      delete props.id;
+      return true;
+    });
+    this.func.exportAsExcelFile(this.data, "Daftar Barang Keluar");
   }
 
   mobile(){

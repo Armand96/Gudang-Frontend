@@ -12,11 +12,13 @@ import { EventEmitterService } from 'src/app/core/event-emitter.service';
 export class ListbarangComponent implements OnInit, OnDestroy {
   
   ngOnDestroy(): void {
-    console.log("DESTROYYED");
-    this.eventEmitterService.invokeFirstComponentFunction.unsubscribe();
-    this.func.landscape.unsubscribe();
+    this.subsEvent.unsubscribe();
+    this.screenEvent.unsubscribe();
   }
   
+  subsEvent;
+  screenEvent; 
+
   dtOptions: DataTables.Settings = {};
   isLandScape:Boolean;
   data;
@@ -28,14 +30,9 @@ export class ListbarangComponent implements OnInit, OnDestroy {
     private func:FunctionService,
     private plat:Platform,
     private eventEmitterService:EventEmitterService
-  ) {
-    this.func.landscape.subscribe(
-      resp=>{
-        this.isLandScape = resp;
-      }
-    )
-  }
+  ) {}
 
+  // ========================== FILTER 
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
 
@@ -54,9 +51,16 @@ export class ListbarangComponent implements OnInit, OnDestroy {
     // this.table.offset = 0;
   }
 
+  // ======================== INIT
   public ngOnInit() {
-    if (this.eventEmitterService.subsVar==undefined) {    
-      this.eventEmitterService.subsVar = this.eventEmitterService.    
+    this.screenEvent = this.func.landscape.subscribe(
+      resp=>{
+        this.isLandScape = resp;
+      }
+    )
+    
+    if (this.subsEvent==undefined) {    
+      this.subsEvent = this.eventEmitterService.    
       invokeFirstComponentFunction.subscribe(() => {  
         this.reinit();
       });    
@@ -66,24 +70,21 @@ export class ListbarangComponent implements OnInit, OnDestroy {
 
   async reinit(){
     this.func.landscape.next(this.plat.isLandscape());
-    (this.func.landscape) ? this.descktop() : this.mobile();
+    this.LoadData();
     await this.func.delay(1000);
     this.temp = [...this.data];
   }
 
-  mobile(){
-    var subs = this.func.getDataWithoutParams('barangshowall').subscribe(
-      resp => {
-        if (resp['success']){
-          this.data = resp['data'];
-          console.log(this.data);
-        }
-        subs.unsubscribe();
-      }
-    );
+  // ====================== EXPORT AS EXCEL
+  exportAsXLSX():void {
+    this.data = this.data.filter( (props) =>{
+      delete props.dibuat_oleh;
+      return true;
+    });
+    this.func.exportAsExcelFile(this.data, "Daftar Barang");
   }
 
-  descktop(){
+  LoadData(){
     var subs = this.func.getDataWithoutParams('barangshowall').subscribe(
       resp => {
         if (resp['success']){

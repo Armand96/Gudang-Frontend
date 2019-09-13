@@ -1,49 +1,59 @@
-<div class="container-fluid mt-2">
+<ion-content scoll-y="true">
 
-  <div class="row">
+  <div class="container-fluid mt-2">
 
-    <ion-card class="col-sm p-0" >
+    <div class="row" *ngIf="isLoading">
+      <div class="col d-flex justify-content-center">
+        <ion-spinner name="crescent" color="primary" [style.width.px]="func.widths" [style.height.px]="func.widths"></ion-spinner>
+      </div>
+    </div>
 
-      <ion-card-header class="p-2" color="primary">
-        <ion-card-title>
-          <h5>Barang Keluar</h5>
-        </ion-card-title>
-      </ion-card-header>
+    <div class="row" *ngIf="!isLoading">
 
-      <ion-card-content class="p-3">
-        <h3>{{barangkeluar}}</h3>
-      </ion-card-content>
+      <ion-card class="col-sm p-0" >
 
-    </ion-card>
+        <ion-card-header class="p-2" color="primary">
+          <ion-card-title>
+            <h5>Barang Keluar</h5>
+          </ion-card-title>
+        </ion-card-header>
 
-    <ion-card class="col-sm p-0" >
+        <ion-card-content class="p-3">
+          <h2>{{barangkeluar}}</h2>
+        </ion-card-content>
 
-      <ion-card-header class="p-2" color="primary">
-        <ion-card-title>
-          <h5>Barang Masuk</h5>
-        </ion-card-title>
-      </ion-card-header>
+      </ion-card>
 
-      <ion-card-content class="p-3">
-        <h3>{{barangmasuk}}</h3>
-      </ion-card-content>
+      <ion-card class="col-sm p-0" >
 
-    </ion-card>
+        <ion-card-header class="p-2" color="primary">
+          <ion-card-title>
+            <h5>Barang Masuk</h5>
+          </ion-card-title>
+        </ion-card-header>
 
-    <ion-card class="col-sm p-0" >
+        <ion-card-content class="p-3">
+          <h2>{{barangmasuk}}</h2>
+        </ion-card-content>
 
-      <ion-card-header class="p-2" color="primary">
-        <ion-card-title>
-          <h5>Jenis Barang</h5>
-        </ion-card-title>
-      </ion-card-header>
+      </ion-card>
 
-      <ion-card-content class="p-3">
-        <h3>{{jenisbarang}}</h3>
-      </ion-card-content>
+      <ion-card class="col-sm p-0" >
 
-    </ion-card>
+        <ion-card-header class="p-2" color="primary">
+          <ion-card-title>
+            <h5>Jenis Barang</h5>
+          </ion-card-title>
+        </ion-card-header>
 
+        <ion-card-content class="p-3">
+          <h2>{{jenisbarang}}</h2>
+        </ion-card-content>
+
+      </ion-card>
+
+    </div>
+    
   </div>
-  
-</div>
+
+</ion-content>
