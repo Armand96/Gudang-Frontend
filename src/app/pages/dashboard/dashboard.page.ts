@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { FunctionService } from 'src/app/core/function.service';
 import { Router } from '@angular/router';
@@ -8,8 +8,13 @@ import { Router } from '@angular/router';
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage implements OnInit, OnDestroy {
+  
+  ngOnDestroy(): void {
+    this.func.landscape.unsubscribe();
+  }
 
+  textpos:Boolean = this.func.plat.isLandscape();
   pages = [
     {
       title: 'Dashboard',
@@ -48,18 +53,26 @@ export class DashboardPage implements OnInit {
     }
   ];
 
+  user = this.func.user;
+
   constructor(
     private menu: MenuController,
     private func: FunctionService,
     private router: Router
-    ) { }
+    ) {}
 
   async ngOnInit () {
     if(this.func.api_token == "" || this.func.api_token == null){
       this.router.navigateByUrl('/login');
     } else {
       await this.func.checkLogin(this.func.api_token);
-      this.router.navigateByUrl('/menu/dashboard');
+      this.user = this.func.user;
+      // this.router.navigateByUrl('/menu/dashboard');
+      this.func.landscape.subscribe(
+        resp=>{
+          this.textpos = resp ? true : false;
+        }
+      )
     }
     
   }
@@ -67,7 +80,6 @@ export class DashboardPage implements OnInit {
   logout(){
     localStorage.clear();
     this.func.user = "";
-    this.func.key = "";
     this.router.navigateByUrl('/login');
   }
 

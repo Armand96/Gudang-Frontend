@@ -40,16 +40,18 @@ export class LoginPage implements OnInit {
     this.data.username = val.username;
     this.data.userpassword = val.userpass;
 
+    this.func.presentLoadingWithOptions();
     var getIn = this.func.postData(this.data, 'login').subscribe(
-      resp => {
+      async resp => {
         if (resp['success']){
           
           this.func.api_token = resp['data']['api_token'];
-          this.func.user = resp['data'['api_token']];
+          this.func.user = resp['data']['username'];
 
           this.func.dtHeaders.Authorization = 'apl '+this.func.api_token;
-
-          localStorage.setItem('api_token', this.func.api_token);
+          
+          await localStorage.setItem('api_token', this.func.api_token);
+          await localStorage.setItem('username', this.func.user);
           this.router.navigateByUrl('/menu');
         }
         getIn.unsubscribe();

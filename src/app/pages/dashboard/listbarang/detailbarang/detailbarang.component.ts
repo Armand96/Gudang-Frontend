@@ -2,6 +2,8 @@ import { FunctionService } from 'src/app/core/function.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
+import { EventEmitterService } from 'src/app/core/event-emitter.service';
 
 @Component({
   selector: 'app-detailbarang',
@@ -22,7 +24,9 @@ export class DetailbarangComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private func: FunctionService,
-    private actr: ActivatedRoute
+    private actr: ActivatedRoute,
+    private navctrl: NavController,
+    private eventEmitter: EventEmitterService
   ) { 
     this.editbarang = this.fb.group({
       nomor_barang: ['', Validators.required],
@@ -60,8 +64,10 @@ export class DetailbarangComponent implements OnInit {
     var subs = this.func.postData(val, 'barangupdate').subscribe(
       async resp => {
         if (resp['success']){
-          await this.func.presentToast('Edit Berhasil', 'text-center', 'primary')
-          this.router.navigateByUrl('/menu/barang');
+          await this.func.presentToast('Edit Berhasil', 'text-center', 'primary');
+          this.router.navigateByUrl("menu/barang");
+          this.eventEmitter.onFirstComponentButtonClick();
+          // this.navctrl.navigateBack("/menu/barang");
         }
         subs.unsubscribe();
       }

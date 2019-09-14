@@ -1,22 +1,21 @@
-import { Component, OnInit, Renderer, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer } from '@angular/core';
 import { Router } from '@angular/router';
 import { FunctionService } from 'src/app/core/function.service';
 import { Platform } from '@ionic/angular';
 import { EventEmitterService } from 'src/app/core/event-emitter.service';
 
 @Component({
-  selector: 'app-barangmasuk',
-  templateUrl: './barangmasuk.component.html',
-  styleUrls: ['./barangmasuk.component.scss'],
+  selector: 'app-barangkeluar',
+  templateUrl: './barangkeluar.component.html',
+  styleUrls: ['./barangkeluar.component.scss'],
 })
-export class BarangmasukComponent implements OnInit, OnDestroy {
+export class BarangkeluarComponent implements OnInit, OnDestroy {
   
   ngOnDestroy(): void {
     this.func.landscape.unsubscribe();
     this.eventEmitterService.invokeFirstComponentFunction.unsubscribe();
   }
 
-  dtOptions: DataTables.Settings = {};
   landscape:Boolean;
   data;
   temp = [];
@@ -26,14 +25,14 @@ export class BarangmasukComponent implements OnInit, OnDestroy {
     private renderer:Renderer, 
     private func:FunctionService,
     private plat:Platform,
-    private eventEmitterService:EventEmitterService
+    private eventEmitterService:EventEmitterService 
   ) {
     this.func.landscape.subscribe(
       resp=>{
         this.landscape = resp;
       }
     )
-   }
+  }
 
   ngOnInit() {
     if (this.eventEmitterService.subsVar==undefined) {    
@@ -52,13 +51,13 @@ export class BarangmasukComponent implements OnInit, OnDestroy {
     await this.func.delay(1000);
     this.temp = [...this.data];
   }
-  
+
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
 
     // filter our data
     const temp = this.temp.filter((o)=>{
-      return ['nomor_barang', 'tgl_masuk', 'no_kontrak', 'asal_barang', 'jml_msk_angka'].some(
+      return ['proyek', 'no_order', 'nomor_barang', 'tgl_keluar', 'jml_klr_angka'].some(
         (k)=>{
           return o[k].toString().toLowerCase().indexOf(val) !== -1 || !val;
         }
@@ -72,7 +71,7 @@ export class BarangmasukComponent implements OnInit, OnDestroy {
   }
 
   mobile(){
-    var subs = this.func.getDataWithoutParams('barangmasukshowall').subscribe(
+    var subs = this.func.getDataWithoutParams('barangkeluarshowall').subscribe(
       resp => {
         if (resp['success']){
           this.data = resp['data'];
@@ -83,7 +82,7 @@ export class BarangmasukComponent implements OnInit, OnDestroy {
   }
 
   descktop() {
-    var subs = this.func.getDataWithoutParams('barangmasukshowall').subscribe(
+    var subs = this.func.getDataWithoutParams('barangkeluarshowall').subscribe(
       resp => {
         if (resp['success']){
           this.data = resp['data'];
@@ -92,48 +91,5 @@ export class BarangmasukComponent implements OnInit, OnDestroy {
       }
     );
   }
-
-  // desktop(){
-  //   this.dtOptions = {
-  //     ajax: {
-  //       url:this.func.url+"barangmasukshowall",
-  //       type:"GET",
-  //       headers: this.func.dtHeaders
-  //     },
-  //     columnDefs:[
-  //       {
-  //         className: "dt-center",
-  //         targets: "_all",
-  //         type: 'date-eu'
-  //       }
-  //     ],
-  //     columns: [
-  //       {data:"nomor_barang"},
-  //       {
-  //         data: "tgl_masuk",
-  //         render: (data)=>{
-  //           return this.datepipe.transform(data, "dd MMMM yyyy");
-  //         }
-  //       },
-  //       {data:"no_kontrak"},
-  //       {data:"asal_barang"},
-  //       {data:"jml_msk_angka"},
-  //       {
-  //         data:"id",
-  //         render: function (data: any, type: any, full: any) {
-  //           return '<td> <ion-button detailid="'+data+'"> Detail </ion-button> </td>';
-  //         }
-  //       },
-  //     ]
-  //   }
-  // }
-
-  // ngAfterViewInit(): void {
-  //   this.renderer.listen('document', 'click', (event) => {
-  //     if (event.target.hasAttribute("detailid")) {
-  //       this.router.navigateByUrl("/menu/editbarangmasuk/"+ event.target.getAttribute("detailid"));
-  //     }
-  //   });
-  // }
 
 }

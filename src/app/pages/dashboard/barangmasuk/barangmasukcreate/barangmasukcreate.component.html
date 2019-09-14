@@ -5,7 +5,7 @@
 
       <ion-card-header color="primary p-2">
         <ion-card-title>
-          <h3 class="text-center">Barang Baru</h3>
+          <h3 class="text-center">Barang Masuk</h3>
         </ion-card-title>
       </ion-card-header>
 
@@ -23,24 +23,26 @@
             <ion-input type="text" name="no_kontrak" maxlength="30" clearInput formControlName="no_kontrak" required></ion-input>
           </ion-item>
 
-          <ion-item>
-            <ion-label>Tgl Masuk</ion-label>
-            <ion-datetime displayFormat="DD/MM/YYYY" placeholder="Select Date" name="tgl_masuk" formControlName="tgl_masuk" required></ion-datetime>
-          </ion-item>
+          <!-- <ion-item>
+            <ion-label position="floating">Tgl Masuk</ion-label>
+            <ion-datetime displayFormat="DD MMMM YYYY" placeholder="Select Date" name="tgl_masuk" formControlName="tgl_masuk" required></ion-datetime>
+          </ion-item> -->
 
           <ion-item>
             <ion-label position="floating">Nomor Barang</ion-label>
-            <ion-input type="text" name="nomor_barang" clearInput formControlName="nomor_barang" required></ion-input>
+            <ion-select placeholder="Nomor Barang" formControlName="nomor_barang" name="nomor_barang" required>
+              <ion-select-option *ngFor="let item of NomorBarang" value="{{item.nomor_barang}}" > {{item.nomor_barang}} </ion-select-option>
+            </ion-select>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Jumlah Masuk (Angka)</ion-label>
-            <ion-input type="number" inputmode="numeric" name="jml_msk_angka" clearInput formControlName="jml_msk_angka" required></ion-input>
+            <ion-input type="number" inputmode="numeric" name="jml_msk_angka" clearInput formControlName="jml_msk_angka" required (change)="konversi(barangbarumasuk.value)"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Jumlah Masuk (Huruf)</ion-label>
-            <ion-input type="text" name="jml_msk_huruf" clearInput formControlName="jml_msk_huruf" required></ion-input>
+            <ion-input type="text" name="jml_msk_huruf" clearInput formControlName="jml_msk_huruf" required disabled></ion-input>
           </ion-item>
 
           <ion-item>

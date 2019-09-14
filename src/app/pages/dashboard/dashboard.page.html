@@ -46,7 +46,7 @@
           <ion-item (click)="logout()" style="cursor: pointer;">
               <ion-icon name="log-out" slot="start"></ion-icon>
               <ion-label>
-                Logout ({{func.user}})
+                Logout ({{user}})
               </ion-label>
           </ion-item>
       </ion-menu-toggle>
@@ -59,7 +59,10 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>
+      <ion-title class="text-center pl-0" *ngIf="!textpos">
+        Dok Kodja Bahari
+      </ion-title>
+      <ion-title *ngIf="textpos">
         Dok Kodja Bahari
       </ion-title>
     </ion-toolbar>

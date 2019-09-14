@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <div class="row" *ngIf="landscape">
+      <!-- <div class="row" *ngIf="landscape">
         <div class="col">
             <div class="table-responsive">
               <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
@@ -24,35 +24,91 @@
                     <th>Detail</th>
                   </tr>
                 </thead>
-                <!-- <tfoot class="bg-primary text-white">
-                  <tr>
-                    <th>Nomor Barang</th>
-                    <th>Deskripsi Barang</th>
-                    <th>Satuan</th>
-                    <th>Kuantitas</th>
-                    <th>Harga per Satuan</th>
-                    <th>Detail</th>
-                  </tr>
-                </tfoot> -->
               </table>
             </div>
         </div>
-      </div>  
+      </div>   -->
+      <div class="row">
+        <div class="col">
+          <ion-item>
+            <ion-label position="floating">Pencarian</ion-label>
+            <ion-input type="text" (keyup)="updateFilter($event)"></ion-input>
+          </ion-item>
+        </div>
+      </div>
+
+      <div *ngIf="landscape">
+        <ngx-datatable
+          [headerHeight]="50" [footerHeight]="50"
+          [rowHeight]="auto"
+          class="material striped"
+          [rows]="data"
+          reorderable="true"
+          [columnMode]="'force'"
+          [limit]="10"
+          >
+
+          <ngx-datatable-column name="Nomor Barang" prop="nomor_barang" headerClass="bg-primary text-white">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.nomor_barang}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Tanggal Masuk" prop="tgl_masuk" headerClass="bg-primary text-white">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.tgl_masuk | date:'dd MMMM yyyy'}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="No Kontrak" prop="no_kontrak" headerClass="bg-primary text-white">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.no_kontrak}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Asal Barang" prop="asal_barang" headerClass="bg-primary text-white">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.asal_barang}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Jumlah Masuk" prop="jml_msk_angka" headerClass="bg-primary text-white">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.jml_msk_angka}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Details" headerClass="bg-primary text-white">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <ion-button routerLink="/menu/editbarangmasuk/{{row.id}}"> Detail </ion-button>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+
         
     </div>
 
-    <!-- <ion-list lines="full">
+    <ion-list lines="full" *ngIf="!landscape">
 
-      <ion-item *ngFor="let item of data">
-        <ion-label>
-          <h3> <b>Nomor Barang:</b>  {{item.nomor_barang}}</h3>
-          <h4> <b>Nama Barang: </b>  {{item.nama_barang}}</h4>
-          <h4> <b>Satuan : </b>  {{item.satuan}}</h4>
-          <h4> <b>Kuantitas : </b>  {{item.kuantitas}}</h4>
-          <h4> <b>Harga : </b>  {{item.harga_satuan | currency:'Rp '}}</h4>
-        </ion-label>
-      </ion-item>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
-    </ion-list> -->
+      <ion-card *ngFor="let item of data | paginate: { itemsPerPage: 5, currentPage: p }" routerLink="/menu/editbarangmasuk/{{item.id}}">
+        
+        <ion-card-header color="primary" class="p-2">
+          <ion-card-title>
+            <h6 class="mb-0"> <b>Nomor Kontrak:</b>  {{item.no_kontrak}}</h6>
+          </ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-label >
+            <h4> <b>Nomor Barang: </b>  {{item.nomor_barang}}</h4>
+            <h4> <b>Tanggal Masuk : </b>  {{item.tgl_masuk | date:'dd MMMM yyyy'}}</h4>
+            <h4> <b>Asal Barang : </b>  {{item.asal_barang}}</h4>
+            <h4> <b>Jumlah Masuk : </b>  {{item.jml_msk_angka}}</h4>
+          </ion-label>
+        </ion-card-content>
+
+      </ion-card>
+
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+    </ion-list>
 
 </ion-content>

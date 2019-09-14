@@ -1,3 +1,71 @@
-<p>
-  barangmasukedit works!
-</p>
+<ion-content class="container-fluid">
+
+  <div class="row d-flex justify-content-center m-2">
+    <ion-card class="col-lg-5 p-0">
+
+      <ion-card-header color="primary p-2">
+        <ion-card-title>
+          <h3 class="text-center">Edit Barang Masuk</h3>
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <form [formGroup]="editbarangmasuk" (ngSubmit)="Simpan(editbarangmasuk.value)">
+
+          <ion-item>
+            <ion-label position="floating">Asal Barang</ion-label>
+            <ion-input type="text" name="asal_barang" maxlength="30" clearInput formControlName="asal_barang" required [disabled]="!editmode"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">No Kontrak</ion-label>
+            <ion-input type="text" name="no_kontrak" maxlength="30" clearInput formControlName="no_kontrak" required [disabled]="!editmode"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Tgl Masuk</ion-label>
+            <ion-datetime displayFormat="DD MMMM YYYY" placeholder="Select Date" name="tgl_masuk" formControlName="tgl_masuk" required disabled></ion-datetime>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Nomor Barang</ion-label>
+            <ion-select placeholder="Nomor Barang" formControlName="nomor_barang" name="nomor_barang" required [disabled]="!editmode">
+              <ion-select-option *ngFor="let item of NomorBarang" value="{{item.nomor_barang}}" > {{item.nomor_barang}} </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Jumlah Masuk (Angka)</ion-label>
+            <ion-input type="number" inputmode="numeric" name="jml_msk_angka" clearInput formControlName="jml_msk_angka" required (change)="konversi(editbarangmasuk.value)" disabled></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Jumlah Masuk (Huruf)</ion-label>
+            <ion-input type="text" name="jml_msk_huruf" clearInput formControlName="jml_msk_huruf" required disabled></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Keterangan</ion-label>
+            <ion-input type="text" name="keterangan" clearInput formControlName="keterangan" required [disabled]="!editmode"></ion-input>
+          </ion-item>
+
+          <br>
+
+          <ion-button expand="block" type="button" color="primary" [disabled]="editmode" (click)="editmode = true">
+            Edit
+          </ion-button>
+
+          <ion-button expand="block" type="submit" color="primary" [disabled]="!editbarangmasuk.valid || !editmode">
+            Simpan
+          </ion-button>
+
+        </form>
+
+      </ion-card-content>
+
+    </ion-card>
+  </div>
+  
+
+</ion-content>

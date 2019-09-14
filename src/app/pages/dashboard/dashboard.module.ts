@@ -1,20 +1,27 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
+import { NgxPaginationModule } from 'ngx-pagination';
 import { IonicModule } from '@ionic/angular';
-
-import { DashboardPage } from './dashboard.page';
-import { ListbarangComponent } from './listbarang/listbarang.component';
-import { HomeComponent } from './home/home.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DataTablesModule } from 'angular-datatables';
+import { IonicSelectableModule } from 'ionic-selectable';
+
+// =================================================== PAGES ===================================================
+import { DashboardPage } from './dashboard.page';
+import { HomeComponent } from './home/home.component';
 import { TambahbarangComponent } from './listbarang/tambahbarang/tambahbarang.component';
 import { DetailbarangComponent } from './listbarang/detailbarang/detailbarang.component';
 import { BarangmasukComponent } from './barangmasuk/barangmasuk.component';
 import { BarangmasukcreateComponent } from './barangmasuk/barangmasukcreate/barangmasukcreate.component';
-import { BarangmasukreadComponent } from './barangmasuk/barangmasukread/barangmasukread.component';
 import { BarangmasukeditComponent } from './barangmasuk/barangmasukedit/barangmasukedit.component';
+import { ListbarangComponent } from './listbarang/listbarang.component';
+import { BarangkeluarcreateComponent } from './barangkeluar/barangkeluarcreate/barangkeluarcreate.component';
+import { BarangkeluarComponent } from './barangkeluar/barangkeluar.component';
+import { BarangkeluareditComponent } from './barangkeluar/barangkeluaredit/barangkeluaredit.component';
+// =================================================== PAGES ===================================================
 
 const routes: Routes = [
   {
@@ -29,9 +36,13 @@ const routes: Routes = [
       // ========================== Barang Masuk ==========================
       {path:'tambahbarangmasuk',component:BarangmasukcreateComponent},
       {path:'barangmasuk',component:BarangmasukComponent},
-      {path:'barangmasukdetail/:id',component:BarangmasukreadComponent},
       {path:'editbarangmasuk/:id',component:BarangmasukeditComponent},
-      // {path:'**', redirectTo:'dashboard'}
+      // ========================== Barang Keluar ==========================
+      {path:'tambahbarangkeluar',component:BarangkeluarcreateComponent},
+      {path:'barangkeluar',component:BarangkeluarComponent},
+      {path:'editbarangkeluar/:id',component:BarangkeluareditComponent},
+      // ========================== Wild Card ==========================
+      {path:'**', redirectTo:'dashboard'}
     ]
   }
 ];
@@ -40,18 +51,20 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes),
-    DataTablesModule, ReactiveFormsModule
+    IonicModule, NgxPaginationModule,
+    RouterModule.forChild(routes), IonicSelectableModule,
+    DataTablesModule, ReactiveFormsModule, NgxDatatableModule
   ],
   declarations: [DashboardPage, ListbarangComponent, 
     HomeComponent, TambahbarangComponent, DetailbarangComponent,
-    BarangmasukcreateComponent, BarangmasukComponent, BarangmasukreadComponent, 
-    BarangmasukeditComponent
+    BarangmasukcreateComponent, BarangmasukComponent, 
+    BarangmasukeditComponent, BarangkeluarcreateComponent, BarangkeluarComponent,
+    BarangkeluareditComponent
   ],
   exports:[
     ListbarangComponent, HomeComponent, TambahbarangComponent,
     DetailbarangComponent
-  ]
+  ],
+  providers:[DatePipe, ListbarangComponent]
 })
 export class DashboardPageModule {}

@@ -2,6 +2,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { FunctionService } from 'src/app/core/function.service';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-barangmasukcreate',
@@ -11,15 +12,16 @@ import { Router } from '@angular/router';
 export class BarangmasukcreateComponent implements OnInit {
 
   barangbarumasuk:FormGroup
+  NomorBarang:any;
   constructor(
     private func:FunctionService,
     private fb:FormBuilder,
-    private router: Router
+    private router: Router,
+    private datepipe: DatePipe
   ) {
     this.barangbarumasuk = this.fb.group({
       asal_barang: ['', Validators.required],
       no_kontrak: ['', Validators.required],
-      tgl_masuk: [, Validators.required],
       nomor_barang: ['', Validators.required],
       jml_msk_angka: ['', Validators.required],
       jml_msk_huruf: ['', Validators.required],
@@ -27,21 +29,39 @@ export class BarangmasukcreateComponent implements OnInit {
     })
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadNomorBarang();
+  }
 
   Tambah(val){
     
-    console.log(val)
-    // var subs = this.func.postData(val, 'barangmasukinsert').subscribe(
-    //   async resp =>{
-    //     if (resp['success']){
-    //       await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary");
-    //       this.router.navigateByUrl('/menu/barangmasuk');
-          
-    //     }
-    //     subs.unsubscribe();
-    //   }
-    // )
+    val.tgl_masuk = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
+    var subs = this.func.postData(val, 'barangmasukinsert').subscribe(
+      async resp =>{
+        if (resp['success']){
+          await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary");
+          this.router.navigateByUrl('/menu/barangmasuk');
+        } else{
+          await this.func.presentToast("Data Gagal Disimpan", "text-center", "danger");
+        }
+        subs.unsubscribe();
+      }
+    )
     
+  }
+
+  loadNomorBarang(){
+    var subs = this.func.getDataWithoutParams("nomorbarangonly").subscribe(
+      resp => {
+        if (resp['success']){
+          this.NomorBarang = resp['data'];
+        }
+        subs.unsubscribe();
+      }
+    );
+  }
+
+  konversi(val){
+    this.barangbarumasuk.controls['jml_msk_huruf'].setValue(this.func.terbilang(val.jml_msk_angka));
   }
 }

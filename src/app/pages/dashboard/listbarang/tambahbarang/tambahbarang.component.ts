@@ -36,7 +36,6 @@ export class TambahbarangComponent implements OnInit {
         if (resp['success']){
           await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary");
           this.router.navigateByUrl('/menu/barang');
-          
         }
         subs.unsubscribe();
       }

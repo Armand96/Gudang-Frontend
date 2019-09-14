@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'menu/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'menu', pathMatch: 'full' },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'menu', loadChildren: './pages/dashboard/dashboard.module#DashboardPageModule' },
-  { path: '**', redirectTo: 'menu/dashboard', pathMatch: 'full' }
+  // { path: '**', redirectTo: 'menu', pathMatch: 'full' }
 ];
 
 @NgModule({
