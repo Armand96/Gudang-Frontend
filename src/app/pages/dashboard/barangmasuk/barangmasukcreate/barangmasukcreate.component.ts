@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FunctionService } from 'src/app/core/function.service';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { EventEmitterService } from 'src/app/core/event-emitter.service';
 
 @Component({
   selector: 'app-barangmasukcreate',
@@ -17,7 +18,8 @@ export class BarangmasukcreateComponent implements OnInit {
     private func:FunctionService,
     private fb:FormBuilder,
     private router: Router,
-    private datepipe: DatePipe
+    private datepipe: DatePipe,
+    private eventEmitter: EventEmitterService
   ) {
     this.barangbarumasuk = this.fb.group({
       asal_barang: ['', Validators.required],
@@ -40,6 +42,7 @@ export class BarangmasukcreateComponent implements OnInit {
       async resp =>{
         if (resp['success']){
           await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary");
+          this.eventEmitter.onFirstComponentButtonClick();
           this.router.navigateByUrl('/menu/barangmasuk');
         } else{
           await this.func.presentToast("Data Gagal Disimpan", "text-center", "danger");

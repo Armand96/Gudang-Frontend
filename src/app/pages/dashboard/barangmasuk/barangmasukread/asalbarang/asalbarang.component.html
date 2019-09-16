@@ -1,0 +1,81 @@
+<ion-content scoll-y="true">
+
+  <div class="container-fluid" class="m-3">
+
+    <div class="row d-flex justify-content-center">
+
+      <ion-item class="col-lg-4 ">
+        <ion-label position="floating">Asal Barang</ion-label>
+        <ion-select placeholder="Pilih Asal Barang" [(ngModel)]="asal_barang" (ionChange)="onChange()">
+          <ion-select-option *ngFor="let item of asal" value="{{item.asal_barang}}">{{item.asal_barang}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+
+
+    </div>
+
+    <br>
+
+    <div *ngIf="landscape && list_asal">
+      <ngx-datatable [headerHeight]="50" [footerHeight]="50" [rowHeight]="auto" class="material striped"
+        [rows]="list_asal.arraydata" reorderable="true" [columnMode]="'force'" [limit]="10">
+
+        <ngx-datatable-column name="No" headerClass="bg-primary text-white">
+          <ng-template let-rowIndex='rowIndex' ngx-datatable-cell-template>
+            {{rowIndex+1}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Nama Barang" prop="nama_barang" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.nama_barang}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Nomor Barang" prop="nomor_barang" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.nomor_barang}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Satuan" prop="satuan" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.satuan}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Angka" prop="jml_msk_angka" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.jml_msk_angka}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Huruf" prop="jml_msk_huruf" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.jml_msk_huruf}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Keterangan" prop="keterangan" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.keterangan}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Details" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <ion-button routerLink="/menu/editbarangmasuk/{{row.id}}"> Detail </ion-button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+
+      <br>
+      
+      <div class="row">
+        <div class="col text-center text-sm-left">
+          <ion-button shape="round" color="success">
+            <ion-icon slot="start" name="save"></ion-icon>
+            Simpan ke Excel
+          </ion-button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

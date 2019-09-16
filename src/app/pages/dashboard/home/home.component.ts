@@ -12,12 +12,11 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit() {
     this.isLoading = true;
-
+    
     this.loadCountBarangKeluar();
     this.loadCountBarangMasuk();
-    this.loadCountJenisBarang();
-
-    await this.func.delay(2000);
+    await this.loadCountJenisBarang();
+    // await this.func.delay(1000);
     
     this.isLoading = false;
   }
@@ -27,19 +26,19 @@ export class HomeComponent implements OnInit {
   barangkeluar;
   isLoading:Boolean;
 
-  loadCountJenisBarang(){
-    var LTJB = this.func.getDataWithoutParams('countbarang').subscribe(
+  async loadCountJenisBarang(){
+    await this.func.getDataWithoutParams('countbarang').toPromise().then(
       resp => {
         if(resp['success'] = true){
           this.jenisbarang = resp['data'];
         }
-        LTJB.unsubscribe();
+        console.log("Kelar load semua");
       }
     );
   }
 
-  loadCountBarangKeluar(){
-    var LTJB = this.func.getDataWithoutParams('countbarangkeluar').subscribe(
+  async loadCountBarangKeluar(){
+    var LTJB = await this.func.getDataWithoutParams('countbarangkeluar').subscribe(
       resp => {
         if(resp['success'] = true){
           this.barangkeluar = resp['data'];
@@ -49,8 +48,8 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  loadCountBarangMasuk(){
-    var LTJB = this.func.getDataWithoutParams('countbarangmasuk').subscribe(
+  async loadCountBarangMasuk(){
+    var LTJB = await this.func.getDataWithoutParams('countbarangmasuk').subscribe(
       resp => {
         if(resp['success'] = true){
           this.barangmasuk = resp['data'];

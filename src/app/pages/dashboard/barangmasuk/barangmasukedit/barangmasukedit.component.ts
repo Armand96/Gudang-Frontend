@@ -68,7 +68,8 @@ export class BarangmasukeditComponent implements OnInit {
         if (resp['success']){
           await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary", 3000);
           this.eventEmitter.onFirstComponentButtonClick();
-          this.router.navigateByUrl("/menu/barangmasuk");
+          // this.router.navigateByUrl("/menu/barangmasuk");
+          this.func.backClicked();
         }
         subs.unsubscribe();
       }

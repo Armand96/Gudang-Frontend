@@ -4,6 +4,7 @@ import { FunctionService } from 'src/app/core/function.service';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { VALID } from '@angular/forms/src/model';
+import { EventEmitterService } from 'src/app/core/event-emitter.service';
 
 @Component({
   selector: 'app-barangkeluarcreate',
@@ -18,7 +19,8 @@ export class BarangkeluarcreateComponent implements OnInit {
     private func:FunctionService,
     private fb:FormBuilder,
     private router: Router,
-    private datepipe: DatePipe
+    private datepipe: DatePipe,
+    private eventEmitter: EventEmitterService
   ) { 
     this.barangbarukeluar = this.fb.group({
       proyek: ['', Validators.required],
@@ -41,12 +43,16 @@ export class BarangkeluarcreateComponent implements OnInit {
   Tambah(val){
     
     val.tgl_keluar = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
-    val.nomor_barang = val.nomor_barang.nomor_barang;
+    if (val.nomor_barang.nomor_barang != null || val.nomor_barang.nomor_barang != undefined ) {
+      val.nomor_barang = val.nomor_barang.nomor_barang;
+    }
+    
     console.log(val);
     var subs = this.func.postData(val, 'barangkeluarinsert').subscribe(
       async resp =>{
         if (resp['success']){
           await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary");
+          this.eventEmitter.onFirstComponentButtonClick();
           this.router.navigateByUrl('/menu/barangkeluar');
         } else{
           await this.func.presentToast("Data Gagal Disimpan", "text-center", "danger");

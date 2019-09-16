@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FunctionService } from 'src/app/core/function.service';
+import { EventEmitterService } from 'src/app/core/event-emitter.service';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class TambahbarangComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private func: FunctionService
+    private func: FunctionService,
+    private eventEmitter: EventEmitterService
   ) {
     this.barangbaru = this.fb.group({
       nomor_barang: ['', Validators.required],
@@ -35,6 +37,7 @@ export class TambahbarangComponent implements OnInit {
       async resp =>{
         if (resp['success']){
           await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary");
+          this.eventEmitter.onFirstComponentButtonClick();
           this.router.navigateByUrl('/menu/barang');
         }
         subs.unsubscribe();

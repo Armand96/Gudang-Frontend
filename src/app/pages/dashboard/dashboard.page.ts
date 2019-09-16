@@ -39,6 +39,11 @@ export class DashboardPage implements OnInit, OnDestroy {
           url: '/menu/barangmasuk',
           icon: 'logo-ionic'
         },
+        {
+          title: 'Asal Barang',
+          url: '/menu/asalbarang',
+          icon: 'logo-ionic'
+        },
       ]
     },
     {

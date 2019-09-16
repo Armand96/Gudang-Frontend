@@ -25,8 +25,6 @@ export class BarangmasukComponent implements OnInit, OnDestroy {
   temp = [];
 
   constructor(
-    private router:Router, 
-    private renderer:Renderer, 
     private func:FunctionService,
     private plat:Platform,
     private eventEmitterService:EventEmitterService
@@ -81,6 +79,7 @@ export class BarangmasukComponent implements OnInit, OnDestroy {
       return true;
     });
     this.func.exportAsExcelFile(this.data, "Daftar Barang Masuk");
+    // this.func.customReportBrgMasuk();
   }
 
   mobile(){

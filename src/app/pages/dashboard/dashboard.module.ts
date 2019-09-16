@@ -21,6 +21,7 @@ import { ListbarangComponent } from './listbarang/listbarang.component';
 import { BarangkeluarcreateComponent } from './barangkeluar/barangkeluarcreate/barangkeluarcreate.component';
 import { BarangkeluarComponent } from './barangkeluar/barangkeluar.component';
 import { BarangkeluareditComponent } from './barangkeluar/barangkeluaredit/barangkeluaredit.component';
+import { AsalbarangComponent } from './barangmasuk/barangmasukread/asalbarang/asalbarang.component';
 // =================================================== PAGES ===================================================
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
       {path:'tambahbarangmasuk',component:BarangmasukcreateComponent},
       {path:'barangmasuk',component:BarangmasukComponent},
       {path:'editbarangmasuk/:id',component:BarangmasukeditComponent},
+      {path:'asalbarang',component:AsalbarangComponent},
       // ========================== Barang Keluar ==========================
       {path:'tambahbarangkeluar',component:BarangkeluarcreateComponent},
       {path:'barangkeluar',component:BarangkeluarComponent},
@@ -59,7 +61,7 @@ const routes: Routes = [
     HomeComponent, TambahbarangComponent, DetailbarangComponent,
     BarangmasukcreateComponent, BarangmasukComponent, 
     BarangmasukeditComponent, BarangkeluarcreateComponent, BarangkeluarComponent,
-    BarangkeluareditComponent
+    BarangkeluareditComponent, AsalbarangComponent
   ],
   exports:[
     ListbarangComponent, HomeComponent, TambahbarangComponent,
