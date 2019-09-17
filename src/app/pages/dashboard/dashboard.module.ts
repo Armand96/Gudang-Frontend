@@ -22,6 +22,10 @@ import { BarangkeluarcreateComponent } from './barangkeluar/barangkeluarcreate/b
 import { BarangkeluarComponent } from './barangkeluar/barangkeluar.component';
 import { BarangkeluareditComponent } from './barangkeluar/barangkeluaredit/barangkeluaredit.component';
 import { AsalbarangComponent } from './barangmasuk/barangmasukread/asalbarang/asalbarang.component';
+import { NomorbarangmasukComponent } from './barangmasuk/barangmasukread/nomorbarangmasuk/nomorbarangmasuk.component';
+import { NomorbarangkeluarComponent } from './barangkeluar/barangkeluarread/nomorbarangkeluar/nomorbarangkeluar.component';
+import { ProyekComponent } from './barangkeluar/barangkeluarread/proyek/proyek.component';
+import { BengkelComponent } from './barangkeluar/barangkeluarread/bengkel/bengkel.component';
 // =================================================== PAGES ===================================================
 
 const routes: Routes = [
@@ -39,10 +43,14 @@ const routes: Routes = [
       {path:'barangmasuk',component:BarangmasukComponent},
       {path:'editbarangmasuk/:id',component:BarangmasukeditComponent},
       {path:'asalbarang',component:AsalbarangComponent},
+      {path:'nomorbarangmasuk',component:NomorbarangmasukComponent},
       // ========================== Barang Keluar ==========================
       {path:'tambahbarangkeluar',component:BarangkeluarcreateComponent},
       {path:'barangkeluar',component:BarangkeluarComponent},
       {path:'editbarangkeluar/:id',component:BarangkeluareditComponent},
+      {path:'nomorbarangkeluar',component:NomorbarangkeluarComponent},
+      {path:'proyek',component:ProyekComponent},
+      {path:'bengkel',component:BengkelComponent},
       // ========================== Wild Card ==========================
       {path:'**', redirectTo:'dashboard'}
     ]
@@ -61,7 +69,8 @@ const routes: Routes = [
     HomeComponent, TambahbarangComponent, DetailbarangComponent,
     BarangmasukcreateComponent, BarangmasukComponent, 
     BarangmasukeditComponent, BarangkeluarcreateComponent, BarangkeluarComponent,
-    BarangkeluareditComponent, AsalbarangComponent
+    BarangkeluareditComponent, AsalbarangComponent, NomorbarangmasukComponent, 
+    NomorbarangkeluarComponent, ProyekComponent, BengkelComponent
   ],
   exports:[
     ListbarangComponent, HomeComponent, TambahbarangComponent,

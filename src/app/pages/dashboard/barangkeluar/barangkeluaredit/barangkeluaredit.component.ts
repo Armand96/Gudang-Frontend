@@ -75,7 +75,8 @@ export class BarangkeluareditComponent implements OnInit {
         if (resp['success']){
           await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary", 3000);
           this.eventEmitter.onFirstComponentButtonClick();
-          this.router.navigateByUrl("/menu/barangkeluar");
+          // this.router.navigateByUrl("/menu/barangkeluar");
+          this.func.backClicked();
         }
         subs.unsubscribe();
       }

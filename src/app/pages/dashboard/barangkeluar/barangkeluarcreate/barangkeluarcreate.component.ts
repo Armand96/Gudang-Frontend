@@ -48,6 +48,7 @@ export class BarangkeluarcreateComponent implements OnInit {
     }
     
     console.log(val);
+    
     var subs = this.func.postData(val, 'barangkeluarinsert').subscribe(
       async resp =>{
         if (resp['success']){

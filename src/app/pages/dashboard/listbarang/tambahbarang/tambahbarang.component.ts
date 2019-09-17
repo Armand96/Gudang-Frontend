@@ -23,7 +23,7 @@ export class TambahbarangComponent implements OnInit {
       nomor_barang: ['', Validators.required],
       nama_barang: ['', Validators.required],
       satuan: ['', Validators.required],
-      kuantitas: ['', Validators.required],
+      // kuantitas: ['', Validators.required],
       harga_satuan: ['', Validators.required],
     })
    }
@@ -33,6 +33,7 @@ export class TambahbarangComponent implements OnInit {
   Tambah(val){
     
     val.dibuat_oleh = this.func.user;
+    val.kuantitas = 0;
     var subs = this.func.postData(val, 'baranginsert').subscribe(
       async resp =>{
         if (resp['success']){

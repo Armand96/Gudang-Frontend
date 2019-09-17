@@ -1,6 +1,12 @@
 <ion-content scoll-x="true">
     <div class="container-fluid" class="m-3">
       
+      <div class="row">
+        <div class="col text-center">
+          <h3> <b> BARANG MASUK</b> </h3>
+        </div>
+      </div>
+
       <div class="row mb-2">
         <div class="col text-center text-sm-left">
           <ion-button shape="round" routerLink="/menu/tambahbarangmasuk">
@@ -107,7 +113,7 @@
 
         <ion-card-content>
           <ion-label >
-            <h4> <b>Nomor Barang: </b>  {{item.nomor_barang}}</h4>
+            <h4> <b>Nomor Barang : </b>  {{item.nomor_barang}}</h4>
             <h4> <b>Tanggal Masuk : </b>  {{item.tgl_masuk | date:'dd MMMM yyyy'}}</h4>
             <h4> <b>Asal Barang : </b>  {{item.asal_barang}}</h4>
             <h4> <b>Jumlah Masuk : </b>  {{item.jml_msk_angka}}</h4>

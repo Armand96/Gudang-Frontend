@@ -44,14 +44,34 @@ export class DashboardPage implements OnInit, OnDestroy {
           url: '/menu/asalbarang',
           icon: 'logo-ionic'
         },
+        {
+          title: 'Nomor Barang Masuk',
+          url: '/menu/nomorbarangmasuk',
+          icon: 'logo-ionic'
+        },
       ]
     },
     {
       title: 'Barang Keluar',
       children: [
         {
-          title: 'Daftar Barang Keluar',
+          title: 'List Barang Keluar',
           url: '/menu/barangkeluar',
+          icon: 'logo-ionic'
+        },
+        {
+          title: 'Nomor Barang Keluar',
+          url: '/menu/nomorbarangkeluar',
+          icon: 'logo-ionic'
+        },
+        {
+          title: 'Proyek',
+          url: '/menu/proyek',
+          icon: 'logo-ionic'
+        },
+        {
+          title: 'Bengkel',
+          url: '/menu/bengkel',
           icon: 'logo-ionic'
         },
       ]

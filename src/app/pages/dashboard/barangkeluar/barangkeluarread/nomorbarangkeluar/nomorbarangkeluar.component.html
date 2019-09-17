@@ -5,9 +5,9 @@
     <div class="row d-flex justify-content-center">
 
       <ion-item class="col-lg-4 ">
-        <ion-label position="floating">Asal Barang</ion-label>
-        <ion-select placeholder="Pilih Asal Barang" [(ngModel)]="asal_barang" (ionChange)="onChange()">
-          <ion-select-option *ngFor="let item of asal" value="{{item.asal_barang}}">{{item.asal_barang}}
+        <ion-label position="floating">Nomor Barang</ion-label>
+        <ion-select placeholder="Pilih Nomor Barang" [(ngModel)]="nomor_barang" (ionChange)="onChange()">
+          <ion-select-option *ngFor="let item of nmrBarang" value="{{item.nomor_barang}}">{{item.nomor_barang}}
           </ion-select-option>
         </ion-select>
       </ion-item>
@@ -16,54 +16,58 @@
 
     <br>
 
-    <div *ngIf="landscape && list_asal">
+    <h3 *ngIf="list_nomor_barang" class="text-center">Nomor Barang : <b> {{list_nomor_barang.nomor_barang}} - {{list_nomor_barang.nama_barang}} </b>  </h3>
+
+    <br>
+
+    <div *ngIf="landscape && list_nomor_barang">
       <ngx-datatable [headerHeight]="50" [footerHeight]="50" [rowHeight]="auto" class="material striped"
-        [rows]="list_asal.arraydata" reorderable="true" [columnMode]="'force'" [limit]="10">
+        [rows]="list_nomor_barang.arraydata" reorderable="true" [columnMode]="'force'" [limit]="10">
 
         <ngx-datatable-column name="No" headerClass="bg-primary text-white">
           <ng-template let-rowIndex='rowIndex' ngx-datatable-cell-template>
             {{rowIndex+1}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Nama Barang" prop="nama_barang" headerClass="bg-primary text-white">
+        <ngx-datatable-column name="Proyek" prop="proyek" headerClass="bg-primary text-white">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.nama_barang}}
+            {{row.proyek}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Nomor Barang" prop="nomor_barang" headerClass="bg-primary text-white">
+        <ngx-datatable-column name="Bengkel" prop="bengkel" headerClass="bg-primary text-white">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.nomor_barang}}
+            {{row.bengkel}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Satuan" prop="satuan" headerClass="bg-primary text-white">
+        <!-- <ngx-datatable-column name="Satuan" prop="satuan" headerClass="bg-primary text-white">
           <ng-template let-row="row" ngx-datatable-cell-template>
             {{row.satuan}}
           </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Jumlah (Angka)" prop="jml_msk_angka" headerClass="bg-primary text-white">
+        </ngx-datatable-column> -->
+        <ngx-datatable-column name="Jumlah (Angka)" prop="jml_klr_angka" headerClass="bg-primary text-white">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.jml_msk_angka}}
+            {{row.jml_klr_angka}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Jumlah (Huruf)" prop="jml_msk_huruf" headerClass="bg-primary text-white">
+        <ngx-datatable-column name="Jumlah (Huruf)" prop="jml_klr_huruf" headerClass="bg-primary text-white">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.jml_msk_huruf}}
+            {{row.jml_klr_huruf}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Keterangan" prop="keterangan" headerClass="bg-primary text-white">
+        <ngx-datatable-column name="Pekerjaan" prop="pekerjaan" headerClass="bg-primary text-white">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.keterangan}}
+            {{row.pekerjaan}}
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Details" headerClass="bg-primary text-white">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            <ion-button routerLink="/menu/editbarangmasuk/{{row.id}}"> Detail </ion-button>
+            <ion-button routerLink="/menu/editbarangkeluar/{{row.id}}"> Detail </ion-button>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
 
       <br>
-      
+
       <div class="row">
         <div class="col text-center text-sm-left">
           <ion-button shape="round" color="success">
@@ -76,24 +80,25 @@
 
   </div>
 
-  <ion-list lines="full" *ngIf="!landscape && list_asal">
+  <ion-list lines="full" *ngIf="!landscape && list_nomor_barang">
 
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
-    <ion-card *ngFor="let item of list_asal.arraydata | paginate: { itemsPerPage: 5, currentPage: p }" routerLink="/menu/editbarangmasuk/{{item.id}}">
-      
+    <ion-card *ngFor="let item of list_nomor_barang.arraydata | paginate: { itemsPerPage: 5, currentPage: p }"
+      routerLink="/menu/editbarangkeluar/{{item.id}}">
+
       <ion-card-header color="primary" class="p-2">
         <ion-card-title>
-          <h6 class="mb-0"> <b>Nomor Barang:</b> {{item.nomor_barang}}</h6>
+          <h6 class="mb-0"> <b>Nomor Barang:</b> {{item.nomor_barang}} - {{item.nama_barang}}</h6>
         </ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-        <ion-label >
-          <h4> <b>Nama Barang : </b>  {{item.nama_barang}}</h4>
-          <h4> <b>Satuan : </b>  {{item.satuan}}</h4>
-          <h4> <b>Jumlah : </b>  {{item.jml_msk_angka}} ({{item.jml_msk_huruf}}) </h4>
-          <h4> <b>Keterangan : </b>  {{item.keterangan}}</h4>
+        <ion-label>
+          <h4> <b>Proyek : </b> {{item.proyek}}</h4>
+          <h4> <b>Bengkel : </b> {{item.bengkel}}</h4>
+          <h4> <b>Jumlah : </b> {{item.jml_klr_angka}} ({{item.jml_klr_huruf}}) </h4>
+          <h4> <b>Pekerjaan : </b> {{item.pekerjaan}}</h4>
         </ion-label>
       </ion-card-content>
 
