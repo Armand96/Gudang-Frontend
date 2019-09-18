@@ -26,6 +26,9 @@ import { NomorbarangmasukComponent } from './barangmasuk/barangmasukread/nomorba
 import { NomorbarangkeluarComponent } from './barangkeluar/barangkeluarread/nomorbarangkeluar/nomorbarangkeluar.component';
 import { ProyekComponent } from './barangkeluar/barangkeluarread/proyek/proyek.component';
 import { BengkelComponent } from './barangkeluar/barangkeluarread/bengkel/bengkel.component';
+import { AdduserComponent } from './user/adduser/adduser.component';
+import { AuditlistComponent } from './audits/auditlist/auditlist.component';
+import { AuditdetailComponent } from './audits/auditdetail/auditdetail.component';
 // =================================================== PAGES ===================================================
 
 const routes: Routes = [
@@ -51,7 +54,13 @@ const routes: Routes = [
       {path:'nomorbarangkeluar',component:NomorbarangkeluarComponent},
       {path:'proyek',component:ProyekComponent},
       {path:'bengkel',component:BengkelComponent},
+      // ========================== USER ==========================
+      {path:'adduser',component:AdduserComponent},
+      // ========================== AUDITS ==========================
+      {path:'audits',component:AuditlistComponent},
+      {path:'auditdetail/:id',component:AuditdetailComponent},
       // ========================== Wild Card ==========================
+      
       {path:'**', redirectTo:'dashboard'}
     ]
   }
@@ -70,7 +79,8 @@ const routes: Routes = [
     BarangmasukcreateComponent, BarangmasukComponent, 
     BarangmasukeditComponent, BarangkeluarcreateComponent, BarangkeluarComponent,
     BarangkeluareditComponent, AsalbarangComponent, NomorbarangmasukComponent, 
-    NomorbarangkeluarComponent, ProyekComponent, BengkelComponent
+    NomorbarangkeluarComponent, ProyekComponent, BengkelComponent, AdduserComponent,
+    AuditlistComponent, AuditdetailComponent
   ],
   exports:[
     ListbarangComponent, HomeComponent, TambahbarangComponent,

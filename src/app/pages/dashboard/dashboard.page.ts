@@ -75,7 +75,22 @@ export class DashboardPage implements OnInit, OnDestroy {
           icon: 'logo-ionic'
         },
       ]
-    }
+    },
+    {
+      title: 'Pengguna',
+      children: [
+        {
+          title: 'Tambah Pengguna',
+          url: '/menu/adduser',
+          icon: 'logo-ionic'
+        }
+      ]
+    },
+    {
+      title: 'Audits',
+      url: '/menu/audits',
+      icon: 'clipboard'
+    },
   ];
 
   user = this.func.user;
@@ -98,6 +113,11 @@ export class DashboardPage implements OnInit, OnDestroy {
           this.textpos = resp ? true : false;
         }
       )
+    }
+
+    if (this.user != 'Admin'){
+      this.pages.pop();
+      this.pages.pop();
     }
     
   }

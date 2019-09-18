@@ -47,14 +47,11 @@ export class BarangkeluarcreateComponent implements OnInit {
       val.nomor_barang = val.nomor_barang.nomor_barang;
     }
     
-    console.log(val);
-    
     var subs = this.func.postData(val, 'barangkeluarinsert').subscribe(
       async resp =>{
         if (resp['success']){
-          await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary");
-          this.eventEmitter.onFirstComponentButtonClick();
-          this.router.navigateByUrl('/menu/barangkeluar');
+          await this.Audits(val);
+          await this.updateStock(val);
         } else{
           await this.func.presentToast("Data Gagal Disimpan", "text-center", "danger");
         }
@@ -62,6 +59,30 @@ export class BarangkeluarcreateComponent implements OnInit {
       }
     )
     
+  }
+
+  async updateStock(val){
+    val.kuantitas = -val.jml_klr_angka;
+    console.log(val);
+    await this.func.postData(val, 'barangupdateq').toPromise().then(
+      async resp => {
+        if (resp['success']){
+          await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary");
+          this.eventEmitter.onFirstComponentButtonClick();
+          this.router.navigateByUrl('/menu/barangkeluar');
+        } else{
+          await this.func.presentToast("Data Gagal Disimpan", "text-center", "danger");
+        }
+      }
+    );
+  }
+
+  async Audits(val){
+    
+    val = JSON.stringify(val);
+    await this.func.Audits('Barang Keluar', val, '').then(
+      async resp => {}
+    );
   }
 
   loadNomorBarang(){

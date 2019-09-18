@@ -2,7 +2,6 @@ import { FunctionService } from 'src/app/core/function.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
 import { EventEmitterService } from 'src/app/core/event-emitter.service';
 
 @Component({
@@ -25,7 +24,6 @@ export class DetailbarangComponent implements OnInit {
     private router: Router,
     private func: FunctionService,
     private actr: ActivatedRoute,
-    private navctrl: NavController,
     private eventEmitter: EventEmitterService
   ) { 
     this.editbarang = this.fb.group({
@@ -64,6 +62,7 @@ export class DetailbarangComponent implements OnInit {
     var subs = this.func.postData(val, 'barangupdate').subscribe(
       async resp => {
         if (resp['success']){
+          await this.Audits(val);
           await this.func.presentToast('Edit Berhasil', 'text-center', 'primary');
           this.router.navigateByUrl("menu/barang");
           this.eventEmitter.onFirstComponentButtonClick();
@@ -74,4 +73,12 @@ export class DetailbarangComponent implements OnInit {
     );
   }
 
+  async Audits(val){
+    delete this.old_value.dibuat_oleh;
+    this.old_value = JSON.stringify(this.old_value);
+    val = JSON.stringify(val);
+    await this.func.Audits('Edit Barang', val, this.old_value).then(
+      async resp => { return true }
+    );
+  }
 }

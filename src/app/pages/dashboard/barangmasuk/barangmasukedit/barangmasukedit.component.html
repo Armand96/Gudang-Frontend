@@ -30,7 +30,7 @@
 
           <ion-item>
             <ion-label position="floating">Nomor Barang</ion-label>
-            <ion-select placeholder="Nomor Barang" formControlName="nomor_barang" name="nomor_barang" required [disabled]="!editmode">
+            <ion-select placeholder="Nomor Barang" formControlName="nomor_barang" name="nomor_barang" required disabled>
               <ion-select-option *ngFor="let item of NomorBarang" value="{{item.nomor_barang}}" > {{item.nomor_barang}} </ion-select-option>
             </ion-select>
           </ion-item>

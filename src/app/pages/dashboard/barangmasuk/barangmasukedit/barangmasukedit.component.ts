@@ -66,6 +66,7 @@ export class BarangmasukeditComponent implements OnInit {
     var subs = this.func.postData(val, "barangmasukupdate").subscribe(
       async resp=>{
         if (resp['success']){
+          await this.Audits(val);
           await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary", 3000);
           this.eventEmitter.onFirstComponentButtonClick();
           // this.router.navigateByUrl("/menu/barangmasuk");
@@ -77,6 +78,7 @@ export class BarangmasukeditComponent implements OnInit {
   }
 
   loadNomorBarang(){
+
     var subs = this.func.getDataWithoutParams("nomorbarangonly").subscribe(
       resp => {
         if (resp['success']){
@@ -85,6 +87,17 @@ export class BarangmasukeditComponent implements OnInit {
         subs.unsubscribe();
       }
     );
+
+  }
+
+  async Audits(val){
+    
+    this.old_value = JSON.stringify(this.old_value);
+    val = JSON.stringify(val);
+    await this.func.Audits('Edit Barang Masuk', val, this.old_value).then(
+      async resp => { return true }
+    );
+
   }
 
   konversi(val){

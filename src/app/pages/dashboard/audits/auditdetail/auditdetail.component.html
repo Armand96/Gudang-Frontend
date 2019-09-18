@@ -1,0 +1,60 @@
+<ion-content class="container-fluid">
+
+  <div class="row d-flex justify-content-center m-2" *ngIf="auditdetail">
+
+    <div class="col">
+
+      <div class="row">
+        <div class="col">
+          <h1 class="text-center"> <b>{{auditdetail.tipe_audit}}</b> </h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h1 class="text-center"> <b>Oleh {{auditdetail.user}}</b> </h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col p-0">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead class="bg-primary text-white">
+                <tr>
+                  <th>Nilai Lama</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of nilai_lama | keyvalue">
+                  <td> <b> {{ item.key }}: </b> {{ item.value }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="col p-0">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead class="bg-primary text-white">
+                <tr>
+                  <th>Nilai Baru</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of nilai_baru | keyvalue">
+                  <td> <b> {{ item.key }}: </b> {{ item.value }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</ion-content>

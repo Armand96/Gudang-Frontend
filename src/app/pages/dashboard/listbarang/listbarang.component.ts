@@ -19,7 +19,7 @@ export class ListbarangComponent implements OnInit, OnDestroy {
   subsEvent;
   screenEvent; 
 
-  dtOptions: DataTables.Settings = {};
+  // dtOptions: DataTables.Settings = {};
   isLandScape:Boolean;
   data;
   temp = [];
@@ -70,8 +70,7 @@ export class ListbarangComponent implements OnInit, OnDestroy {
 
   async reinit(){
     this.func.landscape.next(this.plat.isLandscape());
-    this.LoadData();
-    await this.func.delay(1000);
+    await this.LoadData();
     this.temp = [...this.data];
   }
 
@@ -84,13 +83,12 @@ export class ListbarangComponent implements OnInit, OnDestroy {
     this.func.exportAsExcelFile(this.data, "Daftar Barang");
   }
 
-  LoadData(){
-    var subs = this.func.getDataWithoutParams('barangshowall').subscribe(
+  async LoadData(){
+    await this.func.getDataWithoutParams('barangshowall').toPromise().then(
       resp => {
         if (resp['success']){
           this.data = resp['data'];
         }
-        subs.unsubscribe();
       }
     );
   }

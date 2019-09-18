@@ -35,22 +35,47 @@ export class BarangmasukcreateComponent implements OnInit {
     this.loadNomorBarang();
   }
 
-  Tambah(val){
+  async Tambah(val){
     
     val.tgl_masuk = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
-    var subs = this.func.postData(val, 'barangmasukinsert').subscribe(
+    await this.func.postData(val, 'barangmasukinsert').toPromise().then(
       async resp =>{
         if (resp['success']){
+          await this.Audits(val);
+          await this.updateStock(val);
+        } else{
+          await this.func.presentToast("Data Gagal Disimpan", "text-center", "danger");
+        }
+        
+      }
+    )
+    
+  }
+
+  async updateStock(val){
+    
+    val.kuantitas = val.jml_msk_angka;
+    await this.func.postData(val, 'barangupdateq').toPromise().then(
+      async resp => {
+        if (resp['success']){
+          console.log(resp)
           await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary");
           this.eventEmitter.onFirstComponentButtonClick();
           this.router.navigateByUrl('/menu/barangmasuk');
         } else{
           await this.func.presentToast("Data Gagal Disimpan", "text-center", "danger");
         }
-        subs.unsubscribe();
       }
     )
+
+  }
+
+  async Audits(val){
     
+    val = JSON.stringify(val);
+    await this.func.Audits('Barang Masuk', val, '').then(
+      async resp => {}
+    );
   }
 
   loadNomorBarang(){

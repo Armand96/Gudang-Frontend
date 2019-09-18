@@ -226,6 +226,19 @@ export class FunctionService {
   }
   // ========================================== EXCEL EXPORT ========================================== DEPRECATED  
 
+  // ============ For Auditting
+  public Audits(auditType:string, newValue:string, oldValue:string){
+
+    var json = {
+      user:this.user,
+      tipe_audit:auditType,
+      nilai_lama: oldValue,
+      nilai_baru: newValue
+    }
+
+    return this.postData(json, 'auditinsert').toPromise();
+  }
+
   public async presentToast(msg:string, txtpos:string, clr?:string, dur?: number) {
     
     dur = (dur) ? dur : 2000;
