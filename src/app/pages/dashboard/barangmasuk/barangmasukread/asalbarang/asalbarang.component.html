@@ -1,4 +1,4 @@
-<ion-content scoll-y="true">
+<ion-content scroll-y="true">
 
   <div class="container-fluid" class="m-3">
 
@@ -63,15 +63,7 @@
       </ngx-datatable>
 
       <br>
-      
-      <div class="row">
-        <div class="col text-center text-sm-left">
-          <ion-button shape="round" color="success">
-            <ion-icon slot="start" name="save"></ion-icon>
-            Simpan ke Excel
-          </ion-button>
-        </div>
-      </div>
+
     </div>
 
   </div>
@@ -103,4 +95,12 @@
 
   </ion-list>
 
+  <div class="row ml-2" *ngIf="list_asal">
+    <div class="col text-center text-sm-left">
+      <ion-button shape="round" color="primary" routerLink="/menu/barangmasukexc" (click)="transport()">
+        <ion-icon slot="start" name="save"></ion-icon>
+        Laporan Barang Masuk
+      </ion-button>
+    </div>
+  </div>
 </ion-content>

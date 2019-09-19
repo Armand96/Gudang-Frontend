@@ -1,4 +1,4 @@
-<ion-content scoll-y="true">
+<ion-content scroll-y="true">
 
   <div class="container-fluid" class="m-3">
 
@@ -64,14 +64,7 @@
 
       <br>
       
-      <div class="row">
-        <div class="col text-center text-sm-left">
-          <ion-button shape="round" color="success">
-            <ion-icon slot="start" name="save"></ion-icon>
-            Simpan ke Excel
-          </ion-button>
-        </div>
-      </div>
+      
     </div>
 
   </div>
@@ -103,5 +96,14 @@
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
   </ion-list>
+
+  <div class="row pl-3" *ngIf="list_proyek">
+    <div class="col text-center text-sm-left">
+      <ion-button shape="round" color="success" routerLink="/menu/barangkeluarexc" (click)="transport()">
+        <ion-icon slot="start" name="save"></ion-icon>
+        Simpan ke Excel
+      </ion-button>
+    </div>
+  </div>
 
 </ion-content>
