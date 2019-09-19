@@ -14,6 +14,7 @@ export class ProyekComponent implements OnInit, OnDestroy {
     this.subsEvent.unsubscribe();
   }
 
+  jsonsend;
   proyekarr:Array<any>;
   proyek:string;
   list_proyek:Array<any>;
@@ -54,16 +55,24 @@ export class ProyekComponent implements OnInit, OnDestroy {
   }
 
   onChange(){
-    var jsonsend = {
+    this.jsonsend = {
       proyek:this.proyek
     }
-    this.func.postData(jsonsend, 'proyek').toPromise().then(
+    this.func.postData(this.jsonsend, 'proyek').toPromise().then(
       resp=>{
         if (resp['success'] && resp['data'] != null){
           this.list_proyek = resp['data'];
         }
       }
     )
+  }
+
+  transport(){
+    this.func.TransferDataBrgKlr = {
+      url:'proyek',
+      json:this.jsonsend
+    }
+    localStorage.setItem('tdataklr', JSON.stringify(this.func.TransferDataBrgKlr));
   }
 
 }

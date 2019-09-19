@@ -1,8 +1,8 @@
-import { Component, OnInit, Renderer, AfterViewInit, OnDestroy, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FunctionService } from 'src/app/core/function.service';
 import { Platform } from '@ionic/angular';
 import { EventEmitterService } from 'src/app/core/event-emitter.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-listbarang',
@@ -81,6 +81,19 @@ export class ListbarangComponent implements OnInit, OnDestroy {
       return true;
     });
     this.func.exportAsExcelFile(this.data, "Daftar Barang");
+  }
+
+  testTable(){
+    var wb = XLSX.utils.table_to_book(document.getElementById('mytable'));
+    var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
+    this.func.saveAsExcelFile(this.saveexcel(wbout), 'Test') ;
+  }
+
+  saveexcel(s){
+    var buf = new ArrayBuffer(s.length);
+    var view = new Uint8Array(buf);
+    for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+    return buf;
   }
 
   async LoadData(){

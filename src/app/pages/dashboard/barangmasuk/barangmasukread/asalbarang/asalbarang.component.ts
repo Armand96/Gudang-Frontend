@@ -21,6 +21,7 @@ export class AsalbarangComponent implements OnInit, OnDestroy {
   landscape:Boolean;
   screenEvent;
   subsEvent;
+  jsonsend = {};
 
   constructor(
     private func: FunctionService,
@@ -55,16 +56,24 @@ export class AsalbarangComponent implements OnInit, OnDestroy {
   }
 
   onChange(){
-    var jsonsend = {
+    this.jsonsend = {
       asal_barang:this.asal_barang
     }
-    this.func.postData(jsonsend, 'asalbarang').toPromise().then(
+    this.func.postData(this.jsonsend, 'asalbarang').toPromise().then(
       resp=>{
         if (resp['success'] && resp['data'] != null){
           this.list_asal = resp['data'];
         }
       }
     )
+  }
+
+  transport(){
+    this.func.TransferDataBrgMsk = {
+      url:'asalbarang',
+      json:this.jsonsend
+    }
+    localStorage.setItem('tdatamsk', JSON.stringify(this.func.TransferDataBrgMsk));
   }
 
 }

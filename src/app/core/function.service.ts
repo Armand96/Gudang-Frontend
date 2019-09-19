@@ -26,6 +26,8 @@ export class FunctionService {
   }
   // ================================================ HTTP SEND REQUEST SETTING ================================================
 
+  public TransferDataBrgMsk:any = (localStorage.getItem('tdatamsk') == null) ? "" : JSON.parse(localStorage.getItem('tdatamsk'));
+  public TransferDataBrgKlr:any = (localStorage.getItem('tdataklr') == null) ? "" : JSON.parse(localStorage.getItem('tdataklr'));
   public user = (localStorage.getItem('username') == null) ? "" : localStorage.getItem('username');
   public landscape = new Subject<Boolean>();
   public widths = Math.round(this.plat.width() / 2);
@@ -183,6 +185,18 @@ export class FunctionService {
 
 
   // ========================================== EXCEL EXPORT ========================================== DEPRECATED
+
+  public tableToExcel(table, excelFileName: string){
+    
+    const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(table);
+    // console.log('worksheet',worksheet);
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    //const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
+    this.saveAsExcelFile(excelBuffer, excelFileName);
+  }
+
+
   public exportAsExcelFile(json: any[], excelFileName: string): void {
     
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
@@ -218,7 +232,7 @@ export class FunctionService {
     this.saveAsExcelFile(wbout, "Test");
   }
 
-  private saveAsExcelFile(buffer: any, fileName: string): void {
+  public saveAsExcelFile(buffer: any, fileName: string): void {
     const data: Blob = new Blob([buffer], {
       type: EXCEL_TYPE
     });

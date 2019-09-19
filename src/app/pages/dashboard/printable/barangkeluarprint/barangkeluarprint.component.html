@@ -1,0 +1,194 @@
+<ion-content scroll-y='true'>
+
+  <div class="container-fluid" class="m-3">
+
+    <div class="row" *ngIf="data">
+      <div class="col">
+
+        <div class="table-responsive" id="print_div" #print_div>
+          <table id="mytable" class="table table-borderless">
+            <thead>
+              <tr>
+                <th colspan="2" rowspan="4" class="text-center border-left border-top border-bottom"> <img
+                    src="../../../../../assets/img/Logo-DKB.png" alt="" width="200px" height="100px"> </th>
+                <th colspan="7" rowspan="4" class="border-right border-top border-bottom">
+                  <h4 class="text-center"> PT. DOK & PERKAPALAN KODJA BAHARI <br> (PERSERO) <br> SHIPYARD JAKARTA-II
+                  </h4>
+                </th>
+                <th style="vertical-align: middle" class="p-0 pl-2 border-top"> Nomor </th>
+                <th style="vertical-align: middle" class="p-0 border-right border-top">: FF15GD2-A3.03 </th>
+              </tr>
+              <tr>
+                <th style="vertical-align: middle" class="p-0 pl-2"> Revisi </th>
+                <th style="vertical-align: middle" class="p-0 border-right">: 0 </th>
+              </tr>
+              <tr>
+                <th style="vertical-align: middle" class="p-0 pl-2"> Tanggal </th>
+                <th style="vertical-align: middle" class="p-0 border-right">: 15/06/2010 </th>
+              </tr>
+              <tr>
+                <th style="vertical-align: middle" class="p-0 pl-2"> Halaman</th>
+                <th style="vertical-align: middle" class="p-0 border-right border-bottom">: 01 dari 01 </th>
+              </tr>
+
+              <tr>
+                <th colspan="11" class="text-center border p-1">FORMAT</th>
+              </tr>
+
+              <tr>
+                <th colspan="11" class="text-center p-1"> SURAT PERMINTAAN MATERIAL </th>
+              </tr>
+
+              <tr>
+                <th colspan="11" class="text-center p-1 pl-3"> SPM NO. ...................</th>
+              </tr>
+
+              <tr>
+                <th colspan="2" class="p-0"> Proyek </th>
+                <th class="p-0"> : {{data.proyek}} </th>
+              </tr>
+
+              <tr>
+                <th colspan="2" class="p-0"> No. Order </th>
+                <th class="p-0"> : {{data.arraydata[0].no_order}} </th>
+                <th colspan="2" class="p-0"> Pekerjaan </th>
+                <th class="p-0"> : {{data.arraydata[0].pekerjaan}} </th>
+              </tr>
+
+              <tr>
+                <th colspan="2" class="p-0"> Bid / Bkl </th>
+                <th class="p-0"> : {{data.arraydata[0].bengkel}} </th>
+                <th colspan="2" class="p-0"> Kode Pekerjaan </th>
+                <th class="p-0"> : {{data.arraydata[0].kode_pekerjaan}} </th>
+              </tr>
+
+              <tr>
+                <th style="vertical-align: middle" rowspan="2" class="text-center border P-2"> NO. </th>
+                <th style="vertical-align: middle" rowspan="2" class="text-center border P-2"> KODE </th>
+                <th style="vertical-align: middle" rowspan="2" colspan="2" class="text-center border P-2"> NAMA &
+                  SPESIFIKASI BARANG </th>
+                <th style="vertical-align: middle" rowspan="2" class="text-center border P-2"> SATUAN </th>
+                <th style="vertical-align: middle" colspan="2" class="text-center border P-2"> JUMLAH DIMINTA</th>
+                <th style="vertical-align: middle" colspan="2" class="text-center border P-2"> JUMLAH DISERAHKAN</th>
+                <th style="vertical-align: middle" rowspan="2" class="text-center border P-2"> HARGA SATUAN</th>
+                <th style="vertical-align: middle" rowspan="2" class="text-center border P-2"> JUMLAH HARGA </th>
+              </tr>
+
+              <tr>
+                <th style="vertical-align: middle" class="text-center border p-2">ANGKA</th>
+                <th style="vertical-align: middle" class="text-center border p-2">HURUF</th>
+                <th style="vertical-align: middle" class="text-center border p-2">ANGKA</th>
+                <th style="vertical-align: middle" class="text-center border p-2">HURUF</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of data.arraydata | paginate: { itemsPerPage: 5, currentPage: p }; let i =index;">
+                <td style="vertical-align: middle" class="text-center border-left border-right p-2">{{i+1}}</td>
+                <td style="vertical-align: middle" class="text-center border-left border-right p-2">
+                  {{item.nomor_barang}}</td>
+                <td style="vertical-align: middle" class="border-left border-right p-2" colspan="2">{{item.nama_barang}}
+                </td>
+                <td style="vertical-align: middle" class="text-center border-left border-right p-2">{{item.satuan}}</td>
+                <td style="vertical-align: middle" class="text-center border-left border-right p-2">
+                  {{item.jml_klr_angka}}</td>
+                <td style="vertical-align: middle" class="text-center border-left border-right p-2">
+                  {{item.jml_klr_huruf}}</td>
+                <td style="vertical-align: middle" class="text-center border-left border-right p-2">
+                  {{item.jml_klr_permintaan_angka}}</td>
+                <td style="vertical-align: middle" class="text-center border-left border-right p-2">
+                  {{item.jml_klr_permintaan_huruf}}</td>
+                <td style="vertical-align: middle" class="text-center border-left border-right p-2">
+                </td>
+                <td style="vertical-align: middle" class="text-center border-left border-right p-2">
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="6" class="text-center p-0 border">Paraf</td>
+                <td colspan="5" class="text-center p-0 border">Tanda Tangan & Nama Jelas</td>
+              </tr>
+              <tr>
+                <td colspan="2" class="text-center">Menyetujui</td>
+                <td colspan="2" class="text-center">Renwas</td>
+                <td colspan="2" class="text-center">Gudang</td>
+                <td colspan="2" class="text-center">Peminta</td>
+                <td colspan="2" class="text-center">Penerima</td>
+                <td class="text-center">Pemberi</td>
+              </tr>
+              <tr>
+                <td colspan="11" class="p-0"> &nbsp; </td>
+              </tr>
+              <tr>
+                <td colspan="11" class="p-0"> &nbsp; </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="text-center p-0">___________________</td>
+                <td colspan="2" class="text-center p-0">___________________</td>
+                <td colspan="2" class="text-center p-0">___________________</td>
+                <td colspan="2" class="text-center p-0">___________________</td>
+                <td colspan="2" class="text-center p-0">___________________</td>
+                <td class="text-center p-0">___________________</td>
+              </tr>
+
+              <tr>
+                <td colspan="2" class="text-center p-0">Man/Asman</td>
+                <td colspan="2" class="text-center p-0">Asman/Renwas</td>
+                <td colspan="2" class="text-center p-0">Kabid.Gudang</td>
+                <td colspan="2" class="text-center p-0">Kabid/Kabeng</td>
+                <td colspan="2" class="text-center p-0">....................</td>
+                <!-- <td class="text-center">Pemberi</td> -->
+              </tr>
+
+              <tr>
+                <td colspan="3" class="p-0">Catatan: Harga diisi oleh Akuntansi</td>
+              </tr>
+              <tr>
+                <td colspan="3" class="p-0">Lembar 1 Keuangan</td>
+              </tr>
+              <tr>
+                <td colspan="3" class="p-0">Lembar 2 Produksi</td>
+              </tr>
+              <tr>
+                <td colspan="3" class="p-0">Lembar 3 Peminta</td>
+              </tr>
+              <tr>
+                <td colspan="3" class="p-0">Lembar 4 Renwas</td>
+              </tr>
+              <tr>
+                <td colspan="3" class="p-0">Lembar 5 Arsip</td>
+              </tr>
+            </tfoot>
+          </table>
+          <!-- <e-ngx-print #print1 [showBtn]="false" [printCSS]="printCSS">
+            </e-ngx-print> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col text-center">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col text-center">
+        <ion-button shape="round" color="success" (click)="print()">PRINT</ion-button>
+        <!-- <button printSectionId="print_div" styleSheetFile="assets/css/print.css" ngxPrint>PRINT</button> -->
+        <!-- <button (click)="customPrint('print1')">PRINT</button> -->
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col text-center text-sm-left">
+        <ion-button shape="round" color="success" (click)="onClick()">
+          <ion-icon slot="start" name="save"></ion-icon>
+          Simpan ke Excel
+        </ion-button>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

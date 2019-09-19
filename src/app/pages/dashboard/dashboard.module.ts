@@ -8,6 +8,8 @@ import { IonicModule } from '@ionic/angular';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DataTablesModule } from 'angular-datatables';
 import { IonicSelectableModule } from 'ionic-selectable';
+import { NgxPrintModule } from 'ngx-print';
+import {ENgxPrintModule} from "e-ngx-print";
 
 // =================================================== PAGES ===================================================
 import { DashboardPage } from './dashboard.page';
@@ -29,6 +31,8 @@ import { BengkelComponent } from './barangkeluar/barangkeluarread/bengkel/bengke
 import { AdduserComponent } from './user/adduser/adduser.component';
 import { AuditlistComponent } from './audits/auditlist/auditlist.component';
 import { AuditdetailComponent } from './audits/auditdetail/auditdetail.component';
+import { BarangmasukprintComponent } from './printable/barangmasukprint/barangmasukprint.component';
+import { BarangkeluarprintComponent } from './printable/barangkeluarprint/barangkeluarprint.component';
 // =================================================== PAGES ===================================================
 
 const routes: Routes = [
@@ -59,6 +63,9 @@ const routes: Routes = [
       // ========================== AUDITS ==========================
       {path:'audits',component:AuditlistComponent},
       {path:'auditdetail/:id',component:AuditdetailComponent},
+      // ========================== Printable ==========================
+      {path:'barangmasukexc',component:BarangmasukprintComponent},
+      {path:'barangkeluarexc',component:BarangkeluarprintComponent},
       // ========================== Wild Card ==========================
       
       {path:'**', redirectTo:'dashboard'}
@@ -72,7 +79,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule, NgxPaginationModule,
     RouterModule.forChild(routes), IonicSelectableModule,
-    DataTablesModule, ReactiveFormsModule, NgxDatatableModule
+    DataTablesModule, ReactiveFormsModule, NgxDatatableModule,
+    NgxPrintModule, ENgxPrintModule
   ],
   declarations: [DashboardPage, ListbarangComponent, 
     HomeComponent, TambahbarangComponent, DetailbarangComponent,
@@ -80,7 +88,8 @@ const routes: Routes = [
     BarangmasukeditComponent, BarangkeluarcreateComponent, BarangkeluarComponent,
     BarangkeluareditComponent, AsalbarangComponent, NomorbarangmasukComponent, 
     NomorbarangkeluarComponent, ProyekComponent, BengkelComponent, AdduserComponent,
-    AuditlistComponent, AuditdetailComponent
+    AuditlistComponent, AuditdetailComponent, BarangmasukprintComponent,
+    BarangkeluarprintComponent
   ],
   exports:[
     ListbarangComponent, HomeComponent, TambahbarangComponent,
