@@ -47,7 +47,7 @@ export class BarangkeluarcreateComponent implements OnInit {
       val.nomor_barang = val.nomor_barang.nomor_barang;
     }
     
-    var subs = this.func.postData(val, 'barangkeluarinsert').subscribe(
+    this.func.postData(val, 'barangkeluarinsert').toPromise().then(
       async resp =>{
         if (resp['success']){
           await this.Audits(val);
@@ -55,7 +55,7 @@ export class BarangkeluarcreateComponent implements OnInit {
         } else{
           await this.func.presentToast("Data Gagal Disimpan", "text-center", "danger");
         }
-        subs.unsubscribe();
+        
       }
     )
     
@@ -63,7 +63,7 @@ export class BarangkeluarcreateComponent implements OnInit {
 
   async updateStock(val){
     val.kuantitas = -val.jml_klr_angka;
-    console.log(val);
+    // console.log(val);
     await this.func.postData(val, 'barangupdateq').toPromise().then(
       async resp => {
         if (resp['success']){
@@ -85,13 +85,12 @@ export class BarangkeluarcreateComponent implements OnInit {
     );
   }
 
-  loadNomorBarang(){
-    var subs = this.func.getDataWithoutParams("nomornamabarangonly").subscribe(
+  async loadNomorBarang(){
+    await this.func.getDataWithoutParams("nomornamabarangonly").toPromise().then(
       resp => {
         if (resp['success']){
           this.NomorBarang = resp['data'];
         }
-        subs.unsubscribe();
       }
     );
   }

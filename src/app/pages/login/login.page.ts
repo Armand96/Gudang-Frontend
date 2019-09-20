@@ -36,12 +36,12 @@ export class LoginPage implements OnInit {
    
   }
 
-  Login(val){    
+  async Login(val){    
     this.data.username = val.username;
     this.data.userpassword = val.userpass;
 
     this.func.presentLoadingWithOptions();
-    var getIn = this.func.postData(this.data, 'login').subscribe(
+    await this.func.postData(this.data, 'login').toPromise().then(
       async resp => {
         if (resp['success']){
           
@@ -53,8 +53,14 @@ export class LoginPage implements OnInit {
           await localStorage.setItem('api_token', this.func.api_token);
           await localStorage.setItem('username', this.func.user);
           this.router.navigateByUrl('/menu');
+        } else {
+          this.func.presentToast(resp['message'], 'text-center', 'danger');
         }
-        getIn.unsubscribe();
+      },
+      err=>{
+        if (!err.ok){
+          this.func.presentToast('Tidak dapat terhubung ke server', 'text-center', 'danger', 5000);
+        }
       }
     );
     

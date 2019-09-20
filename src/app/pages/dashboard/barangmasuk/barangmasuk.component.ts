@@ -82,24 +82,12 @@ export class BarangmasukComponent implements OnInit, OnDestroy {
     // this.func.customReportBrgMasuk();
   }
 
-  mobile(){
-    var subs = this.func.getDataWithoutParams('barangmasukshowall').subscribe(
+  async descktop() {
+    await this.func.getDataWithoutParams('barangmasukshowall').toPromise().then(
       resp => {
         if (resp['success']){
           this.data = resp['data'];
         }
-        subs.unsubscribe();
-      }
-    );
-  }
-
-  descktop() {
-    var subs = this.func.getDataWithoutParams('barangmasukshowall').subscribe(
-      resp => {
-        if (resp['success']){
-          this.data = resp['data'];
-        }
-        subs.unsubscribe();
       }
     );
   }

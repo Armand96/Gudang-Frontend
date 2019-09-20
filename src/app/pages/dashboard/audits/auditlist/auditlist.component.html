@@ -7,14 +7,14 @@
       </div>
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
       <div class="col text-center text-sm-left">
         <ion-button shape="round" color="success">
           <ion-icon slot="start" name="save"></ion-icon>
           Simpan ke Excel
         </ion-button>
       </div>
-    </div>
+    </div> -->
 
     <div class="row">
       <div class="col">
@@ -57,14 +57,14 @@
         [limit]="10"
         >
 
-        <ngx-datatable-column name="Pengguna" prop="user" headerClass="bg-primary text-white">
+        <ngx-datatable-column name="Pengguna" prop="user" headerClass="bg-primary text-white text-center font-weight-bold">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.user}}
+            <div class="text-center"> {{row.user}} </div> 
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Audit" prop="tipe_audit" headerClass="bg-primary text-white">
+        <ngx-datatable-column name="Audit" prop="tipe_audit" headerClass="bg-primary text-white text-center font-weight-bold">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.tipe_audit}}
+            <div class="text-center">{{row.tipe_audit}}</div> 
           </ng-template>
         </ngx-datatable-column>
         <!-- <ngx-datatable-column name="Lama" prop="nilai_lama" headerClass="bg-primary text-white">
@@ -72,20 +72,20 @@
             {{row.nilai_lama.nomor_barang}}
           </ng-template>
         </ngx-datatable-column> -->
-        <ngx-datatable-column name="Nomor Barang" prop="nilai_baru" headerClass="bg-primary text-white">
+        <ngx-datatable-column name="Data yang berubah" prop="nilai_baru" headerClass="bg-primary text-white text-center font-weight-bold">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            <b> Nomor Barang :</b> {{row.nilai_baru.nomor_barang}} <br>
-            <b> User : </b> {{row.nilai_baru.username}}
+            <div *ngIf="row.nilai_baru.nomor_barang" class="text-center"> <b> Nomor Barang :</b> {{row.nilai_baru.nomor_barang}} </div>   <br>
+            <div *ngIf="row.nilai_baru.username" class="text-center"> <b> User : </b> {{row.nilai_baru.username}} </div> 
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Tanggal Dibuat" prop="created_at" headerClass="bg-primary text-white">
+        <ngx-datatable-column name="Tanggal Dibuat" prop="created_at" headerClass="bg-primary text-white text-center font-weight-bold">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.created_at | date:'dd MMMM yyyy -- HH:mm:ss'}}
+            <div class="text-center">{{row.created_at | date:'dd MMMM yyyy -- HH:mm:ss'}}</div> 
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Details" headerClass="bg-primary text-white">
+        <ngx-datatable-column name="Details" headerClass="bg-primary text-white text-center font-weight-bold">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            <ion-button routerLink="/menu/auditdetail/{{row.id}}"> Detail </ion-button>
+            <div class="text-center"> <ion-button routerLink="/menu/auditdetail/{{row.id}}"> Detail </ion-button> </div>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
@@ -95,7 +95,7 @@
 
   <ion-list lines="full" *ngIf="!isLandScape">
 
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <pagination-controls class="text-left" (pageChange)="p = $event"></pagination-controls>
 
     <ion-card *ngFor="let item of data | paginate: { itemsPerPage: 5, currentPage: p }" routerLink="/menu/auditdetail/{{item.id}}">
       
@@ -116,7 +116,7 @@
 
     </ion-card>
 
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <pagination-controls class="text-left" (pageChange)="p = $event"></pagination-controls>
 
   </ion-list>
 

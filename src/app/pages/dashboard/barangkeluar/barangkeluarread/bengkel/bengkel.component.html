@@ -4,13 +4,30 @@
 
     <div class="row d-flex justify-content-center">
 
-      <ion-item class="col-lg-4 ">
+      <ion-item class="col-lg-3">
+        <ion-label position="floating">Bengkel</ion-label>
+        <ionic-selectable [canSearch]="true" searchPlaceholder="Cari berdasarkan Bengkel" [(ngModel)]="bengkel" [items]="bengkelarr"
+        (onSelect)="onChange()" itemValueField="bengkel" itemTextField="bengkel">
+
+          <ng-template ionicSelectableCloseButtonTemplate>
+            <ion-icon name="close-circle"></ion-icon>
+          </ng-template>
+
+          <ng-template ionicSelectableItemTemplate let-bengkel="item">
+            {{bengkel.bengkel}}
+          </ng-template>
+
+        </ionic-selectable>
+
+      </ion-item>
+
+      <!-- <ion-item class="col-lg-4 ">
         <ion-label position="floating">Bengkel</ion-label>
         <ion-select placeholder="Pilih Bengkel" [(ngModel)]="bengkel" (ionChange)="onChange()">
           <ion-select-option *ngFor="let item of bengkelarr" value="{{item.bengkel}}">{{item.bengkel}}
           </ion-select-option>
         </ion-select>
-      </ion-item>
+      </ion-item> -->
 
     </div>
 
@@ -66,9 +83,9 @@
       
       <div class="row">
         <div class="col text-center text-sm-left">
-          <ion-button shape="round" color="success">
-            <ion-icon slot="start" name="save"></ion-icon>
-            Simpan ke Excel
+          <ion-button shape="round" routerLink="/menu/barangkeluarexc" (click)="transport()">
+            <ion-icon slot="start" name="clipboard"></ion-icon>
+            Laporan Barang Keluar
           </ion-button>
         </div>
       </div>

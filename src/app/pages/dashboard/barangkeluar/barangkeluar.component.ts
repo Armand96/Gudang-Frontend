@@ -80,24 +80,13 @@ export class BarangkeluarComponent implements OnInit, OnDestroy {
     this.func.exportAsExcelFile(this.data, "Daftar Barang Keluar");
   }
 
-  mobile(){
-    var subs = this.func.getDataWithoutParams('barangkeluarshowall').subscribe(
+  async descktop() {
+    await this.func.getDataWithoutParams('barangkeluarshowall').toPromise().then(
       resp => {
         if (resp['success']){
           this.data = resp['data'];
         }
-        subs.unsubscribe();
-      }
-    );
-  }
-
-  descktop() {
-    var subs = this.func.getDataWithoutParams('barangkeluarshowall').subscribe(
-      resp => {
-        if (resp['success']){
-          this.data = resp['data'];
-        }
-        subs.unsubscribe();
+        
       }
     );
   }

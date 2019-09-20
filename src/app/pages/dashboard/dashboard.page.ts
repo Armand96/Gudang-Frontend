@@ -27,7 +27,7 @@ export class DashboardPage implements OnInit, OnDestroy {
         {
           title: 'Daftar Barang',
           url: '/menu/barang',
-          icon: 'pricetags'
+          icon: 'list'
         },
       ]
     },
@@ -37,17 +37,17 @@ export class DashboardPage implements OnInit, OnDestroy {
         {
           title: 'List Barang Masuk',
           url: '/menu/barangmasuk',
-          icon: 'logo-ionic'
-        },
-        {
-          title: 'Asal Barang',
-          url: '/menu/asalbarang',
-          icon: 'logo-ionic'
+          icon: 'list'
         },
         {
           title: 'Nomor Barang Masuk',
           url: '/menu/nomorbarangmasuk',
-          icon: 'logo-ionic'
+          icon: 'pricetag'
+        },
+        {
+          title: 'Asal Barang',
+          url: '/menu/asalbarang',
+          icon: 'briefcase'
         },
       ]
     },
@@ -57,24 +57,29 @@ export class DashboardPage implements OnInit, OnDestroy {
         {
           title: 'List Barang Keluar',
           url: '/menu/barangkeluar',
-          icon: 'logo-ionic'
+          icon: 'list'
         },
         {
           title: 'Nomor Barang Keluar',
           url: '/menu/nomorbarangkeluar',
-          icon: 'logo-ionic'
+          icon: 'pricetag'
         },
         {
           title: 'Proyek',
           url: '/menu/proyek',
-          icon: 'logo-ionic'
+          icon: 'briefcase'
         },
         {
           title: 'Bengkel',
           url: '/menu/bengkel',
-          icon: 'logo-ionic'
+          icon: 'briefcase'
         },
       ]
+    },
+    {
+      title: 'Audits',
+      url: '/menu/audits',
+      icon: 'clipboard'
     },
     {
       title: 'Pengguna',
@@ -85,11 +90,6 @@ export class DashboardPage implements OnInit, OnDestroy {
           icon: 'logo-ionic'
         }
       ]
-    },
-    {
-      title: 'Audits',
-      url: '/menu/audits',
-      icon: 'clipboard'
     },
   ];
 
@@ -117,7 +117,6 @@ export class DashboardPage implements OnInit, OnDestroy {
 
     if (this.user != 'Admin'){
       this.pages.pop();
-      this.pages.pop();
     }
     
   }
@@ -125,7 +124,6 @@ export class DashboardPage implements OnInit, OnDestroy {
   logout(){
     localStorage.clear();
     this.func.user = "";
-    this.router.navigateByUrl('/login');
   }
 
   // openFirst() {

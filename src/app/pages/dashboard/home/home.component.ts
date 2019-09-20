@@ -13,8 +13,8 @@ export class HomeComponent implements OnInit {
   async ngOnInit() {
     this.isLoading = true;
     
-    this.loadCountBarangKeluar();
-    this.loadCountBarangMasuk();
+    await this.loadCountBarangKeluar();
+    await this.loadCountBarangMasuk();
     await this.loadCountJenisBarang();
     // await this.func.delay(1000);
     
@@ -32,30 +32,30 @@ export class HomeComponent implements OnInit {
         if(resp['success'] = true){
           this.jenisbarang = resp['data'];
         }
-        console.log("Kelar load semua");
-      }
+      },
+      err => {}
     );
   }
 
   async loadCountBarangKeluar(){
-    var LTJB = await this.func.getDataWithoutParams('countbarangkeluar').subscribe(
+    await this.func.getDataWithoutParams('countbarangkeluar').toPromise().then(
       resp => {
         if(resp['success'] = true){
           this.barangkeluar = resp['data'];
         }
-        LTJB.unsubscribe();
-      }
+      },
+      err=>{}
     );
   }
 
   async loadCountBarangMasuk(){
-    var LTJB = await this.func.getDataWithoutParams('countbarangmasuk').subscribe(
+    await this.func.getDataWithoutParams('countbarangmasuk').toPromise().then(
       resp => {
         if(resp['success'] = true){
           this.barangmasuk = resp['data'];
         }
-        LTJB.unsubscribe();
-      }
+      },
+      err => {}
     );
   }
 

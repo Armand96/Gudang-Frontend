@@ -17,7 +17,7 @@ export class AuditlistComponent implements OnInit, OnDestroy {
 
   isLandScape:Boolean;
   data;
-  temp = [];
+  temp;
 
   constructor(
     private func:FunctionService,
@@ -28,19 +28,25 @@ export class AuditlistComponent implements OnInit, OnDestroy {
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
 
-    // filter our data
+    // filter our data    
     const temp = this.temp.filter((o)=>{
       return ['user', 'tipe_audit', 'nilai_lama', 'nilai_baru', 'created_at'].some(
         (k)=>{
-          return o[k].toString().toLowerCase().indexOf(val) !== -1 || !val;
+          if (k == 'nilai_baru') {
+            return o[k].nomor_barang.toString().toLowerCase().indexOf(val) !== -1 || !val;
+          } else {
+            return o[k].toString().toLowerCase().indexOf(val) !== -1 || !val;
+          }
+          
         }
       );
     });
-
+    
     // update the rows
     this.data = temp;
     // Whenever the filter changes, always go back to the first page
     // this.table.offset = 0;
+    // console.log(this.data)
   }
 
   ngOnInit() {
@@ -58,6 +64,10 @@ export class AuditlistComponent implements OnInit, OnDestroy {
     await this.LoadData();
     // await this.func.delay(1000);
     this.temp = [...this.data];
+    
+    Object.keys(this.data[0].nilai_baru).forEach((key)=> {
+      // console.log(this.data[0].nilai_baru[key]) ;
+    });
   }
 
   async LoadData(){

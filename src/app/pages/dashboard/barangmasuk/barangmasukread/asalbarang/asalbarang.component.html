@@ -4,13 +4,30 @@
 
     <div class="row d-flex justify-content-center">
 
-      <ion-item class="col-lg-4 ">
+      <ion-item class="col-lg-3">
+        <ion-label position="floating">Asal Barang</ion-label>
+        <ionic-selectable [canSearch]="true" searchPlaceholder="Cari berdasarkan Asal Barang" [(ngModel)]="asal_barang" [items]="asal"
+        (onSelect)="onChange()" itemValueField="asal_barang" itemTextField="asal_barang">
+
+          <ng-template ionicSelectableCloseButtonTemplate>
+            <ion-icon name="close-circle"></ion-icon>
+          </ng-template>
+
+          <ng-template ionicSelectableItemTemplate let-asal="item">
+            {{asal.asal_barang}}
+          </ng-template>
+
+        </ionic-selectable>
+
+      </ion-item>
+
+      <!-- <ion-item class="col-lg-4 ">
         <ion-label position="floating">Asal Barang</ion-label>
         <ion-select placeholder="Pilih Asal Barang" [(ngModel)]="asal_barang" (ionChange)="onChange()">
           <ion-select-option *ngFor="let item of asal" value="{{item.asal_barang}}">{{item.asal_barang}}
           </ion-select-option>
         </ion-select>
-      </ion-item>
+      </ion-item> -->
 
     </div>
 
@@ -98,7 +115,7 @@
   <div class="row ml-2" *ngIf="list_asal">
     <div class="col text-center text-sm-left">
       <ion-button shape="round" color="primary" routerLink="/menu/barangmasukexc" (click)="transport()">
-        <ion-icon slot="start" name="save"></ion-icon>
+        <ion-icon slot="start" name="clipboard"></ion-icon>
         Laporan Barang Masuk
       </ion-button>
     </div>

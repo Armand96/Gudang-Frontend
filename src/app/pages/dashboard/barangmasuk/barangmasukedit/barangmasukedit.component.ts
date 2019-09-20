@@ -41,8 +41,8 @@ export class BarangmasukeditComponent implements OnInit {
     this.editmode = false;
   }
 
-  loadSingleBarang(){
-    var subs = this.func.getDataWithParams(this.id,'barangmasuksingle/').subscribe(
+  async loadSingleBarang(){
+    await this.func.getDataWithParams(this.id,'barangmasuksingle/').toPromise().then(
       resp => {
         if (resp['success']){
           this.old_value = resp['data'];
@@ -55,15 +55,14 @@ export class BarangmasukeditComponent implements OnInit {
           this.editbarangmasuk.controls['jml_msk_huruf'].setValue(this.old_value.jml_msk_huruf);
           this.editbarangmasuk.controls['keterangan'].setValue(this.old_value.keterangan);
         }
-        subs.unsubscribe();
       }
     );
   }
 
-  Simpan(val){
+  async Simpan(val){
     // console.log(val);
     val.id = this.id;
-    var subs = this.func.postData(val, "barangmasukupdate").subscribe(
+    await this.func.postData(val, "barangmasukupdate").toPromise().then(
       async resp=>{
         if (resp['success']){
           await this.Audits(val);
@@ -72,19 +71,17 @@ export class BarangmasukeditComponent implements OnInit {
           // this.router.navigateByUrl("/menu/barangmasuk");
           this.func.backClicked();
         }
-        subs.unsubscribe();
       }
     );
   }
 
-  loadNomorBarang(){
+  async loadNomorBarang(){
 
-    var subs = this.func.getDataWithoutParams("nomorbarangonly").subscribe(
+    await this.func.getDataWithoutParams("nomorbarangonly").toPromise().then(
       resp => {
         if (resp['success']){
           this.NomorBarang = resp['data'];
         }
-        subs.unsubscribe();
       }
     );
 

@@ -38,6 +38,9 @@ export class BarangmasukcreateComponent implements OnInit {
   async Tambah(val){
     
     val.tgl_masuk = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
+    if (val.nomor_barang.nomor_barang != null || val.nomor_barang.nomor_barang != undefined ) {
+      val.nomor_barang = val.nomor_barang.nomor_barang;
+    }
     await this.func.postData(val, 'barangmasukinsert').toPromise().then(
       async resp =>{
         if (resp['success']){
@@ -58,7 +61,7 @@ export class BarangmasukcreateComponent implements OnInit {
     await this.func.postData(val, 'barangupdateq').toPromise().then(
       async resp => {
         if (resp['success']){
-          console.log(resp)
+          // console.log(resp)
           await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary");
           this.eventEmitter.onFirstComponentButtonClick();
           this.router.navigateByUrl('/menu/barangmasuk');
@@ -78,13 +81,12 @@ export class BarangmasukcreateComponent implements OnInit {
     );
   }
 
-  loadNomorBarang(){
-    var subs = this.func.getDataWithoutParams("nomorbarangonly").subscribe(
+  async loadNomorBarang(){
+    await this.func.getDataWithoutParams("nomornamabarangonly").toPromise().then(
       resp => {
         if (resp['success']){
           this.NomorBarang = resp['data'];
         }
-        subs.unsubscribe();
       }
     );
   }

@@ -3,114 +3,114 @@
   <div class="container-fluid" class="m-3">
    
     <div class="row">
-      <div class="col">
+      <div class="col p-1 ml-1 mr-1" id="print_div">
 
         <div class="table-responsive">
-          <table id="mytable" class="table table-borderless" *ngIf="data">
+          <table id="mytable" class="table table-borderless " *ngIf="data">
             <thead>
               <tr>
-                <th colspan="2" rowspan="4" class="text-center border-left border-top border-bottom"> <img src="../../../../../assets/img/Logo-DKB.png" alt="" width="200px" height="100px"> </th>
-                <th colspan="4" rowspan="4" class="border-right border-top border-bottom"> <h4 class="text-center"> PT. DOK & PERKAPALAN <br> KODJA BAHARI (PERSERO) <br> GALANGAN-II </h4> </th>
-                <th style="vertical-align: middle" class="p-0 pl-2 border-top"> Nomor </th>
-                <th style="vertical-align: middle" class="p-0 border-top"> : </th>
-                <th style="vertical-align: middle" class="p-0 border-right border-top"> FF15GD2-A3.03 </th>
+                <th colspan="2" rowspan="4" class="text-center border-left border-top border-bottom border-dark"> <img src="../../../../../assets/img/Logo-DKB.png" alt="" width="200px" height="100px"> </th>
+                <th colspan="4" rowspan="4" class="border-right border-top border-bottom border-dark"> <h4 class="text-center"> PT. DOK & PERKAPALAN <br> KODJA BAHARI (PERSERO) <br> GALANGAN-II </h4> </th>
+                <th style="vertical-align: middle" class="p-0 pl-2 border-top border-dark"> Nomor </th>
+                <th style="vertical-align: middle" class="p-0 border-top border-dark"> : </th>
+                <th style="vertical-align: middle" class="p-0 border-right border-top border-dark"> FF15GD2-A3.03 </th>
               </tr>
               <tr>
                 <th style="vertical-align: middle" class="p-0 pl-2"> Revisi </th>
                 <th style="vertical-align: middle" class="p-0"> : </th>
-                <th style="vertical-align: middle" class="p-0 border-right"> 0 </th>
+                <th style="vertical-align: middle" class="p-0 border-right border-dark"> 0 </th>
               </tr>
               <tr>
                 <th style="vertical-align: middle" class="p-0 pl-2"> Tanggal </th>
                 <th style="vertical-align: middle" class="p-0"> : </th>
-                <th style="vertical-align: middle" class="p-0 border-right"> 15/06/2010 </th>
+                <th style="vertical-align: middle" class="p-0 border-right border-dark"> 15/06/2010 </th>
               </tr>
               <tr>
                 <th style="vertical-align: middle" class="p-0 pl-2"> Halaman</th>
                 <th style="vertical-align: middle" class="p-0"> : </th>
-                <th style="vertical-align: middle" class="p-0 border-right border-bottom"> 01 dari 01 </th>
+                <th style="vertical-align: middle" class="p-0 border-right border-bottom border-dark"> 01 dari 01 </th>
               </tr>
 
               <tr>
-                <th colspan="9" class="text-center border-left border-right p-1">FORMAT</th>
+                <th colspan="9" class="text-center border-left border-right p-1 border-dark">FORMAT</th>
               </tr>
 
               <tr>
-                <th colspan="9" class="text-center border-left border-right p-1"> <u>BERITA ACARA PENERIMAAN MATERIAL (BAPM)</u> </th>
+                <th colspan="9" class="text-center border-left border-right p-1 border-dark"> <u>BERITA ACARA PENERIMAAN MATERIAL (BAPM)</u> </th>
               </tr>
 
               <tr>
-                <th colspan="9" class="text-left border-left border-right p-1 pl-3"> Terima dari : <u>{{data.asal}}</u> </th>
+                <th colspan="9" class="text-left border-left border-right p-1 pl-3 border-dark"> Terima dari : <u>{{data.asal}}</u> </th>
               </tr>
 
               <tr>
-                <th colspan="6" class="text-left border-left p-1 pl-3"> Diminta dengan SP/Kontrak/SPB.L/C/SPBB No: <u>{{data.arraydata[0].no_kontrak}}</u> </th>
+                <th colspan="6" class="text-left border-left p-1 pl-3 border-dark"> Diminta dengan SP/Kontrak/SPB.L/C/SPBB No: <u>{{data.arraydata[0].no_kontrak}}</u> </th>
                 <th class="p-1 pl-3">Tgl </th>
                 <th class="p-1 pl-3">:</th>
-                <th class="border-right p-1 pl-3"> <u>{{data.arraydata[0].tgl_masuk | date: 'dd MMMM yyyy'}}</u> </th>
+                <th class="border-right p-1 pl-3 border-dark"> <u>{{data.arraydata[0].tgl_masuk | date: 'dd MMMM yyyy'}}</u> </th>
               </tr>
 
               <tr>
-                <th colspan="9"  class="text-right border-left border-right p-1 pr-3">F.02</th>
+                <th colspan="9"  class="text-right border-left border-right p-1 pr-3 border-dark">F.02</th>
               </tr>
 
               <tr>
-                <th style="vertical-align: middle" rowspan="2" class="text-center border P-2"> NO. </th>
-                <th style="vertical-align: middle" rowspan="2" colspan="2" class="text-center border P-2"> NAMA & SPESIFIKASI BARANG </th>
-                <th style="vertical-align: middle" rowspan="2" class="text-center border P-2"> KODE </th>
-                <th style="vertical-align: middle" rowspan="2" class="text-center border P-2"> SATUAN </th>
-                <th style="vertical-align: middle" colspan="3" class="text-center border P-2"> JUMLAH </th>
-                <th style="vertical-align: middle" rowspan="2" class="text-center border P-2"> KETERANGAN </th>
+                <th style="vertical-align: middle" rowspan="2" class="text-center border border-dark p-0"> NO. </th>
+                <th style="vertical-align: middle" rowspan="2" colspan="2" class="text-center border border-dark p-0"> NAMA & SPESIFIKASI BARANG </th>
+                <th style="vertical-align: middle" rowspan="2" class="text-center border border-dark p-0"> KODE </th>
+                <th style="vertical-align: middle" rowspan="2" class="text-center border border-dark p-0"> SATUAN </th>
+                <th style="vertical-align: middle" colspan="3" class="text-center border border-dark p-0"> JUMLAH </th>
+                <th style="vertical-align: middle" rowspan="2" class="text-center border border-dark p-0"> KETERANGAN </th>
               </tr>
 
               <tr>
-                <th style="vertical-align: middle" class="text-center border p-2">ANGKA</th>
-                <th style="vertical-align: middle" colspan="2" class="text-center border p-2">HURUF</th>
+                <th style="vertical-align: middle" class="text-center border p-0 border-dark">ANGKA</th>
+                <th style="vertical-align: middle" colspan="2" class="text-center border p-0 border-dark">HURUF</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of data.arraydata;let i =index;">
-                <td style="vertical-align: middle" class="text-center border-left border-right p-2">{{i+1}}</td>
-                <td style="vertical-align: middle" class="border-left border-right p-2" colspan="2">{{item.nama_barang}}</td>
-                <td style="vertical-align: middle" class="text-center border-left border-right p-2">{{item.nomor_barang}}</td>
-                <td style="vertical-align: middle" class="text-center border-left border-right p-2">{{item.satuan}}</td>
-                <td style="vertical-align: middle" class="text-center border-left border-right p-2">{{item.jml_msk_angka}}</td>
-                <td style="vertical-align: middle" class="text-center border-left border-right p-2" colspan="2">{{item.jml_msk_huruf}}</td>
-                <td style="vertical-align: middle" class="text-center border-left border-right p-2" middle>{{item.keterangan}}</td>
+              <tr *ngFor="let item of data.arraydata | paginate: { itemsPerPage: 5, currentPage: p };">
+                <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">{{item.indexx}}</td>
+                <td style="vertical-align: middle" class="border-left border-right p-0 pl-2 border-dark" colspan="2">{{item.nama_barang}}</td>
+                <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">{{item.nomor_barang}}</td>
+                <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">{{item.satuan}}</td>
+                <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">{{item.jml_msk_angka}}</td>
+                <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark" colspan="2">{{item.jml_msk_huruf}}</td>
+                <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark" middle>{{item.keterangan}}</td>
               </tr>
             </tbody>
             <tfoot>
               <tr>
-                <td colspan="2" class="p-2 text-left border-top border-left"> <b>Lembar 1 Supplier/Pemasok</b> </td>
-                <td colspan="3" class="p-2 text-left border-top border-left"> </td>
-                <td colspan="4" class="p-2 pr-4 text-center border-top border-right"> Jakarta, (16 Januari 2020) </td>
+                <td colspan="2" class="p-2 text-left border-top border-left border-dark"> <b>Lembar 1 Supplier/Pemasok</b> </td>
+                <td colspan="3" class="p-2 text-left border-top border-dark"> </td>
+                <td colspan="4" class="p-2 pr-4 text-center border-top border-right border-dark"> Jakarta, {{datenow | date:'dd MMMM yyyy'}} </td>
               </tr>
               <tr>
-                <td colspan="2" class="p-0 pl-4 text-left border-left">Lembar 1 Supplier/Pemasok</td>
+                <td colspan="2" class="p-0 pl-4 text-left border-left border-dark">Lembar 1 Supplier/Pemasok</td>
                 <td colspan="3" class="p-0 text-center">Yang Menyerahkan </td>
-                <td colspan="4" class="p-0 text-center border-right">Yang Menerima </td>
+                <td colspan="4" class="p-0 text-center border-right border-dark">Yang Menerima </td>
               </tr>
               <tr>
-                <td colspan="2" class="p-0 pl-4 text-left border-left">Lembar 2 Pengadaan</td>
+                <td colspan="9" class="p-0 pl-4 text-left border-left border-right border-dark">Lembar 2 Pengadaan</td>
               </tr>
               <tr>
-                <td colspan="2" class="p-0 pl-4 text-left border-left">Lembar 3 Akuntansi Biaya (Persediaan)</td>
+                <td colspan="9" class="p-0 pl-4 text-left border-left border-right border-dark">Lembar 3 Akuntansi Biaya (Persediaan)</td>
               </tr>
               <tr>
-                <td colspan="2" class="p-0 pl-4 text-left border-left">Lembar 4 Akuntansi Pusat</td>
+                <td colspan="9" class="p-0 pl-4 text-left border-left border-right border-dark">Lembar 4 Akuntansi Pusat</td>
               </tr>
               <tr>
-                <td colspan="2" class="p-0 pl-4 text-left border-left">Lembar 5 Logsitik</td>
+                <td colspan="9" class="p-0 pl-4 text-left border-left border-right border-dark">Lembar 5 Logsitik</td>
               </tr>
               <tr>
-                <td colspan="2" class="p-0 pl-4 text-left border-left">Lembar 6 Peminta</td>
-                <td colspan="3" class="p-0 pl-4 text-center border-left">(.....................................)</td>
-                <td colspan="4" class="p-0 pl-4 text-center border-left">(.....................................)</td>
+                <td colspan="2" class="p-0 pl-4 text-left border-left border-dark">Lembar 6 Peminta</td>
+                <td colspan="3" class="p-0 pl-4 text-center ">(.....................................)</td>
+                <td colspan="4" class="p-0 pl-4 text-center border-right border-dark">(.....................................)</td>
               </tr>
               <tr>
-                <td colspan="2" class="p-0 pl-4 text-left border-left">Lembar 7 Arsip</td>
-                <td colspan="3" class="p-0 pl-4 text-left border-left"></td>
-                <td colspan="4" class="p-0 pl-4 text-center border-left"> <b>KABID GUDANG</b> </td>
+                <td colspan="2" class="p-0 pl-4 text-left border-left border-bottom border-dark">Lembar 7 Arsip</td>
+                <td colspan="3" class="p-0 pl-4 text-left border-bottom border-dark"></td>
+                <td colspan="4" class="p-0 pl-4 text-center border-right border-bottom border-dark"> <b>KABID GUDANG</b> </td>
               </tr>
             </tfoot>
           </table>
@@ -120,13 +120,29 @@
     </div>
 
     <div class="row">
+      <div class="col text-center">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="col text-center text-sm-left">
-        <ion-button shape="round" color="success" (click)="onClick()">
-          <ion-icon slot="start" name="save"></ion-icon>
-          Simpan ke Excel
+        <ion-button shape="round" color="warning" (click)="print()">
+          <ion-icon slot="start" name="save" color="dark"></ion-icon>
+           <ion-text color="dark"> <b>Simpan ke PDF</b>  </ion-text> 
         </ion-button>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col text-center text-sm-left">
+        <ion-button shape="round" color="warning" (click)="onClick()">
+          <ion-icon slot="start" name="save" color="dark"></ion-icon>
+          <ion-text color="dark">  <b>Simpan ke Excel</b>   </ion-text> 
+        </ion-button>
+      </div>
+    </div>
+
     
     
 

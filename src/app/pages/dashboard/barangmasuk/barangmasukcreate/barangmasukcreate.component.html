@@ -30,9 +30,20 @@
 
           <ion-item>
             <ion-label position="floating">Nomor Barang</ion-label>
-            <ion-select placeholder="Nomor Barang" formControlName="nomor_barang" name="nomor_barang" required>
-              <ion-select-option *ngFor="let item of NomorBarang" value="{{item.nomor_barang}}" > {{item.nomor_barang}} </ion-select-option>
-            </ion-select>
+            <ionic-selectable [canSearch]="true" searchPlaceholder="Cari berdasarkan Nomor Barang" formControlName="nomor_barang" name="nomor_barang" [items]="NomorBarang" itemValueField="nomor_barang" itemTextField="nomor_barang">
+
+              <ng-template ionicSelectableCloseButtonTemplate>
+                <ion-icon name="close-circle"></ion-icon>
+              </ng-template>
+
+              <ng-template ionicSelectableItemTemplate let-nomor="item" >
+                {{nomor.nomor_barang}} - {{nomor.nama_barang}}
+              </ng-template>
+              
+            </ionic-selectable>
+            <!-- <ion-select placeholder="Nomor Barang" formControlName="nomor_barang" name="nomor_barang" required>
+              <ion-select-option *ngFor="let item of NomorBarang" value="{{item.nomor_barang}}" > {{item.nomor_barang}} <br> {{item.nama_barang}} </ion-select-option>
+            </ion-select> -->
           </ion-item>
 
           <ion-item>
