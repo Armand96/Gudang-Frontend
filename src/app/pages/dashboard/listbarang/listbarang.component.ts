@@ -78,6 +78,7 @@ export class ListbarangComponent implements OnInit, OnDestroy {
   exportAsXLSX():void {
     this.data = this.data.filter( (props) =>{
       delete props.dibuat_oleh;
+      delete props.harga_satuan;
       return true;
     });
     this.func.exportAsExcelFile(this.data, "Daftar Barang");
@@ -102,6 +103,11 @@ export class ListbarangComponent implements OnInit, OnDestroy {
         if (resp['success']){
           this.data = resp['data'];
         }
+      },
+      err=>{
+        // if (!err.ok){
+        //   this.func.presentToast('Tidak dapat terhubung ke server', 'text-center', 'danger', 5000);
+        // }
       }
     );
   }

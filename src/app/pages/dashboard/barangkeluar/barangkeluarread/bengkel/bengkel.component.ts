@@ -20,6 +20,7 @@ export class BengkelComponent implements OnInit, OnDestroy {
   landscape:Boolean;
   screenEvent;
   subsEvent;
+  jsonsend = {};
 
   constructor(
     private func: FunctionService,
@@ -53,17 +54,26 @@ export class BengkelComponent implements OnInit, OnDestroy {
     if (this.bengkel != null) this.onChange();
   }
 
-  onChange(){
-    var jsonsend = {
+  async onChange(){
+    await this.func.delay(50);
+    this.jsonsend = {
       bengkel:this.bengkel
     }
-    this.func.postData(jsonsend, 'bengkel').toPromise().then(
+    this.func.postData(this.jsonsend, 'bengkel').toPromise().then(
       resp=>{
         if (resp['success'] && resp['data'] != null){
           this.list_bengkel = resp['data'];
         }
       }
     )
+  }
+
+  transport(){
+    this.func.TransferDataBrgKlr = {
+      url:'bengkel',
+      json:this.jsonsend
+    }
+    localStorage.setItem('tdataklr', JSON.stringify(this.func.TransferDataBrgKlr));
   }
 
 }

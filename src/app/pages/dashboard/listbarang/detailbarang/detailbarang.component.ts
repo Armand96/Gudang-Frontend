@@ -40,8 +40,8 @@ export class DetailbarangComponent implements OnInit {
     this.editmode = false;
   }
 
-  loadSingleBarang(){
-    var subs = this.func.postData(this.jsonsend, 'barangsingle').subscribe(
+  async loadSingleBarang(){
+    await this.func.postData(this.jsonsend, 'barangsingle').toPromise().then(
       resp => {
         if (resp['success']){
           this.old_value = resp['data'];
@@ -52,14 +52,13 @@ export class DetailbarangComponent implements OnInit {
           this.editbarang.controls['kuantitas'].setValue(this.old_value.kuantitas);
           this.editbarang.controls['harga_satuan'].setValue(this.old_value.harga_satuan);
         }
-        subs.unsubscribe();
       }
     );
   }
 
-  editBarang(val){
+  async editBarang(val){
 
-    var subs = this.func.postData(val, 'barangupdate').subscribe(
+    await this.func.postData(val, 'barangupdate').toPromise().then(
       async resp => {
         if (resp['success']){
           await this.Audits(val);
@@ -68,7 +67,6 @@ export class DetailbarangComponent implements OnInit {
           this.eventEmitter.onFirstComponentButtonClick();
           // this.navctrl.navigateBack("/menu/barang");
         }
-        subs.unsubscribe();
       }
     );
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FunctionService } from 'src/app/core/function.service';
 import { EventEmitterService } from 'src/app/core/event-emitter.service';
+import { IonicSelectableComponent } from 'ionic-selectable';
 
 @Component({
   selector: 'app-nomorbarangmasuk',
@@ -15,8 +16,8 @@ export class NomorbarangmasukComponent implements OnInit, OnDestroy {
   }
 
   nmrBarang:Array<any>;
-  nomor_barang:string;
-  list_nomor_barang:Array<any>;
+  nomor_barang;
+  list_nomor_barang;
   landscape:Boolean;
   screenEvent;
   subsEvent;
@@ -53,14 +54,21 @@ export class NomorbarangmasukComponent implements OnInit, OnDestroy {
     if (this.nomor_barang != null) this.onChange();
   }
 
-  onChange(){
+  save(){
+    this.func.exportAsExcelFile(this.list_nomor_barang.arraydata, "Barang Masuk Berdasarkan Nomor Barang "+this.nomor_barang.nomor_barang + " - "+ this.nomor_barang.nama_barang);
+  }
+
+  async onChange(){
+    await this.func.delay(50);
     var jsonsend = {
-      nomor_barang:this.nomor_barang
+      nomor_barang:this.nomor_barang.nomor_barang
     }
+    
     this.func.postData(jsonsend, 'nomorbarangmasuk').toPromise().then(
       resp=>{
         if (resp['success'] && resp['data'] != null){
           this.list_nomor_barang = resp['data'];
+          console.log(this.list_nomor_barang);
         }
       }
     )

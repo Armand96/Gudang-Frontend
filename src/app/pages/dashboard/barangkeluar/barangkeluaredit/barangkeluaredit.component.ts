@@ -44,8 +44,8 @@ export class BarangkeluareditComponent implements OnInit {
     this.editmode = false;
   }
 
-  loadSingleBarang(){
-    var subs = this.func.getDataWithParams(this.id,'barangkeluarsingle/').subscribe(
+  async loadSingleBarang(){
+    await this.func.getDataWithParams(this.id,'barangkeluarsingle/').toPromise().then(
       resp => {
         if (resp['success']){
           this.old_value = resp['data'];
@@ -62,15 +62,15 @@ export class BarangkeluareditComponent implements OnInit {
           this.barangbarukeluar.controls['jml_klr_permintaan_angka'].setValue(this.old_value.jml_klr_permintaan_angka);
           this.barangbarukeluar.controls['jml_klr_permintaan_huruf'].setValue(this.old_value.jml_klr_permintaan_huruf);
         }
-        subs.unsubscribe();
+        
       }
     );
   }
 
-  Simpan(val){
+  async Simpan(val){
     // console.log(val);
     val.id = this.id;
-    var subs = this.func.postData(val, "barangkeluarupdate").subscribe(
+    await this.func.postData(val, "barangkeluarupdate").toPromise().then(
       async resp=>{
         if (resp['success']){
           await this.Audits(val);
@@ -79,7 +79,6 @@ export class BarangkeluareditComponent implements OnInit {
           // this.router.navigateByUrl("/menu/barangkeluar");
           this.func.backClicked();
         }
-        subs.unsubscribe();
       }
     );
   }
@@ -94,13 +93,12 @@ export class BarangkeluareditComponent implements OnInit {
 
   }
 
-  loadNomorBarang(){
-    var subs = this.func.getDataWithoutParams("nomornamabarangonly").subscribe(
+  async loadNomorBarang(){
+    await this.func.getDataWithoutParams("nomornamabarangonly").toPromise().then(
       resp => {
         if (resp['success']){
           this.NomorBarang = resp['data'];
         }
-        subs.unsubscribe();
       }
     );
   }

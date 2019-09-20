@@ -16,7 +16,7 @@ export class AsalbarangComponent implements OnInit, OnDestroy {
   }
 
   asal:Array<any>;
-  asal_barang:string;
+  asal_barang
   list_asal:Array<any>;
   landscape:Boolean;
   screenEvent;
@@ -55,7 +55,8 @@ export class AsalbarangComponent implements OnInit, OnDestroy {
     if (this.asal_barang != null) this.onChange();
   }
 
-  onChange(){
+  async onChange(){
+    await this.func.delay(50);
     this.jsonsend = {
       asal_barang:this.asal_barang
     }

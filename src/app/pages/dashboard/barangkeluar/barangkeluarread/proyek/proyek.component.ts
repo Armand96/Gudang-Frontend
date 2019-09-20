@@ -54,7 +54,8 @@ export class ProyekComponent implements OnInit, OnDestroy {
     if (this.proyek != null) this.onChange();
   }
 
-  onChange(){
+  async onChange(){
+    await this.func.delay(50);
     this.jsonsend = {
       proyek:this.proyek
     }

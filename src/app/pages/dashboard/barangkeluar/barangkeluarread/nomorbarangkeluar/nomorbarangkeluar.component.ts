@@ -15,8 +15,8 @@ export class NomorbarangkeluarComponent implements OnInit, OnDestroy {
   }
 
   nmrBarang:Array<any>;
-  nomor_barang:string;
-  list_nomor_barang:Array<any>;
+  nomor_barang
+  list_nomor_barang
   landscape:Boolean;
   screenEvent;
   subsEvent;
@@ -42,6 +42,10 @@ export class NomorbarangkeluarComponent implements OnInit, OnDestroy {
     this.loadNomorBarang();
   }
 
+  save(){
+    this.func.exportAsExcelFile(this.list_nomor_barang.arraydata, "Barang Keluar Berdasarkan Nomor Barang "+this.nomor_barang.nomor_barang + " - "+ this.nomor_barang.nama_barang);
+  }
+
   loadNomorBarang(){
     this.func.getDataWithoutParams('nmrdisbarangkeluar').toPromise().then(
       resp=>{
@@ -53,9 +57,10 @@ export class NomorbarangkeluarComponent implements OnInit, OnDestroy {
     if (this.nomor_barang != null) this.onChange();
   }
 
-  onChange(){
+  async onChange(){
+    await this.func.delay(50);
     var jsonsend = {
-      nomor_barang:this.nomor_barang
+      nomor_barang:this.nomor_barang.nomor_barang
     }
     this.func.postData(jsonsend, 'nomorbarangkeluar').toPromise().then(
       resp=>{

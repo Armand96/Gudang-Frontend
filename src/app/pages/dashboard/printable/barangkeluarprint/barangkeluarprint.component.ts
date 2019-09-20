@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FunctionService } from 'src/app/core/function.service';
-import { ENgxPrintComponent } from 'e-ngx-print';
-import * as jsPDF from 'jspdf'; 
-import html2canvas from 'html2canvas';
+import { ExportAsService, ExportAsConfig, SupportedExtensions } from 'ngx-export-as';
 
 @Component({
   selector: 'app-barangkeluarprint',
@@ -14,17 +12,29 @@ export class BarangkeluarprintComponent implements OnInit {
   data
   sendparam
 
+  config: ExportAsConfig = {
+    type: 'pdf',
+    elementId: 'print_div',
+    options: {
+      jsPDF: {
+        orientation: 'landscape',
+      },
+    }
+  };
+
+
   @ViewChild('print_div') content: ElementRef;
 
   printCSS = ['https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'];
 
   constructor(
     private elRef: ElementRef,
-    private func: FunctionService
+    private func: FunctionService,
+    private exportAsService: ExportAsService
   ) { }
 
   ngOnInit() {
-    console.log(this.func.TransferDataBrgKlr)
+    // console.log(this.func.TransferDataBrgKlr)
     this.loadData();
   }
 
@@ -32,8 +42,14 @@ export class BarangkeluarprintComponent implements OnInit {
     this.sendparam = this.func.TransferDataBrgKlr
     this.func.postData(this.sendparam.json, this.sendparam.url).toPromise().then(
       resp=>{
+        // console.log(resp['data'])
         if (resp['success'] && resp['data'] != null){
           this.data = resp['data'];
+          var i = 1;
+          this.data.arraydata.forEach(element => {
+            element.indexx = i;
+            i++
+          });
         }
       }
     );
@@ -41,28 +57,10 @@ export class BarangkeluarprintComponent implements OnInit {
 
   print(){
     
-    let doc = new jsPDF();
-    let specialElmH = {
-      '#editor': function(element, renderer) {
-        return true;
-      }
-    };
-
-    let content = this.content.nativeElement;
-    doc.fromHTML(content.innerHTML, 15, 15, {
-      'width':190,
-      'elementHandlers': specialElmH
+    this.exportAsService.save(this.config, 'Barang Keluar').toPromise().then(() => {
+      // save started
     });
-    doc.save('test.pdf');
 
-    // html2canvas(document.querySelector("#print_div")).then(
-    //   canvas => {
-    //     let doc = new jsPDF('p', 'pt', [canvas.width, canvas.height]);
-    //     doc.addHTML(this.content.nativeElement, canvas.width, canvas.height)
-    //     doc.save("Barang Keluar.pdf");
-    //   }
-    // );
-    
   }
 
   onClick(){

@@ -43,7 +43,7 @@
       </div>
 
       <ion-menu-toggle>
-          <ion-item (click)="logout()" style="cursor: pointer;">
+          <ion-item (click)="logout()" style="cursor: pointer;" routerLink="/login" (click)="logout()">
               <ion-icon name="log-out" slot="start"></ion-icon>
               <ion-label>
                 Logout ({{user}})

@@ -9,7 +9,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { DataTablesModule } from 'angular-datatables';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { NgxPrintModule } from 'ngx-print';
-import {ENgxPrintModule} from "e-ngx-print";
+import { ExportAsModule } from 'ngx-export-as';
 
 // =================================================== PAGES ===================================================
 import { DashboardPage } from './dashboard.page';
@@ -80,7 +80,7 @@ const routes: Routes = [
     IonicModule, NgxPaginationModule,
     RouterModule.forChild(routes), IonicSelectableModule,
     DataTablesModule, ReactiveFormsModule, NgxDatatableModule,
-    NgxPrintModule, ENgxPrintModule
+    NgxPrintModule, ExportAsModule
   ],
   declarations: [DashboardPage, ListbarangComponent, 
     HomeComponent, TambahbarangComponent, DetailbarangComponent,

@@ -3,36 +3,36 @@
   <div class="container-fluid" class="m-3">
 
     <div class="row" *ngIf="data">
-      <div class="col">
+      <div class="col p-1 ml-1 mr-1" id="print_div">
 
-        <div class="table-responsive" id="print_div" #print_div>
-          <table id="mytable" class="table table-borderless">
+        <div class="table-responsive"  #print_div>
+          <table id="mytable" class="table table-borderless mb-0">
             <thead>
               <tr>
-                <th colspan="2" rowspan="4" class="text-center border-left border-top border-bottom"> <img
+                <th colspan="2" rowspan="4" class="text-center border-left border-top border-bottom border-dark"> <img
                     src="../../../../../assets/img/Logo-DKB.png" alt="" width="200px" height="100px"> </th>
-                <th colspan="7" rowspan="4" class="border-right border-top border-bottom">
+                <th colspan="7" rowspan="4" class="border-right border-top border-bottom border-dark">
                   <h4 class="text-center"> PT. DOK & PERKAPALAN KODJA BAHARI <br> (PERSERO) <br> SHIPYARD JAKARTA-II
                   </h4>
                 </th>
-                <th style="vertical-align: middle" class="p-0 pl-2 border-top"> Nomor </th>
-                <th style="vertical-align: middle" class="p-0 border-right border-top">: FF15GD2-A3.03 </th>
+                <th style="vertical-align: middle" class="p-0 pl-2 border-top border-dark"> Nomor </th>
+                <th style="vertical-align: middle; width: 1%" class="p-0 border-right border-top border-dark">: FF15GD2-A3.03 </th>
               </tr>
               <tr>
                 <th style="vertical-align: middle" class="p-0 pl-2"> Revisi </th>
-                <th style="vertical-align: middle" class="p-0 border-right">: 0 </th>
+                <th style="vertical-align: middle; width: 1%" class="p-0 border-right border-dark">: 0 </th>
               </tr>
               <tr>
                 <th style="vertical-align: middle" class="p-0 pl-2"> Tanggal </th>
-                <th style="vertical-align: middle" class="p-0 border-right">: 15/06/2010 </th>
+                <th style="vertical-align: middle; width: 1%" class="p-0 border-right border-dark">: 15/06/2010 </th>
               </tr>
               <tr>
                 <th style="vertical-align: middle" class="p-0 pl-2"> Halaman</th>
-                <th style="vertical-align: middle" class="p-0 border-right border-bottom">: 01 dari 01 </th>
+                <th style="vertical-align: middle; width: 1%" class="p-0 border-right border-bottom border-dark">: 01 dari 01 </th>
               </tr>
 
               <tr>
-                <th colspan="11" class="text-center border p-1">FORMAT</th>
+                <th colspan="11" class="text-center border p-1 border-dark">FORMAT</th>
               </tr>
 
               <tr>
@@ -44,69 +44,70 @@
               </tr>
 
               <tr>
-                <th colspan="2" class="p-0"> Proyek </th>
-                <th class="p-0"> : {{data.proyek}} </th>
+                <th class="p-0" colspan="2"> Proyek </th>
+                <!-- <th class="p-0" *ngIf="data.proyek"> : {{data.proyek}} </th> -->
+                <th class="p-0" *ngIf="data.arraydata[0].proyek" colspan="2"> : {{data.arraydata[0].proyek}} </th>
               </tr>
 
               <tr>
-                <th colspan="2" class="p-0"> No. Order </th>
-                <th class="p-0"> : {{data.arraydata[0].no_order}} </th>
-                <th colspan="2" class="p-0"> Pekerjaan </th>
-                <th class="p-0"> : {{data.arraydata[0].pekerjaan}} </th>
+                <th class="p-0" colspan="2"> No. Order </th>
+                <th class="p-0" colspan="2"> : {{data.arraydata[0].no_order}} </th>
+                <th class="p-0" colspan="2"> Pekerjaan </th>
+                <th class="p-0" colspan="2"> : {{data.arraydata[0].pekerjaan}} </th>
               </tr>
 
               <tr>
-                <th colspan="2" class="p-0"> Bid / Bkl </th>
-                <th class="p-0"> : {{data.arraydata[0].bengkel}} </th>
-                <th colspan="2" class="p-0"> Kode Pekerjaan </th>
-                <th class="p-0"> : {{data.arraydata[0].kode_pekerjaan}} </th>
+                <th  class="p-0" colspan="2"> Bid / Bkl </th>
+                <th class="p-0" colspan="2"> : {{data.arraydata[0].bengkel}} </th>
+                <th  class="p-0" colspan="2"> Kode Pekerjaan </th>
+                <th class="p-0" colspan="2"> : {{data.arraydata[0].kode_pekerjaan}} </th>
               </tr>
 
               <tr>
-                <th style="vertical-align: middle" rowspan="2" class="text-center border P-2"> NO. </th>
-                <th style="vertical-align: middle" rowspan="2" class="text-center border P-2"> KODE </th>
-                <th style="vertical-align: middle" rowspan="2" colspan="2" class="text-center border P-2"> NAMA &
+                <th style="vertical-align: middle; width: 2%" rowspan="2" class="text-center border border-dark P-0"> NO. </th>
+                <th style="vertical-align: middle; width: 8%" rowspan="2" class="text-center border border-dark P-0"> KODE </th>
+                <th style="vertical-align: middle" rowspan="2" colspan="2" class="text-center border border-dark P-0"> NAMA &
                   SPESIFIKASI BARANG </th>
-                <th style="vertical-align: middle" rowspan="2" class="text-center border P-2"> SATUAN </th>
-                <th style="vertical-align: middle" colspan="2" class="text-center border P-2"> JUMLAH DIMINTA</th>
-                <th style="vertical-align: middle" colspan="2" class="text-center border P-2"> JUMLAH DISERAHKAN</th>
-                <th style="vertical-align: middle" rowspan="2" class="text-center border P-2"> HARGA SATUAN</th>
-                <th style="vertical-align: middle" rowspan="2" class="text-center border P-2"> JUMLAH HARGA </th>
+                <th style="vertical-align: middle; width: 3%" rowspan="2" class="text-center border border-dark P-0"> SATUAN </th>
+                <th style="vertical-align: middle" colspan="2" class="text-center border border-dark P-0"> JUMLAH DIMINTA</th>
+                <th style="vertical-align: middle" colspan="2" class="text-center border border-dark P-0"> JUMLAH DISERAHKAN</th>
+                <th style="vertical-align: middle; width: 1%" rowspan="2" class="text-center border border-dark P-0"> HARGA SATUAN</th>
+                <th style="vertical-align: middle; width: 1%" rowspan="2" class="text-center border border-dark P-0"> JUMLAH HARGA </th>
               </tr>
 
               <tr>
-                <th style="vertical-align: middle" class="text-center border p-2">ANGKA</th>
-                <th style="vertical-align: middle" class="text-center border p-2">HURUF</th>
-                <th style="vertical-align: middle" class="text-center border p-2">ANGKA</th>
-                <th style="vertical-align: middle" class="text-center border p-2">HURUF</th>
+                <th style="vertical-align: middle; width: 10%" class="text-center border p-0 border-dark">ANGKA</th>
+                <th style="vertical-align: middle; width: 10%" class="text-center border p-0 border-dark">HURUF</th>
+                <th style="vertical-align: middle; width: 10%" class="text-center border p-0 border-dark">ANGKA</th>
+                <th style="vertical-align: middle; width: 10%" class="text-center border p-0 border-dark">HURUF</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of data.arraydata | paginate: { itemsPerPage: 5, currentPage: p }; let i =index;">
-                <td style="vertical-align: middle" class="text-center border-left border-right p-2">{{i+1}}</td>
-                <td style="vertical-align: middle" class="text-center border-left border-right p-2">
+              <tr *ngFor="let item of data.arraydata | paginate: { itemsPerPage: 5, currentPage: p }; ">
+                <td style="vertical-align: middle; width: 2%" class="text-center border-left border-right p-0 border-dark">{{item.indexx}}</td>
+                <td style="vertical-align: middle; width: 8%" class="text-center border-left border-right p-0 border-dark">
                   {{item.nomor_barang}}</td>
-                <td style="vertical-align: middle" class="border-left border-right p-2" colspan="2">{{item.nama_barang}}
+                <td style="vertical-align: middle" class="border-left border-right p-0 pl-2 border-dark" colspan="2">{{item.nama_barang}}
                 </td>
-                <td style="vertical-align: middle" class="text-center border-left border-right p-2">{{item.satuan}}</td>
-                <td style="vertical-align: middle" class="text-center border-left border-right p-2">
+                <td style="vertical-align: middle; width: 3%" class="text-center border-left border-right p-0 border-dark">{{item.satuan}}</td>
+                <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">
                   {{item.jml_klr_angka}}</td>
-                <td style="vertical-align: middle" class="text-center border-left border-right p-2">
+                <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">
                   {{item.jml_klr_huruf}}</td>
-                <td style="vertical-align: middle" class="text-center border-left border-right p-2">
+                <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">
                   {{item.jml_klr_permintaan_angka}}</td>
-                <td style="vertical-align: middle" class="text-center border-left border-right p-2">
+                <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">
                   {{item.jml_klr_permintaan_huruf}}</td>
-                <td style="vertical-align: middle" class="text-center border-left border-right p-2">
+                <td style="vertical-align: middle; width: 1%" class="text-center border-left border-right p-0 border-dark">
                 </td>
-                <td style="vertical-align: middle" class="text-center border-left border-right p-2">
+                <td style="vertical-align: middle; width: 1%" class="text-center border-left border-right p-0 border-dark">
                 </td>
               </tr>
             </tbody>
             <tfoot>
               <tr>
-                <td colspan="6" class="text-center p-0 border">Paraf</td>
-                <td colspan="5" class="text-center p-0 border">Tanda Tangan & Nama Jelas</td>
+                <td colspan="6" class="text-center p-0 border-top border-bottom border-left border-dark">Paraf</td>
+                <td colspan="5" class="text-center p-0 border-top border-bottom border-right border-dark">Tanda Tangan & Nama Jelas</td>
               </tr>
               <tr>
                 <td colspan="2" class="text-center">Menyetujui</td>
@@ -115,9 +116,6 @@
                 <td colspan="2" class="text-center">Peminta</td>
                 <td colspan="2" class="text-center">Penerima</td>
                 <td class="text-center">Pemberi</td>
-              </tr>
-              <tr>
-                <td colspan="11" class="p-0"> &nbsp; </td>
               </tr>
               <tr>
                 <td colspan="11" class="p-0"> &nbsp; </td>
@@ -160,8 +158,6 @@
               </tr>
             </tfoot>
           </table>
-          <!-- <e-ngx-print #print1 [showBtn]="false" [printCSS]="printCSS">
-            </e-ngx-print> -->
         </div>
       </div>
     </div>
@@ -173,18 +169,19 @@
     </div>
 
     <div class="row">
-      <div class="col text-center">
-        <ion-button shape="round" color="success" (click)="print()">PRINT</ion-button>
-        <!-- <button printSectionId="print_div" styleSheetFile="assets/css/print.css" ngxPrint>PRINT</button> -->
-        <!-- <button (click)="customPrint('print1')">PRINT</button> -->
+      <div class="col text-center text-sm-left">
+        <ion-button shape="round" color="warning" (click)="print()">
+          <ion-icon slot="start" name="save" color="dark"></ion-icon>
+           <ion-text color="dark"> <b>Simpan ke PDF</b>  </ion-text> 
+        </ion-button>
       </div>
     </div>
 
     <div class="row">
       <div class="col text-center text-sm-left">
-        <ion-button shape="round" color="success" (click)="onClick()">
-          <ion-icon slot="start" name="save"></ion-icon>
-          Simpan ke Excel
+        <ion-button shape="round" color="warning" (click)="onClick()">
+          <ion-icon slot="start" name="save" color="dark"></ion-icon>
+          <ion-text color="dark">  <b>Simpan ke Excel</b>   </ion-text> 
         </ion-button>
       </div>
     </div>

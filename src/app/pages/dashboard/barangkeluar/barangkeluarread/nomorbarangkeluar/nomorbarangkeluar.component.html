@@ -4,12 +4,21 @@
 
     <div class="row d-flex justify-content-center">
 
-      <ion-item class="col-lg-4 ">
+      <ion-item class="col-lg-3">
         <ion-label position="floating">Nomor Barang</ion-label>
-        <ion-select placeholder="Pilih Nomor Barang" [(ngModel)]="nomor_barang" (ionChange)="onChange()">
-          <ion-select-option *ngFor="let item of nmrBarang" value="{{item.nomor_barang}}">{{item.nomor_barang}}
-          </ion-select-option>
-        </ion-select>
+        <ionic-selectable [canSearch]="true" searchPlaceholder="Cari berdasarkan Nomor Barang" [(ngModel)]="nomor_barang" [items]="nmrBarang"
+        (onSelect)="onChange()" itemValueField="nomor_barang" itemTextField="nomor_barang">
+
+          <ng-template ionicSelectableCloseButtonTemplate>
+            <ion-icon name="close-circle"></ion-icon>
+          </ng-template>
+
+          <ng-template ionicSelectableItemTemplate let-nomor="item">
+            {{nomor.nomor_barang}} - {{nomor.nama_barang}}
+          </ng-template>
+
+        </ionic-selectable>
+
       </ion-item>
 
     </div>
@@ -70,7 +79,7 @@
 
       <div class="row">
         <div class="col text-center text-sm-left">
-          <ion-button shape="round" color="success">
+          <ion-button shape="round" color="success" (click)="save()">
             <ion-icon slot="start" name="save"></ion-icon>
             Simpan ke Excel
           </ion-button>
