@@ -121,12 +121,19 @@
                 <td colspan="11" class="p-0"> &nbsp; </td>
               </tr>
               <tr>
-                <td colspan="2" class="text-center p-0">___________________</td>
-                <td colspan="2" class="text-center p-0">___________________</td>
-                <td colspan="2" class="text-center p-0">___________________</td>
-                <td colspan="2" class="text-center p-0">___________________</td>
-                <td colspan="2" class="text-center p-0">___________________</td>
-                <td class="text-center p-0">___________________</td>
+                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.man != ''"> <u>{{func.brgKeluarInfo.man}}</u> </td>
+                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.renwas != ''"> <u>{{func.brgKeluarInfo.renwas}}</u> </td>
+                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.kabid != ''"> <u>{{func.brgKeluarInfo.kabid}}</u> </td>
+                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.kabeng != ''"> <u>{{func.brgKeluarInfo.kabeng}}</u> </td>
+                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.penerima != ''"> <u>{{func.brgKeluarInfo.penerima}}</u> </td>
+                <td class="text-center p-0" *ngIf="func.brgKeluarInfo.pemberi != ''"> <u>{{func.brgKeluarInfo.pemberi}}</u> </td>
+                <!-- if the data is '' -->
+                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.man == ''"> ________________ </td>
+                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.renwas == ''"> ________________ </td>
+                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.kabid == ''"> ________________ </td>
+                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.kabeng == ''"> ________________ </td>
+                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.penerima == ''"> ________________ </td>
+                <td class="text-center p-0" *ngIf="func.brgKeluarInfo.pemberi == ''"> ________________ </td>
               </tr>
 
               <tr>
@@ -170,10 +177,19 @@
 
     <div class="row">
       <div class="col text-center text-sm-left">
-        <ion-button shape="round" color="warning" (click)="print()">
+        <button class="btn btn-light" style="border-radius: 20px"
+          styleSheetFile="../../../../../assets/css/bootstrap.min.css"
+          printSectionId="print_div"
+          ngxPrint> 
+          <ion-button shape="round" color="warning">
+            <ion-icon slot="start" name="save" color="dark"></ion-icon>
+            <ion-text color="dark"> <b>Cetak</b>  </ion-text> 
+          </ion-button>  
+        </button>
+        <!-- <ion-button shape="round" color="warning" (click)="print()">
           <ion-icon slot="start" name="save" color="dark"></ion-icon>
            <ion-text color="dark"> <b>Simpan ke PDF</b>  </ion-text> 
-        </ion-button>
+        </ion-button> -->
       </div>
     </div>
 

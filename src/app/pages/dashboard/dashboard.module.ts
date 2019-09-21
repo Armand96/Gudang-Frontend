@@ -33,6 +33,8 @@ import { AuditlistComponent } from './audits/auditlist/auditlist.component';
 import { AuditdetailComponent } from './audits/auditdetail/auditdetail.component';
 import { BarangmasukprintComponent } from './printable/barangmasukprint/barangmasukprint.component';
 import { BarangkeluarprintComponent } from './printable/barangkeluarprint/barangkeluarprint.component';
+import { BrgkeluarinfoComponent } from '../modal/brgkeluarinfo/brgkeluarinfo.component';
+import { BrgmasukinfoComponent } from '../modal/brgmasukinfo/brgmasukinfo.component';
 // =================================================== PAGES ===================================================
 
 const routes: Routes = [
@@ -89,12 +91,13 @@ const routes: Routes = [
     BarangkeluareditComponent, AsalbarangComponent, NomorbarangmasukComponent, 
     NomorbarangkeluarComponent, ProyekComponent, BengkelComponent, AdduserComponent,
     AuditlistComponent, AuditdetailComponent, BarangmasukprintComponent,
-    BarangkeluarprintComponent
+    BarangkeluarprintComponent, BrgkeluarinfoComponent, BrgmasukinfoComponent
   ],
   exports:[
     ListbarangComponent, HomeComponent, TambahbarangComponent,
     DetailbarangComponent
   ],
-  providers:[DatePipe, ListbarangComponent]
+  providers:[DatePipe, ListbarangComponent],
+  entryComponents:[BrgkeluarinfoComponent, BrgmasukinfoComponent]
 })
 export class DashboardPageModule {}

@@ -3,7 +3,7 @@
   <div class="container-fluid" class="m-3">
    
     <div class="row">
-      <div class="col p-1 ml-1 mr-1" id="print_div">
+      <div class="col p-1 ml-1 mr-1" id="print_brgmsk">
 
         <div class="table-responsive">
           <table id="mytable" class="table table-borderless " *ngIf="data">
@@ -40,7 +40,7 @@
               </tr>
 
               <tr>
-                <th colspan="9" class="text-left border-left border-right p-1 pl-3 border-dark"> Terima dari : <u>{{data.asal}}</u> </th>
+                <th colspan="9" class="text-left border-left border-right p-1 pl-3 border-dark"> Terima dari : <u>{{data.asal.asal_barang}}</u> </th>
               </tr>
 
               <tr>
@@ -104,13 +104,16 @@
               </tr>
               <tr>
                 <td colspan="2" class="p-0 pl-4 text-left border-left border-dark">Lembar 6 Peminta</td>
-                <td colspan="3" class="p-0 pl-4 text-center ">(.....................................)</td>
-                <td colspan="4" class="p-0 pl-4 text-center border-right border-dark">(.....................................)</td>
+                <td colspan="3" class="p-0 text-center " *ngIf="func.brgMasukInfo.penerima != ''">( {{func.brgMasukInfo.penerima}} )</td>
+                <td colspan="4" class="p-0 text-center border-right border-dark" *ngIf="func.brgMasukInfo.pemberi != ''">( {{func.brgMasukInfo.pemberi}} )</td>
+                <!-- if the data is '' -->
+                <td colspan="3" class="p-0 text-center " *ngIf="func.brgMasukInfo.penerima == ''">(.....................................)</td>
+                <td colspan="4" class="p-0 text-center border-right border-dark" *ngIf="func.brgMasukInfo.pemberi == ''">(.....................................)</td>
               </tr>
               <tr>
                 <td colspan="2" class="p-0 pl-4 text-left border-left border-bottom border-dark">Lembar 7 Arsip</td>
                 <td colspan="3" class="p-0 pl-4 text-left border-bottom border-dark"></td>
-                <td colspan="4" class="p-0 pl-4 text-center border-right border-bottom border-dark"> <b>KABID GUDANG</b> </td>
+                <td colspan="4" class="p-0 text-center border-right border-bottom border-dark"> <b>KABID GUDANG</b> </td>
               </tr>
             </tfoot>
           </table>
@@ -127,10 +130,19 @@
 
     <div class="row">
       <div class="col text-center text-sm-left">
-        <ion-button shape="round" color="warning" (click)="print()">
+        <button class="btn btn-light" style="border-radius: 20px"
+          styleSheetFile="../../../../../assets/css/bootstrap.min.css"
+          printSectionId="print_brgmsk"
+          ngxPrint> 
+          <ion-button shape="round" color="warning">
+            <ion-icon slot="start" name="save" color="dark"></ion-icon>
+            <ion-text color="dark"> <b>Cetak</b>  </ion-text> 
+          </ion-button>  
+        </button>
+        <!-- <ion-button shape="round" color="warning" (click)="print()">
           <ion-icon slot="start" name="save" color="dark"></ion-icon>
            <ion-text color="dark"> <b>Simpan ke PDF</b>  </ion-text> 
-        </ion-button>
+        </ion-button> -->
       </div>
     </div>
 

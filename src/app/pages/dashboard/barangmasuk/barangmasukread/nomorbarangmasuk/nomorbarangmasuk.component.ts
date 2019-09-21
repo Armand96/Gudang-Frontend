@@ -55,7 +55,11 @@ export class NomorbarangmasukComponent implements OnInit, OnDestroy {
   }
 
   save(){
-    this.func.exportAsExcelFile(this.list_nomor_barang.arraydata, "Barang Masuk Berdasarkan Nomor Barang "+this.nomor_barang.nomor_barang + " - "+ this.nomor_barang.nama_barang);
+    var datas = this.list_nomor_barang.arraydata.filter( (props) =>{
+      delete props.id;
+      return true;
+    });
+    this.func.exportAsExcelFile(datas, "Barang Masuk Berdasarkan Nomor Barang "+this.nomor_barang.nomor_barang + " - "+ this.nomor_barang.nama_barang);
   }
 
   async onChange(){

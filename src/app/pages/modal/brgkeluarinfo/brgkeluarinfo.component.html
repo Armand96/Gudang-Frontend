@@ -1,0 +1,51 @@
+<ion-content scroll-y="true">
+
+  <div class="container-fluid" class="m-3">
+
+    <form [formGroup]="brgkeluarinfo" (ngSubmit)="Laporan(brgkeluarinfo.value)">
+
+      <ion-item>
+        <ion-label position="floating">Man/Asman</ion-label>
+        <ion-input type="text" name="man" maxlength="30" clearInput formControlName="man">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Asman/Renwas</ion-label>
+        <ion-input type="text" name="renwas" maxlength="30" clearInput formControlName="renwas">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Kabid Gudang</ion-label>
+        <ion-input type="text" name="kabid" maxlength="30" clearInput formControlName="kabid">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Kabid/Kabeng</ion-label>
+        <ion-input type="text" name="kabeng" maxlength="30" clearInput formControlName="kabeng">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Penerima</ion-label>
+        <ion-input type="text" name="penerima" maxlength="30" clearInput formControlName="penerima">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Pemberi</ion-label>
+        <ion-input type="text" name="pemberi" maxlength="30" clearInput formControlName="pemberi">
+        </ion-input>
+      </ion-item>
+
+      <ion-button expand="block" type="submit" color="primary" class="fixed-bottom" routerLink="/menu/barangkeluarexc">
+        Lihat Laporan
+      </ion-button>
+
+    </form>
+
+  </div>
+
+</ion-content>

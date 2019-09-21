@@ -110,11 +110,11 @@
 
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
-  </ion-list>
+</ion-list>
 
   <div class="row ml-2" *ngIf="list_asal">
     <div class="col text-center text-sm-left">
-      <ion-button shape="round" color="primary" routerLink="/menu/barangmasukexc" (click)="transport()">
+      <ion-button shape="round" color="primary" (click)="transport()">
         <ion-icon slot="start" name="clipboard"></ion-icon>
         Laporan Barang Masuk
       </ion-button>

@@ -1,0 +1,27 @@
+<ion-content scroll-y="true">
+
+    <div class="container-fluid" class="m-3">
+  
+      <form [formGroup]="brgmasukinfo" (ngSubmit)="Laporan(brgmasukinfo.value)">
+  
+        <ion-item>
+          <ion-label position="floating">Yang Menyerahkan</ion-label>
+          <ion-input type="text" name="pemberi" maxlength="30" clearInput formControlName="pemberi">
+          </ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="floating">Yang Menerima</ion-label>
+          <ion-input type="text" name="penerima" maxlength="30" clearInput formControlName="penerima">
+          </ion-input>
+        </ion-item>
+  
+        <ion-button expand="block" type="submit" color="primary" class="fixed-bottom" routerLink="/menu/barangmasukexc">
+          Lihat Laporan
+        </ion-button>
+  
+      </form>
+  
+    </div>
+  
+  </ion-content>

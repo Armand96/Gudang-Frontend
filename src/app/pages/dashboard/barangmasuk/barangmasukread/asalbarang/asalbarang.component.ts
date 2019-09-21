@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FunctionService } from 'src/app/core/function.service';
 import { EventEmitterService } from 'src/app/core/event-emitter.service';
+import { ModalController } from '@ionic/angular';
+import { BrgmasukinfoComponent } from 'src/app/pages/modal/brgmasukinfo/brgmasukinfo.component';
 
 @Component({
   selector: 'app-asalbarang',
@@ -25,7 +27,8 @@ export class AsalbarangComponent implements OnInit, OnDestroy {
 
   constructor(
     private func: FunctionService,
-    private eventEmitterService:EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private modalCtrl: ModalController
   ) { }
 
   ngOnInit() {
@@ -69,12 +72,20 @@ export class AsalbarangComponent implements OnInit, OnDestroy {
     )
   }
 
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: BrgmasukinfoComponent
+    });
+    return await modal.present();
+  }
+
   transport(){
     this.func.TransferDataBrgMsk = {
       url:'asalbarang',
       json:this.jsonsend
     }
     localStorage.setItem('tdatamsk', JSON.stringify(this.func.TransferDataBrgMsk));
+    this.presentModal();
   }
 
 }

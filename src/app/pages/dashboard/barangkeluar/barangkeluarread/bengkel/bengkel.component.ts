@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FunctionService } from 'src/app/core/function.service';
 import { EventEmitterService } from 'src/app/core/event-emitter.service';
+import { ModalController } from '@ionic/angular';
+import { BrgkeluarinfoComponent } from 'src/app/pages/modal/brgkeluarinfo/brgkeluarinfo.component';
 
 @Component({
   selector: 'app-bengkel',
@@ -24,7 +26,8 @@ export class BengkelComponent implements OnInit, OnDestroy {
 
   constructor(
     private func: FunctionService,
-    private eventEmitterService:EventEmitterService
+    private eventEmitterService:EventEmitterService,
+    private modalCtrl:ModalController
   ) { }
 
   ngOnInit() {
@@ -68,12 +71,20 @@ export class BengkelComponent implements OnInit, OnDestroy {
     )
   }
 
+  async presentModal() {
+    const modal = await this.modalCtrl.create({
+      component: BrgkeluarinfoComponent
+    });
+    return await modal.present();
+  }
+
   transport(){
     this.func.TransferDataBrgKlr = {
       url:'bengkel',
       json:this.jsonsend
     }
     localStorage.setItem('tdataklr', JSON.stringify(this.func.TransferDataBrgKlr));
+    this.presentModal();
   }
 
 }

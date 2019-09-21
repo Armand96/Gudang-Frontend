@@ -15,7 +15,7 @@ export class BarangmasukprintComponent implements OnInit {
 
   config: ExportAsConfig = {
     type: 'pdf',
-    elementId: 'print_div',
+    elementId: 'print_brgmsk',
     options: {
       jsPDF: {
         orientation: 'landscape',
