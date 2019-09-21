@@ -12,15 +12,15 @@ export class AuditdetailComponent implements OnInit {
   auditdetail
   auditid = this.actr.snapshot.params['id'];
   nilai_lama
-  nilai_baru:Object
+  nilai_baru
 
   constructor(
     private actr: ActivatedRoute,
     private func: FunctionService
   ) { }
 
-  ngOnInit() {
-    this.loadDetail();
+  async ngOnInit() {
+    await this.loadDetail();
   }
 
   async loadDetail(){
@@ -31,12 +31,14 @@ export class AuditdetailComponent implements OnInit {
 
           if (this.auditdetail.nilai_lama != '') {
             this.nilai_lama = JSON.parse(this.auditdetail.nilai_lama);
+            if (this.nilai_lama.harga_satuan != null) delete this.nilai_lama.harga_satuan
             // Object.keys(this.nilai_lama).forEach( (item) =>{
             // });
           }
           
           if (this.auditdetail.nilai_baru != '') {
             this.nilai_baru = JSON.parse(this.auditdetail.nilai_baru);
+            if (this.nilai_baru.harga_satuan != null) delete this.nilai_baru.harga_satuan;
             // Object.keys(this.nilai_baru).forEach( (item) =>{
             // });
           }
