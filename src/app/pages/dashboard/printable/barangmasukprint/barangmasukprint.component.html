@@ -40,11 +40,12 @@
               </tr>
 
               <tr>
-                <th colspan="9" class="text-left border-left border-right p-1 pl-3 border-dark"> Terima dari : <u>{{data.asal.asal_barang}}</u> </th>
+                <th colspan="7" class="text-left border-left p-1 pl-3 border-dark"> Terima dari : <u>{{data.arraydata[0].asal_barang}}</u> </th>
+                <th colspan="2" class="text-left border-right p-1 pl-3 border-dark"> No. <u>{{data.arraydata[0].no_bapm}}</u> </th>
               </tr>
 
               <tr>
-                <th colspan="6" class="text-left border-left p-1 pl-3 border-dark"> Diminta dengan SP/Kontrak/SPB.L/C/SPBB No: <u>{{data.arraydata[0].no_kontrak}}</u> </th>
+                <th colspan="6" class="text-left border-left p-1 pl-3 border-dark"> Diminta dengan SP/Kontrak/SPB.L/C/SPBB No : <u>{{data.arraydata[0].no_kontrak}}</u> </th>
                 <th class="p-1 pl-3">Tgl </th>
                 <th class="p-1 pl-3">:</th>
                 <th class="border-right p-1 pl-3 border-dark"> <u>{{data.arraydata[0].tgl_masuk | date: 'dd MMMM yyyy'}}</u> </th>
@@ -55,7 +56,7 @@
               </tr>
 
               <tr>
-                <th style="vertical-align: middle" rowspan="2" class="text-center border border-dark p-0"> NO. </th>
+                <th style="vertical-align: middle; width: 5%" rowspan="2" class="text-center border border-dark p-0"> NO. </th>
                 <th style="vertical-align: middle" rowspan="2" colspan="2" class="text-center border border-dark p-0"> NAMA & SPESIFIKASI BARANG </th>
                 <th style="vertical-align: middle" rowspan="2" class="text-center border border-dark p-0"> KODE </th>
                 <th style="vertical-align: middle" rowspan="2" class="text-center border border-dark p-0"> SATUAN </th>
@@ -70,7 +71,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of data.arraydata | paginate: { itemsPerPage: 5, currentPage: p };">
-                <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">{{item.indexx}}</td>
+                <td style="vertical-align: middle; width: 5%" class="text-center border-left border-right p-0 border-dark">{{item.indexx}}</td>
                 <td style="vertical-align: middle" class="border-left border-right p-0 pl-2 border-dark" colspan="2">{{item.nama_barang}}</td>
                 <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">{{item.nomor_barang}}</td>
                 <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">{{item.satuan}}</td>

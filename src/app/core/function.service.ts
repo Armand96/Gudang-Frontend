@@ -33,6 +33,7 @@ export class FunctionService {
   public widths = Math.round(this.plat.width() / 2);
   public brgKeluarInfo:any = (localStorage.getItem('brgkeluarinfo') == null) ? "" : JSON.parse(localStorage.getItem('brgkeluarinfo'));
   public brgMasukInfo:any = (localStorage.getItem('brgmasukinfo') == null) ? "" : JSON.parse(localStorage.getItem('brgmasukinfo'));
+  public brgSelected:any = (localStorage.getItem('brgselected') == null) ? "" : JSON.parse(localStorage.getItem('brgselected'));
   // ============================================= END OF SHARED VARIABLE
   
   constructor(

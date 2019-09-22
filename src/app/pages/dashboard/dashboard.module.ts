@@ -1,3 +1,4 @@
+import { NokontrakComponent } from './barangmasuk/barangmasukread/nokontrak/nokontrak.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -35,6 +36,9 @@ import { BarangmasukprintComponent } from './printable/barangmasukprint/barangma
 import { BarangkeluarprintComponent } from './printable/barangkeluarprint/barangkeluarprint.component';
 import { BrgkeluarinfoComponent } from '../modal/brgkeluarinfo/brgkeluarinfo.component';
 import { BrgmasukinfoComponent } from '../modal/brgmasukinfo/brgmasukinfo.component';
+import { ListBarangModalComponent } from '../modal/list-barang-modal/list-barang-modal.component';
+import { NospmComponent } from './barangkeluar/barangkeluarread/nospm/nospm.component';
+import { NobapmComponent } from './barangmasuk/barangmasukread/nobapm/nobapm.component';
 // =================================================== PAGES ===================================================
 
 const routes: Routes = [
@@ -52,7 +56,9 @@ const routes: Routes = [
       {path:'barangmasuk',component:BarangmasukComponent},
       {path:'editbarangmasuk/:id',component:BarangmasukeditComponent},
       {path:'asalbarang',component:AsalbarangComponent},
+      {path:'nokontrak',component:NokontrakComponent},
       {path:'nomorbarangmasuk',component:NomorbarangmasukComponent},
+      {path:'nobapm',component:NobapmComponent},
       // ========================== Barang Keluar ==========================
       {path:'tambahbarangkeluar',component:BarangkeluarcreateComponent},
       {path:'barangkeluar',component:BarangkeluarComponent},
@@ -60,6 +66,7 @@ const routes: Routes = [
       {path:'nomorbarangkeluar',component:NomorbarangkeluarComponent},
       {path:'proyek',component:ProyekComponent},
       {path:'bengkel',component:BengkelComponent},
+      {path:'nospm',component:NospmComponent},
       // ========================== USER ==========================
       {path:'adduser',component:AdduserComponent},
       // ========================== AUDITS ==========================
@@ -91,13 +98,14 @@ const routes: Routes = [
     BarangkeluareditComponent, AsalbarangComponent, NomorbarangmasukComponent, 
     NomorbarangkeluarComponent, ProyekComponent, BengkelComponent, AdduserComponent,
     AuditlistComponent, AuditdetailComponent, BarangmasukprintComponent,
-    BarangkeluarprintComponent, BrgkeluarinfoComponent, BrgmasukinfoComponent
+    BarangkeluarprintComponent, BrgkeluarinfoComponent, BrgmasukinfoComponent,
+    ListBarangModalComponent, NokontrakComponent, NospmComponent, NobapmComponent
   ],
   exports:[
     ListbarangComponent, HomeComponent, TambahbarangComponent,
     DetailbarangComponent
   ],
   providers:[DatePipe, ListbarangComponent],
-  entryComponents:[BrgkeluarinfoComponent, BrgmasukinfoComponent]
+  entryComponents:[BrgkeluarinfoComponent, BrgmasukinfoComponent, ListBarangModalComponent]
 })
 export class DashboardPageModule {}

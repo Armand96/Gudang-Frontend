@@ -4,6 +4,8 @@ import { FunctionService } from 'src/app/core/function.service';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { EventEmitterService } from 'src/app/core/event-emitter.service';
+import { ModalController } from '@ionic/angular';
+import { ListBarangModalComponent } from 'src/app/pages/modal/list-barang-modal/list-barang-modal.component';
 
 @Component({
   selector: 'app-barangmasukcreate',
@@ -19,9 +21,11 @@ export class BarangmasukcreateComponent implements OnInit {
     private fb:FormBuilder,
     private router: Router,
     private datepipe: DatePipe,
-    private eventEmitter: EventEmitterService
+    private eventEmitter: EventEmitterService,
+    private ModalCtrl: ModalController
   ) {
     this.barangbarumasuk = this.fb.group({
+      no_bapm: ['', Validators.required],
       asal_barang: ['', Validators.required],
       no_kontrak: ['', Validators.required],
       nomor_barang: ['', Validators.required],
@@ -93,5 +97,17 @@ export class BarangmasukcreateComponent implements OnInit {
 
   konversi(val){
     this.barangbarumasuk.controls['jml_msk_huruf'].setValue(this.func.terbilang(val.jml_msk_angka));
+  }
+
+  async openModal(){
+    const modal = await this.ModalCtrl.create({
+      component: ListBarangModalComponent
+    });
+    modal.onDidDismiss().then(
+      () => {
+          this.barangbarumasuk.controls['nomor_barang'].setValue(this.func.brgSelected.nomor_barang);
+        }
+    );
+    return await modal.present();
   }
 }

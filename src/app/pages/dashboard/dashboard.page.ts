@@ -45,10 +45,20 @@ export class DashboardPage implements OnInit, OnDestroy {
           icon: 'pricetag'
         },
         {
-          title: 'Asal Barang',
-          url: '/menu/asalbarang',
+          title: 'No BAPM',
+          url: '/menu/nobapm',
           icon: 'briefcase'
         },
+        // {
+        //   title: 'Asal Barang',
+        //   url: '/menu/asalbarang',
+        //   icon: 'briefcase'
+        // },
+        // {
+        //   title: 'No Kontrak',
+        //   url: '/menu/nokontrak',
+        //   icon: 'briefcase'
+        // },
       ]
     },
     {
@@ -65,15 +75,20 @@ export class DashboardPage implements OnInit, OnDestroy {
           icon: 'pricetag'
         },
         {
-          title: 'Proyek',
-          url: '/menu/proyek',
+          title: 'No SPM',
+          url: '/menu/nospm',
           icon: 'briefcase'
         },
-        {
-          title: 'Bengkel',
-          url: '/menu/bengkel',
-          icon: 'briefcase'
-        },
+        // {
+        //   title: 'Proyek',
+        //   url: '/menu/proyek',
+        //   icon: 'briefcase'
+        // },
+        // {
+        //   title: 'Bengkel',
+        //   url: '/menu/bengkel',
+        //   icon: 'briefcase'
+        // },
       ]
     },
     {

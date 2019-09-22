@@ -14,16 +14,21 @@
         <form [formGroup]="barangbarukeluar" (ngSubmit)="Tambah(barangbarukeluar.value)">
 
           <ion-item>
+            <ion-label position="floating">No. SPM</ion-label>
+            <ion-input type="text" name="no_spm" maxlength="10" clearInput formControlName="no_spm" required></ion-input>
+          </ion-item>
+
+          <ion-item>
             <ion-label position="floating">Proyek</ion-label>
             <ion-input type="text" name="proyek" maxlength="30" clearInput formControlName="proyek" required></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">No Order</ion-label>
-            <ion-input type="number" inputmode="numeric" name="no_order" min="0" clearInput formControlName="no_order" required></ion-input>
+            <ion-input type="text" name="no_order" clearInput formControlName="no_order" required></ion-input>
           </ion-item>
 
-          <ion-item>
+          <!-- <ion-item>
             <ion-label position="floating">Bengkel</ion-label>
             <ion-input type="text" name="bengkel" maxlength="30" clearInput formControlName="bengkel" required></ion-input>
           </ion-item>
@@ -31,7 +36,7 @@
           <ion-item>
             <ion-label position="floating">Pekerjaan</ion-label>
             <ion-input type="text" name="pekerjaan" maxlength="30" clearInput formControlName="pekerjaan" required></ion-input>
-          </ion-item>
+          </ion-item> -->
 
           <ion-item>
             <ion-label position="floating">Kode Pekerjaan</ion-label>
@@ -45,20 +50,7 @@
 
           <ion-item>
             <ion-label position="floating">Nomor Barang</ion-label>
-            <ionic-selectable [canSearch]="true" searchPlaceholder="Cari berdasarkan Nomor Barang" formControlName="nomor_barang" name="nomor_barang" [items]="NomorBarang" itemValueField="nomor_barang" itemTextField="nomor_barang">
-
-              <ng-template ionicSelectableCloseButtonTemplate>
-                <ion-icon name="close-circle"></ion-icon>
-              </ng-template>
-
-              <ng-template ionicSelectableItemTemplate let-nomor="item" >
-                {{nomor.nomor_barang}} - {{nomor.nama_barang}}
-              </ng-template>
-              
-            </ionic-selectable>
-            <!-- <ion-select placeholder="Nomor Barang" formControlName="nomor_barang" name="nomor_barang" required>
-              <ion-select-option *ngFor="let item of NomorBarang" value="{{item.nomor_barang}}" > {{item.nomor_barang}} <br> {{item.nama_barang}} </ion-select-option>
-            </ion-select> -->
+            <ion-input type="text" formControlName="nomor_barang" name="nomor_barang" read-only (click)="openModal()" required></ion-input>
           </ion-item>
 
           <ion-item>

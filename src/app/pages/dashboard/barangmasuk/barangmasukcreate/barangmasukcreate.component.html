@@ -14,6 +14,11 @@
         <form [formGroup]="barangbarumasuk" (ngSubmit)="Tambah(barangbarumasuk.value)">
 
           <ion-item>
+            <ion-label position="floating">No BAPM</ion-label>
+            <ion-input type="text" name="no_bapm" maxlength="10" clearInput formControlName="no_bapm" required></ion-input>
+          </ion-item>
+
+          <ion-item>
             <ion-label position="floating">Asal Barang</ion-label>
             <ion-input type="text" name="asal_barang" maxlength="30" clearInput formControlName="asal_barang" required></ion-input>
           </ion-item>
@@ -28,22 +33,9 @@
             <ion-datetime displayFormat="DD MMMM YYYY" placeholder="Select Date" name="tgl_masuk" formControlName="tgl_masuk" required></ion-datetime>
           </ion-item> -->
 
-          <ion-item>
+          <ion-item (click)="openModal()">
             <ion-label position="floating">Nomor Barang</ion-label>
-            <ionic-selectable [canSearch]="true" searchPlaceholder="Cari berdasarkan Nomor Barang" formControlName="nomor_barang" name="nomor_barang" [items]="NomorBarang" itemValueField="nomor_barang" itemTextField="nomor_barang">
-
-              <ng-template ionicSelectableCloseButtonTemplate>
-                <ion-icon name="close-circle"></ion-icon>
-              </ng-template>
-
-              <ng-template ionicSelectableItemTemplate let-nomor="item" >
-                {{nomor.nomor_barang}} - {{nomor.nama_barang}}
-              </ng-template>
-              
-            </ionic-selectable>
-            <!-- <ion-select placeholder="Nomor Barang" formControlName="nomor_barang" name="nomor_barang" required>
-              <ion-select-option *ngFor="let item of NomorBarang" value="{{item.nomor_barang}}" > {{item.nomor_barang}} <br> {{item.nama_barang}} </ion-select-option>
-            </ion-select> -->
+            <ion-input type="text" formControlName="nomor_barang" name="nomor_barang" read-only required></ion-input>
           </ion-item>
 
           <ion-item>

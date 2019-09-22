@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { VALID } from '@angular/forms/src/model';
 import { EventEmitterService } from 'src/app/core/event-emitter.service';
+import { ModalController } from '@ionic/angular';
+import { ListBarangModalComponent } from 'src/app/pages/modal/list-barang-modal/list-barang-modal.component';
 
 @Component({
   selector: 'app-barangkeluarcreate',
@@ -20,13 +22,15 @@ export class BarangkeluarcreateComponent implements OnInit {
     private fb:FormBuilder,
     private router: Router,
     private datepipe: DatePipe,
-    private eventEmitter: EventEmitterService
+    private eventEmitter: EventEmitterService,
+    private ModalCtrl:ModalController
   ) { 
     this.barangbarukeluar = this.fb.group({
+      no_spm: ['', Validators.required],
       proyek: ['', Validators.required],
       no_order: ['', Validators.required],
-      bengkel: ['', Validators.required],
-      pekerjaan: ['', Validators.required],
+      // bengkel: ['', Validators.required],
+      // pekerjaan: ['', Validators.required],
       kode_pekerjaan: ['', Validators.required],
       nomor_barang: ['', Validators.required],
       jml_klr_angka: ['', Validators.required],
@@ -101,6 +105,18 @@ export class BarangkeluarcreateComponent implements OnInit {
 
   konversi2(val){
     this.barangbarukeluar.controls['jml_klr_permintaan_huruf'].setValue(this.func.terbilang(val));
+  }
+
+  async openModal(){
+    const modal = await this.ModalCtrl.create({
+      component: ListBarangModalComponent
+    });
+    modal.onDidDismiss().then(
+      () => {
+          this.barangbarukeluar.controls['nomor_barang'].setValue(this.func.brgSelected.nomor_barang);
+        }
+    );
+    return await modal.present();
   }
 
 }

@@ -65,9 +65,9 @@ export class AuditlistComponent implements OnInit, OnDestroy {
     // await this.func.delay(1000);
     this.temp = [...this.data];
     
-    Object.keys(this.data[0].nilai_baru).forEach((key)=> {
-      // console.log(this.data[0].nilai_baru[key]) ;
-    });
+    // Object.keys(this.data[0].nilai_baru).forEach((key)=> {
+    //   // console.log(this.data[0].nilai_baru[key]) ;
+    // });
   }
 
   async LoadData(){

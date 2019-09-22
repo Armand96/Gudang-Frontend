@@ -25,8 +25,6 @@ export class ListbarangComponent implements OnInit, OnDestroy {
   temp = [];
 
   constructor(
-    // private router:Router, 
-    // private renderer:Renderer, 
     private func:FunctionService,
     private plat:Platform,
     private eventEmitterService:EventEmitterService
