@@ -9,6 +9,7 @@ import { ExportAsService, ExportAsConfig, SupportedExtensions } from 'ngx-export
 })
 export class BarangmasukprintComponent implements OnInit {
 
+  p;
   data
   sendparam
   datenow = new Date();

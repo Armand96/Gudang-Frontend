@@ -70,7 +70,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of data.arraydata | paginate: { itemsPerPage: 5, currentPage: p };">
+              <tr *ngFor="let item of data.arraydata | paginate: { itemsPerPage: 20, currentPage: p };">
                 <td style="vertical-align: middle; width: 5%" class="text-center border-left border-right p-0 border-dark">{{item.indexx}}</td>
                 <td style="vertical-align: middle" class="border-left border-right p-0 pl-2 border-dark" colspan="2">{{item.nama_barang}}</td>
                 <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">{{item.nomor_barang}}</td>

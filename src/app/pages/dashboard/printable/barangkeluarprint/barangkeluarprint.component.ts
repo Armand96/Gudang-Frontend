@@ -11,6 +11,7 @@ export class BarangkeluarprintComponent implements OnInit {
 
   data
   sendparam
+  p
 
   config: ExportAsConfig = {
     type: 'pdf',
