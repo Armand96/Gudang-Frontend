@@ -36,7 +36,7 @@ export class BarangmasukcreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadNomorBarang();
+    // this.loadNomorBarang();
   }
 
   async Tambah(val){

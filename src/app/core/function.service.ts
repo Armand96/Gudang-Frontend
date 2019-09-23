@@ -301,7 +301,7 @@ export class FunctionService {
     } 
 
     var data = {
-      'api_token':token
+      api_token:token
     };
     
     await this.postData(data, 'checklogin').toPromise().then(
@@ -317,9 +317,11 @@ export class FunctionService {
       err=>{
         if (err.status == 401){
           this.presentToast('Anda tidak berhak melihat data', 'text-center', 'danger', 5000);
+          this.router.navigateByUrl('/login');
         } else {
           this.presentToast('Tidak dapat terhubung ke server', 'text-center', 'danger', 5000);
         }
+        localStorage.clear();
       }
     )
 

@@ -24,10 +24,11 @@ export class BarangkeluareditComponent implements OnInit {
     private eventEmitter: EventEmitterService
   ) { 
     this.barangbarukeluar = this.fb.group({
+      no_spm: ['', Validators.required],
       proyek: ['', Validators.required],
       no_order: ['', Validators.required],
-      bengkel: ['', Validators.required],
-      pekerjaan: ['', Validators.required],
+      // bengkel: ['', Validators.required],
+      // pekerjaan: ['', Validators.required],
       kode_pekerjaan: ['', Validators.required],
       tgl_keluar: [, Validators.required],
       nomor_barang: ['', Validators.required],
@@ -40,7 +41,6 @@ export class BarangkeluareditComponent implements OnInit {
 
   ngOnInit() {
     this.loadSingleBarang();
-    this.loadNomorBarang();
     this.editmode = false;
   }
 
@@ -50,10 +50,11 @@ export class BarangkeluareditComponent implements OnInit {
         if (resp['success']){
           this.old_value = resp['data'];
 
+          this.barangbarukeluar.controls['no_spm'].setValue(this.old_value.no_spm);
           this.barangbarukeluar.controls['proyek'].setValue(this.old_value.proyek);
           this.barangbarukeluar.controls['no_order'].setValue(this.old_value.no_order);
-          this.barangbarukeluar.controls['bengkel'].setValue(this.old_value.bengkel);
-          this.barangbarukeluar.controls['pekerjaan'].setValue(this.old_value.pekerjaan);
+          // this.barangbarukeluar.controls['bengkel'].setValue(this.old_value.bengkel);
+          // this.barangbarukeluar.controls['pekerjaan'].setValue(this.old_value.pekerjaan);
           this.barangbarukeluar.controls['kode_pekerjaan'].setValue(this.old_value.kode_pekerjaan);
           this.barangbarukeluar.controls['tgl_keluar'].setValue(this.old_value.tgl_keluar);
           this.barangbarukeluar.controls['nomor_barang'].setValue(this.old_value.nomor_barang);
@@ -91,16 +92,6 @@ export class BarangkeluareditComponent implements OnInit {
       async resp => { return true }
     );
 
-  }
-
-  async loadNomorBarang(){
-    await this.func.getDataWithoutParams("nomornamabarangonly").toPromise().then(
-      resp => {
-        if (resp['success']){
-          this.NomorBarang = resp['data'];
-        }
-      }
-    );
   }
 
   konversi(val){

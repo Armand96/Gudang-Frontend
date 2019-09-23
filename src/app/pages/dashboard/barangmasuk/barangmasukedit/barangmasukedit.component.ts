@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FunctionService } from 'src/app/core/function.service';
 import { EventEmitterService } from 'src/app/core/event-emitter.service';
 
@@ -19,12 +19,12 @@ export class BarangmasukeditComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private func: FunctionService,
     private actr: ActivatedRoute,
     private eventEmitter: EventEmitterService
   ) { 
     this.editbarangmasuk = this.fb.group({
+      no_bapm: ['', Validators.required],
       asal_barang: ['', Validators.required],
       no_kontrak: ['', Validators.required],
       tgl_masuk: [, Validators.required],
@@ -37,7 +37,6 @@ export class BarangmasukeditComponent implements OnInit {
 
   ngOnInit() {
     this.loadSingleBarang();
-    this.loadNomorBarang();
     this.editmode = false;
   }
 
@@ -45,8 +44,8 @@ export class BarangmasukeditComponent implements OnInit {
     await this.func.getDataWithParams(this.id,'barangmasuksingle/').toPromise().then(
       resp => {
         if (resp['success']){
-          this.old_value = resp['data'];
-
+          this.old_value = resp['data'][0];
+          this.editbarangmasuk.controls['no_bapm'].setValue(this.old_value.no_bapm);
           this.editbarangmasuk.controls['asal_barang'].setValue(this.old_value.asal_barang);
           this.editbarangmasuk.controls['no_kontrak'].setValue(this.old_value.no_kontrak);
           this.editbarangmasuk.controls['tgl_masuk'].setValue(this.old_value.tgl_masuk);
@@ -73,18 +72,6 @@ export class BarangmasukeditComponent implements OnInit {
         }
       }
     );
-  }
-
-  async loadNomorBarang(){
-
-    await this.func.getDataWithoutParams("nomorbarangonly").toPromise().then(
-      resp => {
-        if (resp['success']){
-          this.NomorBarang = resp['data'];
-        }
-      }
-    );
-
   }
 
   async Audits(val){
