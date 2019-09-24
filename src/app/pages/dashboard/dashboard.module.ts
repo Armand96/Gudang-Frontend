@@ -39,6 +39,12 @@ import { BrgmasukinfoComponent } from '../modal/brgmasukinfo/brgmasukinfo.compon
 import { ListBarangModalComponent } from '../modal/list-barang-modal/list-barang-modal.component';
 import { NospmComponent } from './barangkeluar/barangkeluarread/nospm/nospm.component';
 import { NobapmComponent } from './barangmasuk/barangmasukread/nobapm/nobapm.component';
+import { NoorderlistComponent } from './other/noorder/noorderlist/noorderlist.component';
+import { NoordercreateComponent } from './other/noorder/noordercreate/noordercreate.component';
+import { KodepekerjaanlistComponent } from './other/kodepekerjaan/kodepekerjaanlist/kodepekerjaanlist.component';
+import { KodepekerjaancreateComponent } from './other/kodepekerjaan/kodepekerjaancreate/kodepekerjaancreate.component';
+import { NoordereditComponent } from './other/noorder/noorderedit/noorderedit.component';
+import { KodepekerjaaneditComponent } from './kodepekerjaan/kodepekerjaanedit/kodepekerjaanedit.component';
 // =================================================== PAGES ===================================================
 
 const routes: Routes = [
@@ -72,6 +78,14 @@ const routes: Routes = [
       // ========================== AUDITS ==========================
       {path:'audits',component:AuditlistComponent},
       {path:'auditdetail/:id',component:AuditdetailComponent},
+      // ========================== Other ==========================
+      {path:'noorder', component:NoorderlistComponent},
+      {path:'noordercreate', component:NoordercreateComponent},
+      {path:'noorderedit/:id', component:NoordereditComponent},
+
+      {path:'kodepekerjaan', component:KodepekerjaanlistComponent},
+      {path:'kodepekerjaancreate', component:KodepekerjaancreateComponent},
+      {path:'kodepekerjaanedit/:id', component:KodepekerjaaneditComponent},
       // ========================== Printable ==========================
       {path:'barangmasukexc',component:BarangmasukprintComponent},
       {path:'barangkeluarexc',component:BarangkeluarprintComponent},
@@ -99,7 +113,9 @@ const routes: Routes = [
     NomorbarangkeluarComponent, ProyekComponent, BengkelComponent, AdduserComponent,
     AuditlistComponent, AuditdetailComponent, BarangmasukprintComponent,
     BarangkeluarprintComponent, BrgkeluarinfoComponent, BrgmasukinfoComponent,
-    ListBarangModalComponent, NokontrakComponent, NospmComponent, NobapmComponent
+    ListBarangModalComponent, NokontrakComponent, NospmComponent, NobapmComponent,
+    NoorderlistComponent, NoordercreateComponent, KodepekerjaanlistComponent, 
+    NoordereditComponent, KodepekerjaancreateComponent, KodepekerjaaneditComponent
   ],
   exports:[
     ListbarangComponent, HomeComponent, TambahbarangComponent,

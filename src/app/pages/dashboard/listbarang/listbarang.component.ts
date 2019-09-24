@@ -82,19 +82,6 @@ export class ListbarangComponent implements OnInit, OnDestroy {
     this.func.exportAsExcelFile(this.data, "Daftar Barang");
   }
 
-  testTable(){
-    var wb = XLSX.utils.table_to_book(document.getElementById('mytable'));
-    var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
-    this.func.saveAsExcelFile(this.saveexcel(wbout), 'Test') ;
-  }
-
-  saveexcel(s){
-    var buf = new ArrayBuffer(s.length);
-    var view = new Uint8Array(buf);
-    for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
-    return buf;
-  }
-
   async LoadData(){
     await this.func.getDataWithoutParams('barangshowall').toPromise().then(
       resp => {
