@@ -1,9 +1,9 @@
+import { OthersComponent } from './../../../modal/others/others.component';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FunctionService } from 'src/app/core/function.service';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { VALID } from '@angular/forms/src/model';
 import { EventEmitterService } from 'src/app/core/event-emitter.service';
 import { ModalController } from '@ionic/angular';
 import { ListBarangModalComponent } from 'src/app/pages/modal/list-barang-modal/list-barang-modal.component';
@@ -17,6 +17,9 @@ export class BarangkeluarcreateComponent implements OnInit {
 
   barangbarukeluar:FormGroup
   NomorBarang:any;
+  KodePkr;
+  NoOrder;
+
   constructor(
     private func:FunctionService,
     private fb:FormBuilder,
@@ -41,8 +44,32 @@ export class BarangkeluarcreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadNomorBarang();
+    this.loadKodePkr();
+    this.loadOrder();
   }
+
+  async loadOrder(){
+    await this.func.getDataWithoutParams('noorderall').toPromise().then(
+      resp => {
+        if (resp['success']){
+          this.NoOrder = resp['data'];
+        }
+      },
+      err=>{}
+    );
+  }
+
+  async loadKodePkr(){
+    await this.func.getDataWithoutParams('kodepekerjaanall').toPromise().then(
+      resp => {
+        if (resp['success']){
+          this.KodePkr = resp['data'];
+        }
+      },
+      err=>{}
+    );
+  }
+
 
   Tambah(val){
     
@@ -89,16 +116,6 @@ export class BarangkeluarcreateComponent implements OnInit {
     );
   }
 
-  async loadNomorBarang(){
-    await this.func.getDataWithoutParams("nomornamabarangonly").toPromise().then(
-      resp => {
-        if (resp['success']){
-          this.NomorBarang = resp['data'];
-        }
-      }
-    );
-  }
-
   konversi(val){
     this.barangbarukeluar.controls['jml_klr_huruf'].setValue(this.func.terbilang(val));
   }
@@ -107,7 +124,7 @@ export class BarangkeluarcreateComponent implements OnInit {
     this.barangbarukeluar.controls['jml_klr_permintaan_huruf'].setValue(this.func.terbilang(val));
   }
 
-  async openModal(){
+  async openModalNmr(){
     const modal = await this.ModalCtrl.create({
       component: ListBarangModalComponent
     });
@@ -118,5 +135,21 @@ export class BarangkeluarcreateComponent implements OnInit {
     );
     return await modal.present();
   }
+
+  // async openModalOtr(typez:string){
+  //   const modal = await this.ModalCtrl.create({
+  //     component: OthersComponent,
+  //     componentProps: {
+  //       url:typez
+  //     }
+  //   });
+  //   modal.onDidDismiss().then(
+  //     () => {
+  //       if (typez == 'noorder') this.barangbarukeluar.controls['no_order'].setValue(this.func.brgSelected.nomor_barang);
+  //       if (typez == 'kodepekerjaan') this.barangbarukeluar.controls['kode_pekerjaan'].setValue(this.func.brgSelected.nomor_barang);
+  //     }
+  //   );
+  //   return await modal.present();
+  // }
 
 }

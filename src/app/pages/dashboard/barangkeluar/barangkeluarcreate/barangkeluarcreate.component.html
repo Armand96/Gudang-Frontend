@@ -15,19 +15,33 @@
 
           <ion-item>
             <ion-label position="floating">No. SPM</ion-label>
-            <ion-input type="text" name="no_spm" maxlength="10" clearInput formControlName="no_spm" required></ion-input>
+            <ion-input type="text" name="no_spm" maxlength="10" clearInput formControlName="no_spm" required>
+            </ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Proyek</ion-label>
-            <ion-input type="text" name="proyek" maxlength="30" clearInput formControlName="proyek" required></ion-input>
+            <ion-input type="text" name="proyek" maxlength="30" clearInput formControlName="proyek" read-only required>
+            </ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">No Order</ion-label>
-            <ion-input type="text" name="no_order" clearInput formControlName="no_order" required></ion-input>
+            <ion-select formControlName="no_order" name="no_order">
+              <ion-select-option *ngFor="let ord of NoOrder" value="{{ord.no_order}}">{{ord.no_order}} - {{ord.bengkel}}
+              </ion-select-option>
+            </ion-select>
+            <!-- <ion-input type="text" name="no_order" clearInput formControlName="no_order" read-only required></ion-input> -->
           </ion-item>
 
+          <ion-item>
+            <ion-label position="floating">Kode Pekerjaan</ion-label>
+            <ion-select formControlName="kode_pekerjaan" name="kode_pekerjaan">
+              <ion-select-option *ngFor="let kpr of KodePkr" value="{{kpr.kode_pekerjaan}}">{{kpr.kode_pekerjaan}} - {{kpr.pekerjaan}}
+              </ion-select-option>
+            </ion-select>
+            <!-- <ion-input type="number" inputmode="numeric" name="kode_pekerjaan" min="0" clearInput formControlName="kode_pekerjaan" required></ion-input> -->
+          </ion-item>
           <!-- <ion-item>
             <ion-label position="floating">Bengkel</ion-label>
             <ion-input type="text" name="bengkel" maxlength="30" clearInput formControlName="bengkel" required></ion-input>
@@ -38,39 +52,42 @@
             <ion-input type="text" name="pekerjaan" maxlength="30" clearInput formControlName="pekerjaan" required></ion-input>
           </ion-item> -->
 
-          <ion-item>
-            <ion-label position="floating">Kode Pekerjaan</ion-label>
-            <ion-input type="number" inputmode="numeric" name="kode_pekerjaan" min="0" clearInput formControlName="kode_pekerjaan" required></ion-input>
-          </ion-item>
+
 
           <!-- <ion-item>
             <ion-label position="floating">Tgl Keluar</ion-label>
             <ion-datetime displayFormat="DD MMMM YYYY" placeholder="Select Date" name="tgl_keluar" formControlName="tgl_keluar" required></ion-datetime>
           </ion-item> -->
 
-          <ion-item>
+          <ion-item (click)="openModalNmr()">
             <ion-label position="floating">Nomor Barang</ion-label>
-            <ion-input type="text" formControlName="nomor_barang" name="nomor_barang" read-only (click)="openModal()" required></ion-input>
+            <ion-input type="text" formControlName="nomor_barang" name="nomor_barang" read-only required></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Jumlah Keluar (Angka)</ion-label>
-            <ion-input type="number" inputmode="numeric" name="jml_klr_angka" min="0" clearInput formControlName="jml_klr_angka" required (change)="konversi(barangbarukeluar.value.jml_klr_angka)"></ion-input>
+            <ion-input type="number" inputmode="numeric" name="jml_klr_angka" min="0" clearInput
+              formControlName="jml_klr_angka" required (change)="konversi(barangbarukeluar.value.jml_klr_angka)">
+            </ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Jumlah Keluar (Huruf)</ion-label>
-            <ion-input type="text" name="jml_klr_huruf" clearInput formControlName="jml_klr_huruf" required disabled></ion-input>
+            <ion-input type="text" name="jml_klr_huruf" clearInput formControlName="jml_klr_huruf" required disabled>
+            </ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Jumlah Permintaan Keluar (Angka)</ion-label>
-            <ion-input type="number" inputmode="numeric" name="jml_klr_permintaan_angka" min="0" clearInput formControlName="jml_klr_permintaan_angka" required (change)="konversi2(barangbarukeluar.value.jml_klr_permintaan_angka)"></ion-input>
+            <ion-input type="number" inputmode="numeric" name="jml_klr_permintaan_angka" min="0" clearInput
+              formControlName="jml_klr_permintaan_angka" required
+              (change)="konversi2(barangbarukeluar.value.jml_klr_permintaan_angka)"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Jumlah Permintaan Keluar (Huruf)</ion-label>
-            <ion-input type="text" name="jml_klr_permintaan_huruf" clearInput formControlName="jml_klr_permintaan_huruf" required disabled></ion-input>
+            <ion-input type="text" name="jml_klr_permintaan_huruf" clearInput formControlName="jml_klr_permintaan_huruf"
+              required disabled></ion-input>
           </ion-item>
 
           <br>
@@ -85,6 +102,6 @@
 
     </ion-card>
   </div>
-  
+
 
 </ion-content>

@@ -1,3 +1,4 @@
+import { OthersComponent } from './../modal/others/others.component';
 import { NokontrakComponent } from './barangmasuk/barangmasukread/nokontrak/nokontrak.component';
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
@@ -115,13 +116,14 @@ const routes: Routes = [
     BarangkeluarprintComponent, BrgkeluarinfoComponent, BrgmasukinfoComponent,
     ListBarangModalComponent, NokontrakComponent, NospmComponent, NobapmComponent,
     NoorderlistComponent, NoordercreateComponent, KodepekerjaanlistComponent, 
-    NoordereditComponent, KodepekerjaancreateComponent, KodepekerjaaneditComponent
+    NoordereditComponent, KodepekerjaancreateComponent, KodepekerjaaneditComponent,
+    OthersComponent
   ],
   exports:[
     ListbarangComponent, HomeComponent, TambahbarangComponent,
     DetailbarangComponent
   ],
   providers:[DatePipe, ListbarangComponent],
-  entryComponents:[BrgkeluarinfoComponent, BrgmasukinfoComponent, ListBarangModalComponent]
+  entryComponents:[BrgkeluarinfoComponent, BrgmasukinfoComponent, ListBarangModalComponent, OthersComponent]
 })
 export class DashboardPageModule {}

@@ -34,6 +34,8 @@ export class FunctionService {
   public brgKeluarInfo:any = (localStorage.getItem('brgkeluarinfo') == null) ? "" : JSON.parse(localStorage.getItem('brgkeluarinfo'));
   public brgMasukInfo:any = (localStorage.getItem('brgmasukinfo') == null) ? "" : JSON.parse(localStorage.getItem('brgmasukinfo'));
   public brgSelected:any = (localStorage.getItem('brgselected') == null) ? "" : JSON.parse(localStorage.getItem('brgselected'));
+  public noOrderSelected:any = (localStorage.getItem('noorder') == null) ? "" : JSON.parse(localStorage.getItem('noorder'));
+  public KodePkrSelected:any = (localStorage.getItem('kodepkr') == null) ? "" : JSON.parse(localStorage.getItem('kodepkr'));
   // ============================================= END OF SHARED VARIABLE
   
   constructor(
