@@ -69,6 +69,7 @@ export class ListBarangModalComponent implements OnInit, OnDestroy {
   }
 
   selectData(index){
+    console.log(index);
     this.func.brgSelected = {
       nomor_barang:this.data[index].nomor_barang,
       nama_barang:this.data[index].nama_barang,
@@ -94,6 +95,14 @@ export class ListBarangModalComponent implements OnInit, OnDestroy {
         // }
       }
     );
+  }
+
+  dismiss() {
+    // using the injected ModalController this page
+    // can "dismiss" itself and optionally pass back data
+    this.modalCtrl.dismiss({
+      'dismissed': true
+    });
   }
 
 }

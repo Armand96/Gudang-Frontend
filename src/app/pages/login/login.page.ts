@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-   
+    // console.log(window.location.origin);
   }
 
   async Login(val){    

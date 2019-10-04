@@ -59,7 +59,7 @@
 
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
-    <ion-card *ngFor="let item of data | paginate: { itemsPerPage: 5, currentPage: p }">
+    <ion-card *ngFor="let item of data | paginate: { itemsPerPage: 5, currentPage: p }; let i = index" (click)="selectData(i)">
 
       <ion-card-header color="primary" class="p-2">
         <ion-card-title>
