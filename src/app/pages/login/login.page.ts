@@ -32,8 +32,15 @@ export class LoginPage implements OnInit {
     'userpassword':'iskandar'
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     // console.log(window.location.origin);
+    if(this.func.api_token == "" || this.func.api_token == null){
+      // this.router.navigateByUrl('/login');
+    } else {
+      await this.func.checkLogin(this.func.api_token);
+      // this.user = this.func.user;
+      this.router.navigateByUrl('/menu/dashboard');
+    }
   }
 
   async Login(val){    

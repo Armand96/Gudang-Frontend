@@ -146,9 +146,11 @@ export class DashboardPage implements OnInit, OnDestroy {
     
   }
 
-  logout(){
-    localStorage.clear();
+  async logout(){
+    await localStorage.clear();
     this.func.user = "";
+    this.func.api_token = "";
+    // this.router.navigateByUrl('/login');
   }
 
   // openFirst() {
