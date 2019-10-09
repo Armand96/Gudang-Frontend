@@ -8,7 +8,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { IonicModule } from '@ionic/angular';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { DataTablesModule } from 'angular-datatables';
+// import { DataTablesModule } from 'angular-datatables';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { NgxPrintModule } from 'ngx-print';
 import { ExportAsModule } from 'ngx-export-as';
@@ -103,7 +103,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule, NgxPaginationModule,
     RouterModule.forChild(routes), IonicSelectableModule,
-    DataTablesModule, ReactiveFormsModule, NgxDatatableModule,
+    ReactiveFormsModule, NgxDatatableModule,
     NgxPrintModule, ExportAsModule
   ],
   declarations: [DashboardPage, ListbarangComponent, 

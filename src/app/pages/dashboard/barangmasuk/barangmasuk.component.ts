@@ -19,7 +19,7 @@ export class BarangmasukComponent implements OnInit, OnDestroy {
   subsEvent;
   screenEvent; 
 
-  dtOptions: DataTables.Settings = {};
+  // dtOptions: DataTables.Settings = {};
   landscape:Boolean;
   data;
   temp = [];

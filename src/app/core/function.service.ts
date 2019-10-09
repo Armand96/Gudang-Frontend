@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, isDevMode } from '@angular/core';
 import {Location} from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -18,7 +18,7 @@ export class FunctionService {
 
   // ================================================ HTTP SEND REQUEST SETTING ================================================
   public api_token = (localStorage.getItem('api_token') == null) ? "" : localStorage.getItem('api_token');
-  public url:string = "http://gudang.com/data/api/"; // for development use this
+  // public url:string = "http://gudang.com/data/api/"; // for development use this
   // public url:string = window.location.origin+"/data/api/"; // for production enable this
   public dtHeaders = {
     'Authorization':'apl '+this.api_token,

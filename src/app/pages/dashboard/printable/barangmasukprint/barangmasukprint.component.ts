@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FunctionService } from 'src/app/core/function.service';
-import { ExportAsService, ExportAsConfig, SupportedExtensions } from 'ngx-export-as';
+import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 
 @Component({
   selector: 'app-barangmasukprint',
