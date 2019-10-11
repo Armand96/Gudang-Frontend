@@ -5,18 +5,20 @@
     <div class="row" *ngIf="data">
       <div class="col p-1 ml-1 mr-1" id="print_div">
 
-        <div class="table-responsive"  #print_div>
+        <div class="table-responsive" #print_div>
           <table id="mytable" class="table table-borderless mb-0">
             <thead>
               <tr>
                 <th colspan="3" rowspan="4" class="text-center border-left border-top border-bottom border-dark"> <img
-                    src="../../../../../assets/img/Logo-DKB.png" alt="" width="200px" height="100px" style="float:left"> </th>
+                    src="../../../../../assets/img/Logo-DKB.png" alt="" width="200px" height="100px" style="float:left">
+                </th>
                 <th colspan="6" rowspan="4" class="border-right border-top border-bottom border-dark">
                   <h4 class="text-center"> PT. DOK & PERKAPALAN KODJA BAHARI <br> (PERSERO) <br> SHIPYARD JAKARTA-II
                   </h4>
                 </th>
                 <th style="vertical-align: middle" class="p-0 pl-2 border-top border-dark"> Nomor </th>
-                <th style="vertical-align: middle; width: 1%" class="p-0 border-right border-top border-dark">: FF15GD2-A3.03 </th>
+                <th style="vertical-align: middle; width: 1%" class="p-0 border-right border-top border-dark">:
+                  FF15GD2-A3.03 </th>
               </tr>
               <tr>
                 <th style="vertical-align: middle" class="p-0 pl-2"> Revisi </th>
@@ -28,7 +30,8 @@
               </tr>
               <tr>
                 <th style="vertical-align: middle" class="p-0 pl-2"> Halaman</th>
-                <th style="vertical-align: middle; width: 1%" class="p-0 border-right border-bottom border-dark">: 01 dari 01 </th>
+                <th style="vertical-align: middle; width: 1%" class="p-0 border-right border-bottom border-dark">: 01
+                  dari 01 </th>
               </tr>
 
               <tr>
@@ -57,22 +60,30 @@
               </tr>
 
               <tr>
-                <th  class="p-0" colspan="2"> Bid / Bkl </th>
+                <th class="p-0" colspan="2"> Bid / Bkl </th>
                 <th class="p-0" colspan="2"> : {{data.arraydata[0].bengkel}} </th>
-                <th  class="p-0" colspan="2"> Kode Pekerjaan </th>
+                <th class="p-0" colspan="2"> Kode Pekerjaan </th>
                 <th class="p-0" colspan="2"> : {{data.arraydata[0].kode_pekerjaan}} </th>
               </tr>
 
               <tr>
-                <th style="vertical-align: middle; width: 3%" rowspan="2" class="text-center border border-dark P-0"> NO. </th>
-                <th style="vertical-align: middle; width: 5%" rowspan="2" class="text-center border border-dark P-0"> KODE </th>
-                <th style="vertical-align: middle; width: 25%" rowspan="2" colspan="2" class="text-center border border-dark P-0"> NAMA &
+                <th style="vertical-align: middle; width: 3%" rowspan="2" class="text-center border border-dark P-0">
+                  NO. </th>
+                <th style="vertical-align: middle; width: 5%" rowspan="2" class="text-center border border-dark P-0">
+                  KODE </th>
+                <th style="vertical-align: middle; width: 25%" rowspan="2" colspan="2"
+                  class="text-center border border-dark P-0"> NAMA &
                   SPESIFIKASI BARANG </th>
-                <th style="vertical-align: middle; width: 3%" rowspan="2" class="text-center border border-dark P-0"> SATUAN </th>
-                <th style="vertical-align: middle" colspan="2" class="text-center border border-dark P-0"> JUMLAH DIMINTA</th>
-                <th style="vertical-align: middle" colspan="2" class="text-center border border-dark P-0"> JUMLAH DISERAHKAN</th>
-                <th style="vertical-align: middle; width: 5%" rowspan="2" class="text-center border border-dark P-0"> HARGA SATUAN</th>
-                <th style="vertical-align: middle; width: 5%" rowspan="2" class="text-center border border-dark P-0"> JUMLAH HARGA </th>
+                <th style="vertical-align: middle; width: 3%" rowspan="2" class="text-center border border-dark P-0">
+                  SATUAN </th>
+                <th style="vertical-align: middle" colspan="2" class="text-center border border-dark P-0"> JUMLAH
+                  DIMINTA</th>
+                <th style="vertical-align: middle" colspan="2" class="text-center border border-dark P-0"> JUMLAH
+                  DISERAHKAN</th>
+                <th style="vertical-align: middle; width: 5%" rowspan="2" class="text-center border border-dark P-0">
+                  HARGA SATUAN</th>
+                <th style="vertical-align: middle; width: 5%" rowspan="2" class="text-center border border-dark P-0">
+                  JUMLAH HARGA </th>
               </tr>
 
               <tr>
@@ -84,20 +95,35 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of data.arraydata | paginate: { itemsPerPage: 20, currentPage: p }; ">
-                <td style="vertical-align: middle; width: 3%" class="text-center border-left border-right p-0 border-dark">{{item.indexx}}</td>
-                <td style="vertical-align: middle; width: 5%" class="text-center border-left border-right p-0 border-dark">
-                  {{item.nomor_barang}}</td>
-                <td style="vertical-align: middle; width: 25%" class="border-left border-right p-0 pl-2 border-dark" colspan="2">{{item.nama_barang}}
+                <td style="vertical-align: middle; width: 3%"
+                  class="text-center border-left border-right p-0 border-dark">
+                  <div>{{item.indexx}}</div>
                 </td>
-                <td style="vertical-align: middle; width: 3%" class="text-center border-left border-right p-0 border-dark">{{item.satuan}}</td>
+                <td style="vertical-align: middle; width: 5%"
+                  class="text-center border-left border-right p-0 border-dark">
+                  <div [ngStyle]="{'color':item.nomor_barang == 'none' ? 'transparent' : 'black' }">{{item.nomor_barang}}
+                  </div>
+                </td>
+                <td style="vertical-align: middle; width: 25%" class="border-left border-right p-0 pl-2 border-dark"
+                  colspan="2">
+                  <div *ngIf="item.nama_barang != 'none'">{{item.nama_barang}}</div>
+                </td>
+                <td style="vertical-align: middle; width: 3%"
+                  class="text-center border-left border-right p-0 border-dark">
+                  <div *ngIf="item.satuan != 'none'">{{item.satuan}}</div>
+                </td>
                 <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">
-                  {{item.jml_klr_angka}}</td>
+                  <div *ngIf="item.jml_klr_angka != 'none'">{{item.jml_klr_angka}}</div>
+                </td>
                 <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">
-                  {{item.jml_klr_huruf}}</td>
+                  <div *ngIf="item.jml_klr_huruf != 'none'">{{item.jml_klr_huruf}}</div>
+                </td>
                 <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">
-                  {{item.jml_klr_permintaan_angka}}</td>
+                  <div *ngIf="item.jml_klr_permintaan_angka != 'none'">{{item.jml_klr_permintaan_angka}}</div>
+                </td>
                 <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">
-                  {{item.jml_klr_permintaan_huruf}}</td>
+                  <div *ngIf="item.jml_klr_permintaan_huruf != 'none'">{{item.jml_klr_permintaan_huruf}}</div>
+                </td>
                 <td style="vertical-align: middle;" class="text-center border-left border-right p-0 border-dark">
                 </td>
                 <td style="vertical-align: middle;" class="text-center border-left border-right p-0 border-dark">
@@ -107,7 +133,8 @@
             <tfoot>
               <tr>
                 <td colspan="6" class="text-center p-0 border-top border-bottom border-left border-dark">Paraf</td>
-                <td colspan="5" class="text-center p-0 border-top border-bottom border-right border-dark">Tanda Tangan & Nama Jelas</td>
+                <td colspan="5" class="text-center p-0 border-top border-bottom border-right border-dark">Tanda Tangan &
+                  Nama Jelas</td>
               </tr>
               <tr>
                 <td colspan="2" class="text-center">Menyetujui</td>
@@ -121,18 +148,25 @@
                 <td colspan="11" class="p-0"> &nbsp; </td>
               </tr>
               <tr>
-                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.man != ''"> <u>{{func.brgKeluarInfo.man}}</u> </td>
-                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.renwas != ''"> <u>{{func.brgKeluarInfo.renwas}}</u> </td>
-                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.kabid != ''"> <u>{{func.brgKeluarInfo.kabid}}</u> </td>
-                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.kabeng != ''"> <u>{{func.brgKeluarInfo.kabeng}}</u> </td>
-                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.penerima != ''"> <u>{{func.brgKeluarInfo.penerima}}</u> </td>
-                <td class="text-center p-0" *ngIf="func.brgKeluarInfo.pemberi != ''"> <u>{{func.brgKeluarInfo.pemberi}}</u> </td>
+                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.man != ''">
+                  <u>{{func.brgKeluarInfo.man}}</u> </td>
+                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.renwas != ''">
+                  <u>{{func.brgKeluarInfo.renwas}}</u> </td>
+                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.kabid != ''">
+                  <u>{{func.brgKeluarInfo.kabid}}</u> </td>
+                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.kabeng != ''">
+                  <u>{{func.brgKeluarInfo.kabeng}}</u> </td>
+                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.penerima != ''">
+                  <u>{{func.brgKeluarInfo.penerima}}</u> </td>
+                <td class="text-center p-0" *ngIf="func.brgKeluarInfo.pemberi != ''">
+                  <u>{{func.brgKeluarInfo.pemberi}}</u> </td>
                 <!-- if the data is '' -->
                 <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.man == ''"> ________________ </td>
                 <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.renwas == ''"> ________________ </td>
                 <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.kabid == ''"> ________________ </td>
                 <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.kabeng == ''"> ________________ </td>
-                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.penerima == ''"> ________________ </td>
+                <td colspan="2" class="text-center p-0" *ngIf="func.brgKeluarInfo.penerima == ''"> ________________
+                </td>
                 <td class="text-center p-0" *ngIf="func.brgKeluarInfo.pemberi == ''"> ________________ </td>
               </tr>
 
@@ -178,13 +212,11 @@
     <div class="row">
       <div class="col text-center text-sm-left">
         <button class="btn btn-light" style="border-radius: 20px"
-          styleSheetFile="../../../../../assets/css/bootstrap.min.css"
-          printSectionId="print_div"
-          ngxPrint> 
+          styleSheetFile="../../../../../assets/css/bootstrap.min.css" printSectionId="print_div" ngxPrint>
           <ion-button shape="round" color="warning">
-            <ion-icon slot="start" name="save" color="dark"></ion-icon>
-            <ion-text color="dark"> <b>Cetak</b>  </ion-text> 
-          </ion-button>  
+            <ion-icon slot="start" name="print" color="dark"></ion-icon>
+            <ion-text color="dark"> <b>Cetak</b> </ion-text>
+          </ion-button>
         </button>
         <!-- <ion-button shape="round" color="warning" (click)="print()">
           <ion-icon slot="start" name="save" color="dark"></ion-icon>
@@ -196,8 +228,8 @@
     <div class="row">
       <div class="col text-center text-sm-left">
         <ion-button shape="round" color="warning" (click)="onClick()">
-          <ion-icon slot="start" name="print" color="dark"></ion-icon>
-          <ion-text color="dark">  <b>Simpan ke Excel</b>   </ion-text> 
+          <ion-icon slot="start" name="save" color="dark"></ion-icon>
+          <ion-text color="dark"> <b>Simpan ke Excel</b> </ion-text>
         </ion-button>
       </div>
     </div>

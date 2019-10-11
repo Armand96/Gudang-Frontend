@@ -13,6 +13,7 @@ export class BarangkeluarprintComponent implements OnInit {
   sendparam
   p
   maxItem: number = 10;
+  fillarray = [];
 
   config: ExportAsConfig = {
     type: 'pdf',
@@ -54,12 +55,12 @@ export class BarangkeluarprintComponent implements OnInit {
             i++
           });
 
-          // var sisa = this.data.arraydata.length % 10;
-          // if (sisa < this.maxItem) {
-          //   for (i = sisa; i < this.maxItem; i++) {
-          //     this.data.arraydata.push(this.emptyObjPush());
-          //   }
-          // }
+          var sisa = this.data.arraydata.length % 10;
+          if (sisa < this.maxItem) {
+            for (i = sisa; i < this.maxItem; i++) {
+              this.data.arraydata.push(this.emptyObjPush());
+            }
+          }
 
         }
       }
@@ -68,13 +69,13 @@ export class BarangkeluarprintComponent implements OnInit {
 
   emptyObjPush() {
     var object = {
-      nomor_barang: '-',
-      nama_barang: '-',
-      satuan: '-',
-      jml_klr_angka: '-',
-      jml_klr_huruf: '-',
-      jml_klr_permintaan_angka: '-',
-      jml_klr_permintaan_huruf: '-',
+      nomor_barang: 'none',
+      nama_barang: 'none',
+      satuan: 'none',
+      jml_klr_angka: 'none',
+      jml_klr_huruf: 'none',
+      jml_klr_permintaan_angka: 'none',
+      jml_klr_permintaan_huruf: 'none',
     }
     return object;
   }
