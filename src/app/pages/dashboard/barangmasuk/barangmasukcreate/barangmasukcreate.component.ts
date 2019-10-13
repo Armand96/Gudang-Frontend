@@ -14,11 +14,11 @@ import { ListBarangModalComponent } from 'src/app/pages/modal/list-barang-modal/
 })
 export class BarangmasukcreateComponent implements OnInit {
 
-  barangbarumasuk:FormGroup
-  NomorBarang:any;
+  barangbarumasuk: FormGroup
+  NomorBarang: any;
   constructor(
-    private func:FunctionService,
-    private fb:FormBuilder,
+    private func: FunctionService,
+    private fb: FormBuilder,
     private router: Router,
     private datepipe: DatePipe,
     private eventEmitter: EventEmitterService,
@@ -39,37 +39,46 @@ export class BarangmasukcreateComponent implements OnInit {
     // this.loadNomorBarang();
   }
 
-  async Tambah(val){
-    
+  async Tambah(val) {
+
     val.tgl_masuk = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
-    if (val.nomor_barang.nomor_barang != null || val.nomor_barang.nomor_barang != undefined ) {
+    if (val.nomor_barang.nomor_barang != null || val.nomor_barang.nomor_barang != undefined) {
       val.nomor_barang = val.nomor_barang.nomor_barang;
     }
     await this.func.postData(val, 'barangmasukinsert').toPromise().then(
-      async resp =>{
-        if (resp['success']){
+      async resp => {
+        if (resp['success']) {
           await this.Audits(val);
           await this.updateStock(val);
-        } else{
+        } else {
           await this.func.presentToast("Data Gagal Disimpan", "text-center", "danger");
         }
-        
+
       }
     )
-    
+
   }
 
-  async updateStock(val){
-    
+  Done() {
+    this.eventEmitter.onFirstComponentButtonClick();
+    this.router.navigateByUrl('/menu/barangmasuk');
+  }
+
+  async updateStock(val) {
+
     val.kuantitas = val.jml_msk_angka;
     await this.func.postData(val, 'barangupdateq').toPromise().then(
       async resp => {
-        if (resp['success']){
+        if (resp['success']) {
           // console.log(resp)
           await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary");
-          this.eventEmitter.onFirstComponentButtonClick();
-          this.router.navigateByUrl('/menu/barangmasuk');
-        } else{
+          // this.eventEmitter.onFirstComponentButtonClick();
+          // this.router.navigateByUrl('/menu/barangmasuk');
+          this.barangbarumasuk.controls['nomor_barang'].setValue('');
+          this.barangbarumasuk.controls['jml_msk_angka'].setValue('');
+          this.barangbarumasuk.controls['jml_msk_huruf'].setValue('');
+          // this.barangbarumasuk.controls['keterangan'].setValue('');
+        } else {
           await this.func.presentToast("Data Gagal Disimpan", "text-center", "danger");
         }
       }
@@ -77,36 +86,36 @@ export class BarangmasukcreateComponent implements OnInit {
 
   }
 
-  async Audits(val){
-    
+  async Audits(val) {
+
     val = JSON.stringify(val);
     await this.func.Audits('Barang Masuk', val, '').then(
-      async resp => {}
+      async resp => { }
     );
   }
 
-  async loadNomorBarang(){
+  async loadNomorBarang() {
     await this.func.getDataWithoutParams("nomornamabarangonly").toPromise().then(
       resp => {
-        if (resp['success']){
+        if (resp['success']) {
           this.NomorBarang = resp['data'];
         }
       }
     );
   }
 
-  konversi(val){
+  konversi(val) {
     this.barangbarumasuk.controls['jml_msk_huruf'].setValue(this.func.terbilang(val.jml_msk_angka));
   }
 
-  async openModal(){
+  async openModal() {
     const modal = await this.ModalCtrl.create({
       component: ListBarangModalComponent
     });
     modal.onDidDismiss().then(
       () => {
-          this.barangbarumasuk.controls['nomor_barang'].setValue(this.func.brgSelected.nomor_barang);
-        }
+        this.barangbarumasuk.controls['nomor_barang'].setValue(this.func.brgSelected.nomor_barang);
+      }
     );
     return await modal.present();
   }

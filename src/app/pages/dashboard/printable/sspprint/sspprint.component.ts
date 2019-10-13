@@ -1,19 +1,19 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ExportAsConfig, ExportAsService } from 'ngx-export-as';
 import { FunctionService } from 'src/app/core/function.service';
-import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 
 @Component({
-  selector: 'app-barangkeluarprint',
-  templateUrl: './barangkeluarprint.component.html',
-  styleUrls: ['./barangkeluarprint.component.scss'],
+  selector: 'app-sspprint',
+  templateUrl: './sspprint.component.html',
+  styleUrls: ['./sspprint.component.scss'],
 })
-export class BarangkeluarprintComponent implements OnInit {
+export class SspprintComponent implements OnInit {
 
+  p;
   data
   sendparam
-  p
-  maxItem: number = 10;
-  fillarray = [];
+  datenow = new Date();
+  maxItem:number = 10;
 
   config: ExportAsConfig = {
     type: 'pdf',
@@ -25,27 +25,19 @@ export class BarangkeluarprintComponent implements OnInit {
     }
   };
 
-
-  @ViewChild('print_div') content: ElementRef;
-
-  // printCSS = ['https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'];
-
   constructor(
-    private elRef: ElementRef,
     private func: FunctionService,
     private exportAsService: ExportAsService
   ) { }
 
   ngOnInit() {
-    // console.log(this.func.TransferDataBrgKlr)
     this.loadData();
   }
 
   loadData() {
-    this.sendparam = this.func.TransferDataBrgKlr
+    this.sendparam = this.func.TransferSPP
     this.func.postData(this.sendparam.json, this.sendparam.url).toPromise().then(
       resp => {
-        // console.log(resp['data'])
         if (resp['success'] && resp['data'] != null) {
           this.data = resp['data'];
 
@@ -53,6 +45,7 @@ export class BarangkeluarprintComponent implements OnInit {
           this.data.arraydata.forEach(element => {
             element.indexx = i;
             i++
+            element.huruf = this.func.terbilang(element.jml_diminta);
           });
 
           var sisa = this.data.arraydata.length % 10;
@@ -61,7 +54,6 @@ export class BarangkeluarprintComponent implements OnInit {
               this.data.arraydata.push(this.emptyObjPush());
             }
           }
-
         }
       }
     );
@@ -70,26 +62,21 @@ export class BarangkeluarprintComponent implements OnInit {
   emptyObjPush() {
     var object = {
       nomor_barang: 'none',
-      nama_barang: 'none',
-      satuan: 'none',
-      jml_klr_angka: 'none',
-      jml_klr_huruf: 'none',
-      jml_klr_permintaan_angka: 'none',
-      jml_klr_permintaan_huruf: 'none',
+      huruf: 'none',
     }
     return object;
   }
 
   print() {
 
-    this.exportAsService.save(this.config, 'Barang Keluar').toPromise().then(() => {
+    this.exportAsService.save(this.config, 'SPP').toPromise().then(() => {
       // save started
     });
 
   }
 
   onClick() {
-    this.func.tableToExcel(document.getElementById('mytable'), 'Barang Keluar');
+    this.func.tableToExcel(document.getElementById('mytable'), 'SPP');
   }
 
 }

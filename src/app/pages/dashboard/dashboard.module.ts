@@ -1,3 +1,6 @@
+import { SspprintComponent } from './printable/sspprint/sspprint.component';
+import { SspinfoComponent } from './../modal/sspinfo/sspinfo.component';
+import { SspreadComponent } from './ssp/sspread/sspread.component';
 import { OthersComponent } from './../modal/others/others.component';
 import { NokontrakComponent } from './barangmasuk/barangmasukread/nokontrak/nokontrak.component';
 import { NgModule } from '@angular/core';
@@ -46,6 +49,9 @@ import { KodepekerjaanlistComponent } from './other/kodepekerjaan/kodepekerjaanl
 import { KodepekerjaancreateComponent } from './other/kodepekerjaan/kodepekerjaancreate/kodepekerjaancreate.component';
 import { NoordereditComponent } from './other/noorder/noorderedit/noorderedit.component';
 import { KodepekerjaaneditComponent } from './kodepekerjaan/kodepekerjaanedit/kodepekerjaanedit.component';
+import { SspComponent } from './ssp/ssp.component';
+import { SspcreateComponent } from './ssp/sspcreate/sspcreate.component';
+import { SspeditComponent } from './ssp/sspedit/sspedit.component';
 // =================================================== PAGES ===================================================
 
 const routes: Routes = [
@@ -83,15 +89,20 @@ const routes: Routes = [
       {path:'noorder', component:NoorderlistComponent},
       {path:'noordercreate', component:NoordercreateComponent},
       {path:'noorderedit/:id', component:NoordereditComponent},
-
+      //--------------------------------
       {path:'kodepekerjaan', component:KodepekerjaanlistComponent},
       {path:'kodepekerjaancreate', component:KodepekerjaancreateComponent},
       {path:'kodepekerjaanedit/:id', component:KodepekerjaaneditComponent},
       // ========================== Printable ==========================
       {path:'barangmasukexc',component:BarangmasukprintComponent},
       {path:'barangkeluarexc',component:BarangkeluarprintComponent},
+      {path:'sspexc',component:SspprintComponent},
+      // ========================== SSP ==========================
+      {path:'ssp',component:SspComponent},
+      {path:'sspcreate',component:SspcreateComponent},
+      {path:'sspread',component:SspreadComponent},
+      {path:'sspedit/:id',component:SspeditComponent},
       // ========================== Wild Card ==========================
-      
       {path:'**', redirectTo:'dashboard'}
     ]
   }
@@ -117,13 +128,18 @@ const routes: Routes = [
     ListBarangModalComponent, NokontrakComponent, NospmComponent, NobapmComponent,
     NoorderlistComponent, NoordercreateComponent, KodepekerjaanlistComponent, 
     NoordereditComponent, KodepekerjaancreateComponent, KodepekerjaaneditComponent,
-    OthersComponent
+    OthersComponent, SspComponent, SspcreateComponent, SspeditComponent, SspreadComponent, 
+    SspinfoComponent, SspprintComponent
   ],
   exports:[
     ListbarangComponent, HomeComponent, TambahbarangComponent,
     DetailbarangComponent
   ],
   providers:[DatePipe, ListbarangComponent],
-  entryComponents:[BrgkeluarinfoComponent, BrgmasukinfoComponent, ListBarangModalComponent, OthersComponent]
+  entryComponents:[
+    BrgkeluarinfoComponent, BrgmasukinfoComponent, 
+    ListBarangModalComponent, OthersComponent,
+    SspinfoComponent
+  ]
 })
 export class DashboardPageModule {}

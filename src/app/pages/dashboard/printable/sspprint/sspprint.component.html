@@ -21,12 +21,12 @@
               <tr>
                 <th style="vertical-align: middle" class="p-0 pl-2"> Revisi </th>
                 <th style="vertical-align: middle" class="p-0"> : </th>
-                <th style="vertical-align: middle" class="p-0 border-right border-dark"> 0 </th>
+                <th style="vertical-align: middle" class="p-0 border-right border-dark"> 02 </th>
               </tr>
               <tr>
                 <th style="vertical-align: middle" class="p-0 pl-2"> Tanggal </th>
                 <th style="vertical-align: middle" class="p-0"> : </th>
-                <th style="vertical-align: middle" class="p-0 border-right border-dark"> 15/06/2010 </th>
+                <th style="vertical-align: middle" class="p-0 border-right border-dark"> 15 Juni 2009 </th>
               </tr>
               <tr>
                 <th style="vertical-align: middle" class="p-0 pl-2"> Halaman</th>
@@ -35,32 +35,33 @@
               </tr>
 
               <tr>
-                <th colspan="9" class="text-center border-left border-right p-1 border-dark">FORMAT</th>
+                <th colspan="9" class="text-center border p-1 border-dark">FORMAT</th>
               </tr>
 
               <tr>
-                <th colspan="9" class="text-center border-left border-right p-1 border-dark"> <u>BERITA ACARA PENERIMAAN
-                    MATERIAL (BAPM)</u> </th>
+                <th colspan="9" class="text-center border-left border-right p-1 border-dark"> <u>SURAT PERMINTAAN
+                    PEMBELIAN (SPP)</u> </th>
+              </tr>
+              <tr>
+                <th colspan="9" class="text-center border-left border-right p-1 border-dark"> DITUJUKAN KEPADA PENGADAAN
+                  <div class="text-right mr-3" style="font-size: 20px;">No. {{data.arraydata[0].no_spp}}</div>
+                </th>
               </tr>
 
               <tr>
-                <th colspan="7" class="text-left border-left p-1 pl-3 border-dark"> Terima dari :
-                  <u>{{data.arraydata[0].asal_barang}}</u> </th>
-                <th colspan="2" class="text-left border-right p-1 pl-3 border-dark" style="font-size: 20px;"> No.
-                  <u>{{data.arraydata[0].no_bapm}}</u> </th>
+                <th colspan="2" class="text-left border-left p-1 pl-3 border-dark"> Diperlukan untuk Persediaan / Proyek: 
+                  <u>{{data.arraydata[0].proyek}}</u> </th>
+                <th colspan="7" class="text-left border-right p-1 pl-3 border-dark"> No. Order : <u>{{data.arraydata[0].no_order}}</u> </th>
               </tr>
 
               <tr>
-                <th colspan="6" class="text-left border-left p-1 pl-3 border-dark"> Diminta dengan
-                  SP/Kontrak/SPB.L/C/SPBB No : <u>{{data.arraydata[0].no_kontrak}}</u> </th>
-                <th class="p-1 pl-3">Tgl </th>
-                <th class="p-1 pl-3">:</th>
-                <th class="border-right p-1 pl-3 border-dark">
-                  <u>{{data.arraydata[0].tgl_masuk | date: 'dd MMMM yyyy'}}</u> </th>
+                <th colspan="9" class="text-left border-left border-right p-1 pl-3 border-dark">Sifat Pengadaan : Segera / Biasa /
+                  Persediaan</th>
               </tr>
 
               <tr>
-                <th colspan="9" class="text-right border-left border-right p-1 pr-3 border-dark">F.02</th>
+                <th colspan="9" class="text-left border-left border-right p-1 pl-3 border-dark">Tanggal Penerimaan yang diharapkan :
+                  {{data.arraydata[0].tgl_penerimaan | date:'dd MMMM yyyy'}}</th>
               </tr>
 
               <tr>
@@ -68,16 +69,17 @@
                   NO. </th>
                 <th style="vertical-align: middle" rowspan="2" colspan="2" class="text-center border border-dark p-0">
                   NAMA & SPESIFIKASI BARANG </th>
-                <th style="vertical-align: middle" rowspan="2" class="text-center border border-dark p-0"> KODE </th>
+                <th style="vertical-align: middle" colspan="4" class="text-center border border-dark p-0"> JUMLAH </th>
                 <th style="vertical-align: middle" rowspan="2" class="text-center border border-dark p-0"> SATUAN </th>
-                <th style="vertical-align: middle" colspan="3" class="text-center border border-dark p-0"> JUMLAH </th>
                 <th style="vertical-align: middle" rowspan="2" class="text-center border border-dark p-0"> KETERANGAN
                 </th>
               </tr>
 
               <tr>
-                <th style="vertical-align: middle" class="text-center border p-0 border-dark">ANGKA</th>
-                <th style="vertical-align: middle;width: 10%" colspan="2" class="text-center border p-0 border-dark">HURUF</th>
+                <th style="vertical-align: middle"  class="text-center border p-0 border-dark">TERSEDIA</th>
+                <th style="vertical-align: middle" class="text-center border p-0 border-dark">DIMINTA</th>
+                <th style="vertical-align: middle;width: 10%" colspan="2" class="text-center border p-0 border-dark">
+                  DIBELI</th>
               </tr>
             </thead>
             <tbody>
@@ -92,59 +94,58 @@
                     {{item.nomor_barang}}</div>
                 </td>
                 <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">
+                  {{item.jml_diminta}} <ion-text [ngStyle]="{'color':item.huruf == 'none' ? 'transparent' : 'black' }">({{item.huruf}})</ion-text> </td>
+                <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark"
+                  colspan="2"></td>
+                <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">
                   <div *ngIf="item.satuan != 'none'">{{item.satuan}}</div>
                 </td>
-                <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark">
-                  {{item.jml_msk_angka}}</td>
-                <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark"
-                  colspan="2">{{item.jml_msk_huruf}}</td>
                 <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark" middle>
                   {{item.keterangan}}</td>
               </tr>
             </tbody>
             <tfoot>
               <tr>
-                <td colspan="2" class="p-2 text-left border-top border-left border-dark"> <b>Lembar 1
-                    Supplier/Pemasok</b> </td>
-                <td colspan="3" class="p-2 text-left border-top border-dark"> </td>
+                <td colspan="5" class="p-2 text-left border-top border-left border-dark"> <b>Catatan Pesanan harus
+                    dibuat sejelas-jelasnya dan dilampiri dengan bukti pendukung</b> </td>
                 <td colspan="4" class="p-2 pr-4 text-center border-top border-right border-dark"> Jakarta,
                   {{datenow | date:'dd MMMM yyyy'}} </td>
               </tr>
               <tr>
-                <td colspan="2" class="p-0 pl-4 text-left border-left border-dark">Lembar 1 Supplier/Pemasok</td>
-                <td colspan="3" class="p-0 text-center">Yang Menyerahkan </td>
+                <td colspan="2" class="p-0 pl-4 text-left border-left border-dark">Lembar 1 Untuk Pengadaan</td>
+                <td colspan="3" class="p-0 text-center"></td>
                 <td colspan="4" class="p-0 text-center border-right border-dark">Yang Menerima </td>
               </tr>
               <tr>
-                <td colspan="9" class="p-0 pl-4 text-left border-left border-right border-dark">Lembar 2 Pengadaan</td>
+                <td colspan="9" class="p-0 pl-4 text-left border-left border-right border-dark">Lembar 2 Arsip</td>
               </tr>
               <tr>
-                <td colspan="9" class="p-0 pl-4 text-left border-left border-right border-dark">Lembar 3 Akuntansi Biaya
-                  (Persediaan)</td>
-              </tr>
-              <tr>
-                <td colspan="9" class="p-0 pl-4 text-left border-left border-right border-dark">Lembar 4 Akuntansi Pusat
+                <td colspan="9" class="p-0 pl-4 text-left border-left border-right border-dark">Lembar 3 Rental Produksi
                 </td>
               </tr>
               <tr>
-                <td colspan="9" class="p-0 pl-4 text-left border-left border-right border-dark">Lembar 5 Logsitik</td>
+                <td colspan="9" class="p-0 pl-4 text-left border-left border-right border-dark">&nbsp;
+                </td>
               </tr>
               <tr>
-                <td colspan="2" class="p-0 pl-4 text-left border-left border-dark">Lembar 6 Peminta</td>
-                <td colspan="3" class="p-0 text-center " *ngIf="func.brgMasukInfo.penerima != ''">(
-                  {{func.brgMasukInfo.penerima}} )</td>
+                <td colspan="9" class="p-0 pl-4 text-left border-left border-right border-dark">&nbsp;</td>
+              </tr>
+              <tr>
+                <td colspan="2" class="p-0 pl-4 text-left border-left border-dark">&nbsp;</td>
+                <td colspan="3" class="p-0 text-center " *ngIf="func.sspInfo.penerima != ''"></td>
                 <td colspan="4" class="p-0 text-center border-right border-dark"
-                  *ngIf="func.brgMasukInfo.pemberi != ''">( {{func.brgMasukInfo.pemberi}} )</td>
+                  *ngIf="func.sspInfo.peminta != ''">( {{func.sspInfo.peminta}} )</td>
                 <!-- if the data is '' -->
-                <td colspan="3" class="p-0 text-center " *ngIf="func.brgMasukInfo.penerima == ''">
-                  (.....................................)</td>
+                <td colspan="3" class="p-0 text-center " *ngIf="func.sspInfo.penerima == ''">
+                </td>
                 <td colspan="4" class="p-0 text-center border-right border-dark"
-                  *ngIf="func.brgMasukInfo.pemberi == ''">(.....................................)</td>
+                  *ngIf="func.sspInfo.peminta == ''">(.....................................)</td>
               </tr>
               <tr>
-                <td colspan="2" class="p-0 pl-4 text-left border-left border-bottom border-dark">Lembar 7 Arsip</td>
+                <td colspan="2" class="p-0 pl-4 text-left border-left border-bottom border-dark">&nbsp;</td>
                 <td colspan="3" class="p-0 pl-4 text-left border-bottom border-dark"></td>
-                <td colspan="4" class="p-0 text-center border-right border-bottom border-dark"> <b>KABID GUDANG</b>
+                <td colspan="4" class="p-0 text-center border-right border-bottom border-dark"> <b>(Ka. Bid.
+                    Pergudangan)</b>
                 </td>
               </tr>
             </tfoot>
@@ -170,9 +171,9 @@
           </ion-button>
         </button>
         <!-- <ion-button shape="round" color="warning" (click)="print()">
-          <ion-icon slot="start" name="save" color="dark"></ion-icon>
-           <ion-text color="dark"> <b>Simpan ke PDF</b>  </ion-text> 
-        </ion-button> -->
+            <ion-icon slot="start" name="save" color="dark"></ion-icon>
+             <ion-text color="dark"> <b>Simpan ke PDF</b>  </ion-text> 
+          </ion-button> -->
       </div>
     </div>
 

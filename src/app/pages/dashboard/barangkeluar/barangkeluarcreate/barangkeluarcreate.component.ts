@@ -15,19 +15,19 @@ import { ListBarangModalComponent } from 'src/app/pages/modal/list-barang-modal/
 })
 export class BarangkeluarcreateComponent implements OnInit {
 
-  barangbarukeluar:FormGroup
-  NomorBarang:any;
+  barangbarukeluar: FormGroup
+  NomorBarang: any;
   KodePkr;
   NoOrder;
 
   constructor(
-    private func:FunctionService,
-    private fb:FormBuilder,
+    private func: FunctionService,
+    private fb: FormBuilder,
     private router: Router,
     private datepipe: DatePipe,
     private eventEmitter: EventEmitterService,
-    private ModalCtrl:ModalController
-  ) { 
+    private ModalCtrl: ModalController
+  ) {
     this.barangbarukeluar = this.fb.group({
       no_spm: ['', Validators.required],
       proyek: ['', Validators.required],
@@ -48,90 +48,100 @@ export class BarangkeluarcreateComponent implements OnInit {
     this.loadOrder();
   }
 
-  async loadOrder(){
+  async loadOrder() {
     await this.func.getDataWithoutParams('noorderall').toPromise().then(
       resp => {
-        if (resp['success']){
+        if (resp['success']) {
           this.NoOrder = resp['data'];
         }
       },
-      err=>{}
+      err => { }
     );
   }
 
-  async loadKodePkr(){
+  async loadKodePkr() {
     await this.func.getDataWithoutParams('kodepekerjaanall').toPromise().then(
       resp => {
-        if (resp['success']){
+        if (resp['success']) {
           this.KodePkr = resp['data'];
         }
       },
-      err=>{}
+      err => { }
     );
   }
 
 
-  Tambah(val){
-    
+  Tambah(val) {
+
     val.tgl_keluar = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
-    if (val.nomor_barang.nomor_barang != null || val.nomor_barang.nomor_barang != undefined ) {
+    if (val.nomor_barang.nomor_barang != null || val.nomor_barang.nomor_barang != undefined) {
       val.nomor_barang = val.nomor_barang.nomor_barang;
     }
-    
+
     this.func.postData(val, 'barangkeluarinsert').toPromise().then(
-      async resp =>{
-        if (resp['success']){
+      async resp => {
+        if (resp['success']) {
           await this.Audits(val);
           await this.updateStock(val);
-        } else{
+        } else {
           await this.func.presentToast("Data Gagal Disimpan", "text-center", "danger");
         }
-        
+
       }
     )
-    
+
   }
 
-  async updateStock(val){
+  async updateStock(val) {
     val.kuantitas = -val.jml_klr_angka;
     // console.log(val);
     await this.func.postData(val, 'barangupdateq').toPromise().then(
       async resp => {
-        if (resp['success']){
+        if (resp['success']) {
           await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary");
-          this.eventEmitter.onFirstComponentButtonClick();
-          this.router.navigateByUrl('/menu/barangkeluar');
-        } else{
+          // this.eventEmitter.onFirstComponentButtonClick();
+          // this.router.navigateByUrl('/menu/barangkeluar');
+          this.barangbarukeluar.controls['nomor_barang'].setValue('');
+          this.barangbarukeluar.controls['jml_klr_angka'].setValue('');
+          this.barangbarukeluar.controls['jml_klr_huruf'].setValue('');
+          this.barangbarukeluar.controls['jml_klr_permintaan_angka'].setValue('');
+          this.barangbarukeluar.controls['jml_klr_permintaan_huruf'].setValue('');
+        } else {
           await this.func.presentToast("Data Gagal Disimpan", "text-center", "danger");
         }
       }
     );
   }
 
-  async Audits(val){
-    
+  async Audits(val) {
+
     val = JSON.stringify(val);
     await this.func.Audits('Barang Keluar', val, '').then(
-      async resp => {}
+      async resp => { }
     );
   }
 
-  konversi(val){
+  Done() {
+    this.eventEmitter.onFirstComponentButtonClick();
+    this.router.navigateByUrl('/menu/barangkeluar');
+  }
+
+  konversi(val) {
     this.barangbarukeluar.controls['jml_klr_huruf'].setValue(this.func.terbilang(val));
   }
 
-  konversi2(val){
+  konversi2(val) {
     this.barangbarukeluar.controls['jml_klr_permintaan_huruf'].setValue(this.func.terbilang(val));
   }
 
-  async openModalNmr(){
+  async openModalNmr() {
     const modal = await this.ModalCtrl.create({
       component: ListBarangModalComponent
     });
     modal.onDidDismiss().then(
       () => {
-          this.barangbarukeluar.controls['nomor_barang'].setValue(this.func.brgSelected.nomor_barang);
-        }
+        this.barangbarukeluar.controls['nomor_barang'].setValue(this.func.brgSelected.nomor_barang);
+      }
     );
     return await modal.present();
   }

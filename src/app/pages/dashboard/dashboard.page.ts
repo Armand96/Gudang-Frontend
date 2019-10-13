@@ -9,12 +9,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit, OnDestroy {
-  
+
   ngOnDestroy(): void {
     this.func.landscape.unsubscribe();
   }
 
-  textpos:Boolean = this.func.plat.isLandscape();
+  textpos: Boolean = this.func.plat.isLandscape();
   pages = [
     {
       title: 'Dashboard',
@@ -79,16 +79,31 @@ export class DashboardPage implements OnInit, OnDestroy {
           url: '/menu/nospm',
           icon: 'briefcase'
         },
-        // {
-        //   title: 'Proyek',
-        //   url: '/menu/proyek',
-        //   icon: 'briefcase'
-        // },
+        {
+          title: 'Proyek',
+          url: '/menu/proyek',
+          icon: 'briefcase'
+        },
         // {
         //   title: 'Bengkel',
         //   url: '/menu/bengkel',
         //   icon: 'briefcase'
         // },
+      ]
+    },
+    {
+      title: 'SPP (Surat Permintaan Pembelian)',
+      children: [
+        {
+          title: 'List SPP',
+          url: '/menu/ssp',
+          icon: 'filing'
+        },
+        {
+          title: 'Cetak SPP',
+          url: '/menu/sspread',
+          icon: 'briefcase'
+        },
       ]
     },
     {
@@ -124,29 +139,29 @@ export class DashboardPage implements OnInit, OnDestroy {
     private menu: MenuController,
     private func: FunctionService,
     private router: Router
-    ) {}
+  ) { }
 
-  async ngOnInit () {
-    if(this.func.api_token == "" || this.func.api_token == null){
+  async ngOnInit() {
+    if (this.func.api_token == "" || this.func.api_token == null) {
       this.router.navigateByUrl('/login');
     } else {
       await this.func.checkLogin(this.func.api_token);
       this.user = this.func.user;
       // this.router.navigateByUrl('/menu/dashboard');
       this.func.landscape.subscribe(
-        resp=>{
+        resp => {
           this.textpos = resp ? true : false;
         }
       )
     }
 
-    if (this.user != 'Admin'){
+    if (this.user != 'Admin') {
       this.pages.pop();
     }
-    
+
   }
 
-  async logout(){
+  async logout() {
     await localStorage.clear();
     this.func.user = "";
     this.func.api_token = "";

@@ -14,6 +14,7 @@ const EXCEL_EXTENSION = '.xlsx';
 @Injectable({
   providedIn: 'root'
 })
+
 export class FunctionService {
 
   // ================================================ HTTP SEND REQUEST SETTING ================================================
@@ -28,11 +29,13 @@ export class FunctionService {
   // ================================================ END OF HTTP SEND REQUEST SETTING ================================================
 
   // ============================================= SHARED VARIABLE
+  public TransferSPP:any = (localStorage.getItem('tspp') == null) ? "" : JSON.parse(localStorage.getItem('tspp'));
   public TransferDataBrgMsk:any = (localStorage.getItem('tdatamsk') == null) ? "" : JSON.parse(localStorage.getItem('tdatamsk'));
   public TransferDataBrgKlr:any = (localStorage.getItem('tdataklr') == null) ? "" : JSON.parse(localStorage.getItem('tdataklr'));
   public user = (localStorage.getItem('username') == null) ? "" : localStorage.getItem('username');
   public landscape = new Subject<Boolean>();
   public widths = Math.round(this.plat.width() / 2);
+  public sspInfo:any = (localStorage.getItem('sspinfo') == null) ? "" : JSON.parse(localStorage.getItem('sspinfo'));
   public brgKeluarInfo:any = (localStorage.getItem('brgkeluarinfo') == null) ? "" : JSON.parse(localStorage.getItem('brgkeluarinfo'));
   public brgMasukInfo:any = (localStorage.getItem('brgmasukinfo') == null) ? "" : JSON.parse(localStorage.getItem('brgmasukinfo'));
   public brgSelected:any = (localStorage.getItem('brgselected') == null) ? "" : JSON.parse(localStorage.getItem('brgselected'));

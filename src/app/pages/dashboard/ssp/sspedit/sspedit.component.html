@@ -1,0 +1,87 @@
+<ion-content class="container-fluid">
+
+  <div class="row d-flex justify-content-center m-2">
+    <ion-card class="col-lg-5 p-0">
+
+      <ion-card-header color="primary p-2">
+        <ion-card-title>
+          <h3 class="text-center">Edit SPP</h3>
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <form [formGroup]="editspp" (ngSubmit)="Edit(editspp.value)">
+
+          <ion-item>
+            <ion-label position="floating">No. SPP</ion-label>
+            <ion-input type="text" name="no_spp" maxlength="10" clearInput formControlName="no_spp" required disabled>
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Proyek</ion-label>
+            <ion-input type="text" name="proyek" maxlength="30" clearInput formControlName="proyek" read-only required
+              disabled>
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">No Order</ion-label>
+            <ion-select formControlName="no_order" name="no_order" disabled>
+              <ion-select-option *ngFor="let ord of NoOrder" value="{{ord.no_order}}">{{ord.no_order}} - {{ord.bengkel}}
+              </ion-select-option>
+            </ion-select>
+            <!-- <ion-input type="text" name="no_order" clearInput formControlName="no_order" read-only required></ion-input> -->
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Tgl Penerimaan yang Diharapakan</ion-label>
+            <ion-datetime displayFormat="DD MMMM YYYY" placeholder="Pilih Tanggal" name="tgl_penerimaan"
+              formControlName="tgl_penerimaan" required disabled></ion-datetime>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Nama Barang</ion-label>
+            <ion-input type="text" formControlName="nama_barang" name="nama_barang" read-only required
+              [disabled]="!editmode"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Jumlah Diminta (Angka)</ion-label>
+            <ion-input type="number" inputmode="numeric" name="jml_diminta" min="0" clearInput
+              formControlName="jml_diminta" [disabled]="!editmode">
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Satuan</ion-label>
+            <ion-input type="text" name="satuan" clearInput formControlName="satuan" maxlength="5" required
+              [disabled]="!editmode"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Keterangan</ion-label>
+            <ion-input type="text" name="keterangan" clearInput formControlName="keterangan" required
+              [disabled]="!editmode"></ion-input>
+          </ion-item>
+
+          <br>
+
+          <ion-button expand="block" type="button" color="primary" [disabled]="editmode" (click)="editmode = true">
+            Edit
+          </ion-button>
+
+          <ion-button expand="block" type="submit" color="primary" [disabled]="!editspp.valid || !editmode">
+            Simpan
+          </ion-button>
+
+        </form>
+
+      </ion-card-content>
+
+    </ion-card>
+  </div>
+
+
+</ion-content>

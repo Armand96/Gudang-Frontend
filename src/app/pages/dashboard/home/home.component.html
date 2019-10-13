@@ -4,11 +4,12 @@
 
     <div class="row" *ngIf="isLoading">
       <div class="col d-flex justify-content-center">
-        <ion-spinner name="crescent" color="primary" [style.width.px]="func.widths" [style.height.px]="func.widths"></ion-spinner>
+        <ion-spinner name="crescent" color="primary" [style.width.px]="func.widths" [style.height.px]="func.widths">
+        </ion-spinner>
       </div>
     </div>
 
-    <div class="row" *ngIf="!isLoading">
+    <!-- <div class="row" *ngIf="!isLoading">
 
       <ion-card class="col-sm p-0" routerLink="/menu/barangkeluar">
 
@@ -52,8 +53,24 @@
 
       </ion-card>
 
+    </div> -->
+
+    <div class="row">
+      <div class="col d-flex justify-content-center">
+        <img src="../../../../assets/img/dkb_Untitled-4.jpg" alt="">
+      </div>
     </div>
-    
+
+    <div class="row">
+      <div class="col">
+        <h1 class="text-center" style="font-size: 60px"> SHIPYARD JAKARTA-II </h1><br>
+        <h3 class="text-center"
+          style="font-size: 50px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"> DKB WCM
+        </h3> <br>
+        <h3 class="text-center"> (Warehouse Control Management) </h3>
+      </div>
+    </div>
+
   </div>
 
 </ion-content>

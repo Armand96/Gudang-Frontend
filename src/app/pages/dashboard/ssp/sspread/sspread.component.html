@@ -1,0 +1,106 @@
+<ion-content scroll-y="true">
+
+  <div class="container-fluid" class="m-3">
+
+    <div class="row d-flex justify-content-center">
+
+      <ion-item class="col-lg-3">
+        <ion-label position="floating">No. SPP</ion-label>
+        <ionic-selectable [canSearch]="true" searchPlaceholder="Cari berdasarkan No.SPP" [(ngModel)]="no_spp" [items]="no_spparr"
+        (onSelect)="onChange()" itemValueField="no_spp" itemTextField="no_spp">
+
+          <ng-template ionicSelectableCloseButtonTemplate>
+            <ion-icon name="close-circle"></ion-icon>
+          </ng-template>
+
+          <ng-template ionicSelectableItemTemplate let-no_spp="item">
+            {{no_spp.no_spp}}
+          </ng-template>
+
+        </ionic-selectable>
+
+      </ion-item>
+
+    </div>
+
+    <br>
+
+    <div *ngIf="landscape && list_no_spp">
+      <ngx-datatable [headerHeight]="50" [footerHeight]="50" [rowHeight]="auto" class="material striped"
+        [rows]="list_no_spp.arraydata" reorderable="true" [columnMode]="'force'" [limit]="10">
+
+        <ngx-datatable-column name="No" headerClass="bg-primary text-white">
+          <ng-template let-rowIndex='rowIndex' ngx-datatable-cell-template>
+            {{rowIndex+1}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Nama Barang" prop="nama_barang" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.nama_barang}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Jumlah Diminta" prop="jml_diminta" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.jml_diminta}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Satuan" prop="satuan" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.satuan}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Keterangan" prop="keterangan" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.keterangan}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Details" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <ion-button routerLink="/menu/sspedit/{{row.id}}"> Detail </ion-button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+
+      <br>
+      
+      
+    </div>
+
+  </div>
+
+  <ion-list lines="full" *ngIf="!landscape && list_no_spp">
+
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+    <ion-card *ngFor="let item of list_no_spp.arraydata | paginate: { itemsPerPage: 5, currentPage: p }" routerLink="/menu/sspedit/{{item.id}}">
+      
+      <ion-card-header color="primary" class="p-2">
+        <ion-card-title>
+          <h6 class="mb-0"> <b>No SPP:</b> {{item.no_spp}}</h6>
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-label >
+          <h4> <b>Nama Barang : </b>  {{item.nama_barang}}</h4>
+          <h4> <b>Jumlah Diminta: </b>  {{item.jml_diminta}} ({{item.satuan}}) </h4>
+          <h4> <b>Keterangan : </b>  {{item.keterangan}}</h4>
+        </ion-label>
+      </ion-card-content>
+
+    </ion-card>
+
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+  </ion-list>
+
+  <div class="row pl-3" *ngIf="list_no_spp">
+    <div class="col text-center text-sm-left">
+      <ion-button shape="round" (click)="transport()">
+        <ion-icon slot="start" name="clipboard"></ion-icon>
+        Cetak SPP
+      </ion-button>
+    </div>
+  </div>
+
+</ion-content>

@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FunctionService } from 'src/app/core/function.service';
 import { Platform } from '@ionic/angular';
 import { EventEmitterService } from 'src/app/core/event-emitter.service';
-import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-listbarang',
@@ -36,7 +35,7 @@ export class ListbarangComponent implements OnInit, OnDestroy {
 
     // filter our data
     const temp = this.temp.filter((o)=>{
-      return ['nomor_barang', 'nama_barang', 'satuan', 'kuantitas', 'harga_satuan'].some(
+      return ['nomor_barang', 'nama_barang', 'satuan', 'kuantitas'].some(
         (k)=>{
           return o[k].toString().toLowerCase().indexOf(val) !== -1 || !val;
         }

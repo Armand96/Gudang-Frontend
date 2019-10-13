@@ -1,0 +1,103 @@
+<ion-content scroll-x="true">
+  <div class="container-fluid" class="m-3">
+
+    <div class="row">
+      <div class="col text-center">
+        <h3> <b>LIST SPP</b> </h3>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col text-center text-sm-left">
+        <ion-button shape="round" routerLink="/menu/sspcreate">
+          <ion-icon slot="start" name="add"></ion-icon>
+          Tambah SPP Baru
+        </ion-button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col text-center text-sm-left">
+        <ion-button shape="round" (click)="exportAsXLSX()" color="warning">
+          <ion-icon slot="start" name="save" color="primary"></ion-icon>
+          <ion-text color="primary">Simpan ke Excel</ion-text>
+        </ion-button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <ion-item>
+          <ion-label position="floating">Pencarian</ion-label>
+          <ion-input type="text" (keyup)="updateFilter($event)"></ion-input>
+        </ion-item>
+      </div>
+    </div>
+
+    <div *ngIf="isLandScape">
+      <ngx-datatable [headerHeight]="50" [footerHeight]="50" [rowHeight]="auto" class="material striped" [rows]="data"
+        reorderable="true" [columnMode]="'force'" [limit]="10">
+
+        <ngx-datatable-column name="No SPP" prop="no_spp" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.no_spp}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Tanggal Pengadaan" prop="tgl_pengadaan" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.tgl_pengadaan | date:'dd MMMM yyyy'}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Nama Barang" prop="nama_barang" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.nama_barang}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Jumlah Diminta" prop="jml_diminta" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.jml_diminta}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Satuan" prop="satuan" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.satuan}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Details" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <ion-button routerLink="/menu/sspedit/{{row.id}}"> Detail </ion-button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+
+  </div>
+
+  <ion-list lines="full" *ngIf="!isLandScape">
+
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+    <ion-card *ngFor="let item of data | paginate: { itemsPerPage: 5, currentPage: p }"
+      routerLink="/menu/detailbarang/{{item.nomor_barang}}">
+
+      <ion-card-header color="primary" class="p-2">
+        <ion-card-title>
+          <h6 class="mb-0"> <b>No SPP:</b> {{item.no_spp}}</h6>
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-label>
+          <h4> <b>Tanggal Pengadaan: </b> {{item.tgl_pengadaan | date:'dd MMMM yyyy'}}</h4>
+          <h4> <b>Nama Barang : </b> {{item.nama_barang}}</h4>
+          <h4> <b>Jumlah Diminta : </b> {{item.jml_diminta}} {{item.satuan}} </h4>
+        </ion-label>
+      </ion-card-content>
+
+    </ion-card>
+
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+  </ion-list>
+
+</ion-content>

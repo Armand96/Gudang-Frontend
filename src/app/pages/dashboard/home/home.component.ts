@@ -13,9 +13,9 @@ export class HomeComponent implements OnInit {
   async ngOnInit() {
     this.isLoading = true;
     
-    await this.loadCountBarangKeluar();
-    await this.loadCountBarangMasuk();
-    await this.loadCountJenisBarang();
+    // await this.loadCountBarangKeluar();
+    // await this.loadCountBarangMasuk();
+    // await this.loadCountJenisBarang();
     // await this.func.delay(1000);
     
     this.isLoading = false;
@@ -26,37 +26,37 @@ export class HomeComponent implements OnInit {
   barangkeluar;
   isLoading:Boolean;
 
-  async loadCountJenisBarang(){
-    await this.func.getDataWithoutParams('countbarang').toPromise().then(
-      resp => {
-        if(resp['success'] = true){
-          this.jenisbarang = resp['data'];
-        }
-      },
-      err => {}
-    );
-  }
+  // async loadCountJenisBarang(){
+  //   await this.func.getDataWithoutParams('countbarang').toPromise().then(
+  //     resp => {
+  //       if(resp['success'] = true){
+  //         this.jenisbarang = resp['data'];
+  //       }
+  //     },
+  //     err => {}
+  //   );
+  // }
 
-  async loadCountBarangKeluar(){
-    await this.func.getDataWithoutParams('countbarangkeluar').toPromise().then(
-      resp => {
-        if(resp['success'] = true){
-          this.barangkeluar = resp['data'];
-        }
-      },
-      err=>{}
-    );
-  }
+  // async loadCountBarangKeluar(){
+  //   await this.func.getDataWithoutParams('countbarangkeluar').toPromise().then(
+  //     resp => {
+  //       if(resp['success'] = true){
+  //         this.barangkeluar = resp['data'];
+  //       }
+  //     },
+  //     err=>{}
+  //   );
+  // }
 
-  async loadCountBarangMasuk(){
-    await this.func.getDataWithoutParams('countbarangmasuk').toPromise().then(
-      resp => {
-        if(resp['success'] = true){
-          this.barangmasuk = resp['data'];
-        }
-      },
-      err => {}
-    );
-  }
+  // async loadCountBarangMasuk(){
+  //   await this.func.getDataWithoutParams('countbarangmasuk').toPromise().then(
+  //     resp => {
+  //       if(resp['success'] = true){
+  //         this.barangmasuk = resp['data'];
+  //       }
+  //     },
+  //     err => {}
+  //   );
+  // }
 
 }

@@ -1,74 +1,74 @@
 <ion-menu contentId="content" type="overlay">
- 
-    <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title>Navigasi Menu</ion-title>
-      </ion-toolbar>
-    </ion-header>
-   
-    <ion-content>
-   
-      <div *ngFor="let p of pages">
-   
-        <!-- Standard Menu Item -->
-        <ion-menu-toggle *ngIf="p.url">
-          <ion-item [routerLink]="p.url" routerDirection="root" routerLinkActive="active">
-            <ion-icon [name]="p.icon" slot="start"></ion-icon>
+
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Navigasi Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+
+    <div *ngFor="let p of pages">
+
+      <!-- Standard Menu Item -->
+      <ion-menu-toggle *ngIf="p.url">
+        <ion-item [routerLink]="p.url" routerDirection="root" routerLinkActive="active">
+          <ion-icon [name]="p.icon" slot="start"></ion-icon>
+          <ion-label>
+            {{ p.title }}
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <!-- Item with Children -->
+
+      <ion-item button *ngIf="p.children?.length > 0" (click)="p.open = !p.open" [class.parent-active]="p.open"
+        detail="false">
+        <ion-icon slot="start" name="arrow-forward" *ngIf="!p.open"></ion-icon>
+        <ion-icon slot="start" name="arrow-down" *ngIf="p.open"></ion-icon>
+        <ion-label text-wrap>{{ p.title }}</ion-label>
+      </ion-item>
+
+      <!-- Children List for clicked Item -->
+      <ion-list *ngIf="p.open">
+        <ion-menu-toggle>
+          <ion-item *ngFor="let sub of p.children" class="sub-item" [routerLink]="sub.url" routerDirection="root"
+            routerLinkActive="active">
+            <ion-icon [name]="sub.icon" slot="start"></ion-icon>
             <ion-label>
-              {{ p.title }}
+              {{ sub.title }}
             </ion-label>
           </ion-item>
         </ion-menu-toggle>
-        <!-- Item with Children -->
-   
-        <ion-item button *ngIf="p.children?.length > 0" (click)="p.open = !p.open" [class.parent-active]="p.open" detail="false">
-          <ion-icon slot="start" name="arrow-forward" *ngIf="!p.open"></ion-icon>
-          <ion-icon slot="start" name="arrow-down" *ngIf="p.open"></ion-icon>
-          <ion-label>{{ p.title }}</ion-label>
-        </ion-item>
-   
-        <!-- Children List for clicked Item -->
-        <ion-list *ngIf="p.open">
-          <ion-menu-toggle>
-            <ion-item *ngFor="let sub of p.children" class="sub-item" [routerLink]="sub.url" routerDirection="root"
-              routerLinkActive="active">
-              <ion-icon [name]="sub.icon" slot="start"></ion-icon>
-              <ion-label>
-                {{ sub.title }}
-              </ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-   
-      </div>
+      </ion-list>
 
-      <ion-menu-toggle>
-          <ion-item (click)="logout()" style="cursor: pointer;" routerLink="/login" (click)="logout()">
-              <ion-icon name="log-out" slot="start"></ion-icon>
-              <ion-label>
-                Logout ({{user}})
-              </ion-label>
-          </ion-item>
-      </ion-menu-toggle>
-    </ion-content>
-   
+    </div>
+
+    <ion-menu-toggle>
+      <ion-item (click)="logout()" style="cursor: pointer;" routerLink="/login" (click)="logout()">
+        <ion-icon name="log-out" slot="start"></ion-icon>
+        <ion-label>
+          Logout ({{user}})
+        </ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+  </ion-content>
+
 </ion-menu>
 
-  <ion-header >
-    <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title class="text-center pl-0" *ngIf="!textpos">
-        DKB SHIPYARD-II GUDANG
-      </ion-title>
-      <ion-title *ngIf="textpos">
-        DKB SHIPYARD-II GUDANG
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-   
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="text-center pl-0" *ngIf="!textpos" color="warning">
+      <b text-wrap>DKB SHIPYARD JAKARTA-II GUDANG</b> <!-- Untuk Mobile -->
+    </ion-title>
+    <ion-title *ngIf="textpos" color="warning">
+      <b >DKB SHIPYARD JAKARTA-II GUDANG</b>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
   <ion-router-outlet id="content" main></ion-router-outlet>
 </ion-content>
-  

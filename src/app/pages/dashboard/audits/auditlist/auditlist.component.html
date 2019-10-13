@@ -78,6 +78,7 @@
             <div *ngIf="row.nilai_baru.username" class="text-center"> <b> User : </b> {{row.nilai_baru.username}} </div> 
             <div *ngIf="row.nilai_baru.no_order && row.nilai_baru.bengkel" class="text-center"> <b> No Order : </b> {{row.nilai_baru.no_order}} </div> 
             <div *ngIf="row.nilai_baru.kode_pekerjaan && row.nilai_baru.pekerjaan" class="text-center"> <b> Kode Pekerjaan : </b> {{row.nilai_baru.kode_pekerjaan}} </div> 
+            <div *ngIf="row.nilai_baru.no_spp" class="text-center"> <b> No SPP : </b> {{row.nilai_baru.no_spp}} </div> 
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Tanggal & Waktu Dibuat" prop="created_at" headerClass="bg-primary text-white text-center font-weight-bold">
