@@ -21,7 +21,7 @@ export class FunctionService {
   public api_token = (localStorage.getItem('api_token') == null) ? "" : localStorage.getItem('api_token');
   // public url:string = "http://gudang.com/data/api/"; // for development use this
   // public url:string = window.location.origin+"/data/api/"; // for production enable this
-  public url:string = isDevMode() ? "http://gudang.com/data/api/" : window.location.origin+"/data/api/";
+  public url:string = isDevMode() ? "http://localhost/data/api/" : window.location.origin+"/data/api/";
   public dtHeaders = {
     'Authorization':'apl '+this.api_token,
     'Content-Type':'application/json'

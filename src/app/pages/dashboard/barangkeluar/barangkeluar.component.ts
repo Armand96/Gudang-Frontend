@@ -59,7 +59,7 @@ export class BarangkeluarComponent implements OnInit, OnDestroy {
 
     // filter our data
     const temp = this.temp.filter((o)=>{
-      return ['proyek', 'no_order', 'nomor_barang', 'tgl_keluar', 'jml_klr_angka'].some(
+      return ['proyek', 'no_order', 'no_spm', 'kode_pekerjaan'].some(
         (k)=>{
           return o[k].toString().toLowerCase().indexOf(val) !== -1 || !val;
         }
@@ -89,6 +89,14 @@ export class BarangkeluarComponent implements OnInit, OnDestroy {
         
       }
     );
+    // await this.func.getDataWithoutParams('barangkeluardis').toPromise().then(
+    //   resp => {
+    //     if (resp['success']){
+    //       this.data = resp['data'];
+    //     }
+        
+    //   }
+    // );
   }
 
 }

@@ -69,7 +69,7 @@ export class ListBarangModalComponent implements OnInit, OnDestroy {
   }
 
   selectData(index){
-    console.log(index);
+    // console.log(index);
     this.func.brgSelected = {
       nomor_barang:this.data[index].nomor_barang,
       nama_barang:this.data[index].nama_barang,

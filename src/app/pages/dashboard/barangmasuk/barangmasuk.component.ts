@@ -60,7 +60,7 @@ export class BarangmasukComponent implements OnInit, OnDestroy {
 
     // filter our data
     const temp = this.temp.filter((o)=>{
-      return ['nomor_barang', 'tgl_masuk', 'no_kontrak', 'asal_barang', 'jml_msk_angka'].some(
+      return ['nomor_barang', 'tgl_masuk', 'no_kontrak', 'asal_barang', 'jml_msk_angka','no_bapm'].some(
         (k)=>{
           return o[k].toString().toLowerCase().indexOf(val) !== -1 || !val;
         }
@@ -90,6 +90,13 @@ export class BarangmasukComponent implements OnInit, OnDestroy {
         }
       }
     );
+    // await this.func.getDataWithoutParams('barangmasukdis').toPromise().then(
+    //   resp => {
+    //     if (resp['success']){
+    //       this.data = resp['data'];
+    //     }
+    //   }
+    // );
   }
 
   // desktop(){

@@ -4,3 +4,14 @@
 // styles are for the entire app and not just one component. Additionally, this 
 // file can hold Sass mixins, functions, and placeholder classes to be imported 
 // and used throughout the application.
+* {
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.smsize{
+    font-size: 18px;
+}
+
+.lgsize{
+    font-size:25px;
+}

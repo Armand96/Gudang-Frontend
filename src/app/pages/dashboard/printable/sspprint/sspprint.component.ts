@@ -13,7 +13,7 @@ export class SspprintComponent implements OnInit {
   data
   sendparam
   datenow = new Date();
-  maxItem:number = 10;
+  maxItem:number = 35;
 
   config: ExportAsConfig = {
     type: 'pdf',

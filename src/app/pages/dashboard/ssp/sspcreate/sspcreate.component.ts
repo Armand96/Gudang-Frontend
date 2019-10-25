@@ -52,7 +52,7 @@ export class SspcreateComponent implements OnInit {
 
   Tambah(val) {
     
-    val.tgl_penerimaan = this.datepipe.transform(val.tgl_penerimaan, 'yyyy-MM-dd' )
+    val.tgl_penerimaan = this.datepipe.transform(val.tgl_penerimaan, 'yyyy-MM-dd' );
     val.tgl_pengadaan = this.datepipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
     this.func.postData(val, 'pengadaaninsert').toPromise().then(
       async resp => {

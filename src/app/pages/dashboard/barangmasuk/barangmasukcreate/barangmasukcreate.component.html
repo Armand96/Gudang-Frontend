@@ -15,17 +15,43 @@
 
           <ion-item>
             <ion-label position="floating">No BAPM</ion-label>
-            <ion-input type="text" name="no_bapm" maxlength="10" clearInput formControlName="no_bapm" required></ion-input>
+            <ion-input type="text" name="no_bapm" maxlength="10" clearInput formControlName="no_bapm" required>
+            </ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Asal Barang</ion-label>
-            <ion-input type="text" name="asal_barang" maxlength="30" clearInput formControlName="asal_barang" required></ion-input>
+            <ion-input type="text" name="asal_barang" maxlength="30" clearInput formControlName="asal_barang" required>
+            </ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">No Kontrak</ion-label>
-            <ion-input type="text" name="no_kontrak" maxlength="30" clearInput formControlName="no_kontrak" required></ion-input>
+            <ion-input type="text" name="no_kontrak" maxlength="30" clearInput formControlName="no_kontrak" required>
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Keterangan</ion-label>
+            <ion-input type="text" name="keterangan" clearInput formControlName="keterangan" required></ion-input>
+          </ion-item>
+
+          <ion-item (click)="openModal()">
+            <ion-label position="floating">Nomor Barang</ion-label>
+            <ion-input type="text" formControlName="nomor_barang" name="nomor_barang" read-only required>
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Jumlah Masuk (Angka)</ion-label>
+            <ion-input type="number" inputmode="numeric" name="jml_msk_angka" min="0" clearInput
+              formControlName="jml_msk_angka" required (change)="konversi(barangbarumasuk.value.jml_msk_angka)"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Jumlah Masuk (Huruf)</ion-label>
+            <ion-input type="text" name="jml_msk_huruf" clearInput formControlName="jml_msk_huruf" required disabled>
+            </ion-input>
           </ion-item>
 
           <!-- <ion-item>
@@ -33,25 +59,28 @@
             <ion-datetime displayFormat="DD MMMM YYYY" placeholder="Select Date" name="tgl_masuk" formControlName="tgl_masuk" required></ion-datetime>
           </ion-item> -->
 
-          <ion-item (click)="openModal()">
-            <ion-label position="floating">Nomor Barang</ion-label>
-            <ion-input type="text" formControlName="nomor_barang" name="nomor_barang" read-only required></ion-input>
-          </ion-item>
+          <!-- <div formArrayName="array_barang" >
+            <div *ngFor="let grp of Arrayz.controls;let i=index;" [formGroupName]="i" class="border mb-2">
+              <ion-item (click)="openModal(i)">
+                <ion-label position="floating">Nomor Barang</ion-label>
+                <ion-input type="text" formControlName="nomor_barang" name="nomor_barang" read-only required>
+                </ion-input>
+              </ion-item>
 
-          <ion-item>
-            <ion-label position="floating">Jumlah Masuk (Angka)</ion-label>
-            <ion-input type="number" inputmode="numeric" name="jml_msk_angka" clearInput formControlName="jml_msk_angka" required (change)="konversi(barangbarumasuk.value)"></ion-input>
-          </ion-item>
+              <ion-item>
+                <ion-label position="floating">Jumlah Masuk (Angka)</ion-label>
+                <ion-input type="number" inputmode="numeric" name="jml_msk_angka" min="0" clearInput
+                  formControlName="jml_msk_angka" required (change)="konversi(i)"></ion-input>
+              </ion-item>
 
-          <ion-item>
-            <ion-label position="floating">Jumlah Masuk (Huruf)</ion-label>
-            <ion-input type="text" name="jml_msk_huruf" clearInput formControlName="jml_msk_huruf" required disabled></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="floating">Keterangan</ion-label>
-            <ion-input type="text" name="keterangan" clearInput formControlName="keterangan" required></ion-input>
-          </ion-item>
+              <ion-item>
+                <ion-label position="floating">Jumlah Masuk (Huruf)</ion-label>
+                <ion-input type="text" name="jml_msk_huruf" clearInput formControlName="jml_msk_huruf" required
+                  disabled>
+                </ion-input>
+              </ion-item>
+            </div>
+          </div> -->
 
           <br>
 
@@ -69,6 +98,18 @@
 
     </ion-card>
   </div>
-  
+
+  <!-- <ion-fab vertical="top" horizontal="end" slot="fixed" (click)="addMoreField()">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab class="mt-5" vertical="top" horizontal="end" slot="fixed" (click)="removeField()">
+    <ion-fab-button>
+      <ion-icon name="remove"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+
 
 </ion-content>

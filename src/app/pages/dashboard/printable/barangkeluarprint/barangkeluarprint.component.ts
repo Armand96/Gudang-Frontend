@@ -12,7 +12,7 @@ export class BarangkeluarprintComponent implements OnInit {
   data
   sendparam
   p
-  maxItem: number = 10;
+  maxItem: number = 30;
   fillarray = [];
 
   config: ExportAsConfig = {

@@ -15,7 +15,7 @@
 
           <ion-item>
             <ion-label position="floating">No BAPM</ion-label>
-            <ion-input type="text" name="no_bapm" maxlength="10" clearInput formControlName="no_bapm" required disabled></ion-input>
+            <ion-input type="text" name="no_bapm" maxlength="10" clearInput formControlName="no_bapm" required [disabled]="!editmode"></ion-input>
           </ion-item>
 
           <ion-item>
@@ -50,7 +50,7 @@
 
           <ion-item>
             <ion-label position="floating">Keterangan</ion-label>
-            <ion-input type="text" name="keterangan" clearInput formControlName="keterangan" required [disabled]="!editmode"></ion-input>
+            <ion-input type="text" name="keterangan" clearInput formControlName="keterangan" required disabled></ion-input>
           </ion-item>
 
           <br>

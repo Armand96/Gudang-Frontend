@@ -12,7 +12,8 @@
                 <th colspan="2" rowspan="4" class="text-center border-left border-top border-bottom border-dark"> <img
                     src="../../../../../assets/img/Logo-DKB.png" alt="" width="200px" height="100px"> </th>
                 <th colspan="4" rowspan="4" class="border-right border-top border-bottom border-dark">
-                  <h4 class="text-center"> PT. DOK & PERKAPALAN <br> KODJA BAHARI (PERSERO) <br> SHIPYARD JAKARTA-II </h4>
+                  <h4 class="text-center"> PT. DOK & PERKAPALAN <br> KODJA BAHARI (PERSERO) <br> SHIPYARD JAKARTA-II
+                  </h4>
                 </th>
                 <th style="vertical-align: middle" class="p-0 pl-2 border-top border-dark"> Nomor </th>
                 <th style="vertical-align: middle" class="p-0 border-top border-dark"> : </th>
@@ -35,18 +36,18 @@
               </tr>
 
               <tr>
-                <th colspan="9" class="text-center border-left border-right p-1 border-dark">FORMAT</th>
+                <th colspan="9" class="text-center border-left border-right p-1 border-dark lgsize">FORMAT</th>
               </tr>
 
               <tr>
-                <th colspan="9" class="text-center border-left border-right p-1 border-dark"> <u>BERITA ACARA PENERIMAAN
+                <th colspan="9" class="text-center border-left border-right p-1 border-dark lgsize"> <u>BERITA ACARA PENERIMAAN
                     MATERIAL (BAPM)</u> </th>
               </tr>
 
               <tr>
                 <th colspan="7" class="text-left border-left p-1 pl-3 border-dark"> Terima dari :
                   <u>{{data.arraydata[0].asal_barang}}</u> </th>
-                <th colspan="2" class="text-left border-right p-1 pl-3 border-dark" style="font-size: 20px;"> No.
+                <th colspan="2" class="text-left border-right p-1 pl-3 border-dark lgsize"> No.
                   <u>{{data.arraydata[0].no_bapm}}</u> </th>
               </tr>
 
@@ -77,11 +78,12 @@
 
               <tr>
                 <th style="vertical-align: middle" class="text-center border p-0 border-dark">ANGKA</th>
-                <th style="vertical-align: middle;width: 10%" colspan="2" class="text-center border p-0 border-dark">HURUF</th>
+                <th style="vertical-align: middle;width: 10%" colspan="2" class="text-center border p-0 border-dark">
+                  HURUF</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of data.arraydata | paginate: { itemsPerPage: 20, currentPage: p };">
+              <tr *ngFor="let item of data.arraydata | paginate: { itemsPerPage: maxItem, currentPage: p };">
                 <td style="vertical-align: middle; width: 5%"
                   class="text-center border-left border-right p-0 border-dark">{{item.indexx}}</td>
                 <td style="vertical-align: middle" class="border-left border-right p-0 pl-2 border-dark" colspan="2">
@@ -98,7 +100,8 @@
                   {{item.jml_msk_angka}}</td>
                 <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark"
                   colspan="2">{{item.jml_msk_huruf}}</td>
-                <td style="vertical-align: middle" class="text-center border-left border-right p-0 border-dark" middle>
+                <td rowspan="35" style="width: 15%;" class="text-center border-left border-right p-0 border-dark"
+                  *ngIf="item.indexx == 1">
                   {{item.keterangan}}</td>
               </tr>
             </tbody>
@@ -131,15 +134,20 @@
               </tr>
               <tr>
                 <td colspan="2" class="p-0 pl-4 text-left border-left border-dark">Lembar 6 Peminta</td>
-                <td colspan="3" class="p-0 text-center " *ngIf="func.brgMasukInfo.penerima != ''">(
+
+                <!--  -->
+                <td colspan="3" class="p-0 text-center" *ngIf="func.brgMasukInfo.pemberi != ''">(
+                  {{func.brgMasukInfo.pemberi}} )</td>
+                <td colspan="3" class="p-0 text-center" *ngIf="func.brgMasukInfo.pemberi == ''">
+                  (.....................................)</td>
+
+                <td colspan="4" class="p-0 text-center border-right border-dark"
+                  *ngIf="func.brgMasukInfo.penerima != ''">(
                   {{func.brgMasukInfo.penerima}} )</td>
                 <td colspan="4" class="p-0 text-center border-right border-dark"
-                  *ngIf="func.brgMasukInfo.pemberi != ''">( {{func.brgMasukInfo.pemberi}} )</td>
-                <!-- if the data is '' -->
-                <td colspan="3" class="p-0 text-center " *ngIf="func.brgMasukInfo.penerima == ''">
+                  *ngIf="func.brgMasukInfo.penerima == ''">
                   (.....................................)</td>
-                <td colspan="4" class="p-0 text-center border-right border-dark"
-                  *ngIf="func.brgMasukInfo.pemberi == ''">(.....................................)</td>
+                <!-- if the data is '' -->
               </tr>
               <tr>
                 <td colspan="2" class="p-0 pl-4 text-left border-left border-bottom border-dark">Lembar 7 Arsip</td>
