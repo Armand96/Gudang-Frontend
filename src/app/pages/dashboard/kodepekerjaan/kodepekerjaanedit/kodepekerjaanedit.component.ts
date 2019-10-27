@@ -65,9 +65,9 @@ export class KodepekerjaaneditComponent implements OnInit {
 
   async Audits(val){
     delete val.kode_pekerjaan_old;
-    this.old_value = JSON.stringify(this.old_value);
+    var oldval = JSON.stringify(this.old_value);
     val = JSON.stringify(val);
-    await this.func.Audits('Edit Kode Pekerjaan', val, this.old_value).then(
+    await this.func.Audits('Edit Kode Pekerjaan', val, oldval).then(
       async resp => { return true }
     );
   }

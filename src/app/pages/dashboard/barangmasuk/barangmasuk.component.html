@@ -61,16 +61,6 @@
             {{row.no_bapm}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Nomor Barang" prop="nomor_barang" headerClass="bg-primary text-white">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.nomor_barang}}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Tanggal Masuk" prop="tgl_masuk" headerClass="bg-primary text-white">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            {{row.tgl_masuk | date:'dd MMMM yyyy'}}
-          </ng-template>
-        </ngx-datatable-column>
         <ngx-datatable-column name="No Kontrak" prop="no_kontrak" headerClass="bg-primary text-white">
           <ng-template let-row="row" ngx-datatable-cell-template>
             {{row.no_kontrak}}
@@ -81,14 +71,25 @@
             {{row.asal_barang}}
           </ng-template>
         </ngx-datatable-column>
+        <ngx-datatable-column name="Nomor Barang" prop="nomor_barang" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.nomor_barang}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Tanggal Masuk" prop="tgl_masuk" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.tgl_masuk | date:'dd MMMM yyyy'}}
+          </ng-template>
+        </ngx-datatable-column>
         <ngx-datatable-column name="Jumlah Masuk" prop="jml_msk_angka" headerClass="bg-primary text-white">
           <ng-template let-row="row" ngx-datatable-cell-template>
             {{row.jml_msk_angka}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Details" headerClass="bg-primary text-white">
+        <ngx-datatable-column name="Actions" headerClass="bg-primary text-white">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            <ion-button routerLink="/menu/editbarangmasuk/{{row.id}}"> Detail </ion-button>
+            <ion-button routerLink="/menu/editbarangmasuk/{{row.id}}"> Edit </ion-button>
+            <ion-button color="danger" (click)="presentAlertConfirm(row)"> Delete </ion-button>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
@@ -133,8 +134,7 @@
 
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
-    <ion-card *ngFor="let item of data | paginate: { itemsPerPage: 5, currentPage: p }"
-      routerLink="/menu/editbarangmasuk/{{item.id}}">
+    <ion-card *ngFor="let item of data | paginate: { itemsPerPage: 5, currentPage: p }">
 
       <ion-card-header color="primary" class="p-2">
         <ion-card-title>
@@ -151,6 +151,16 @@
           <h4> <b>Keterangan : </b> {{item.keterangan}}</h4>
           <h4> <b>Jumlah Masuk : </b> {{item.jml_msk_angka}}</h4>
         </ion-label>
+
+        <div class="row ">
+          <div class="col p-0 pl-2">
+            <ion-button routerLink="/menu/editbarangmasuk/{{item.id}}" expand="block"> Edit </ion-button>
+          </div>
+
+          <div class="col p-0 pr-2">
+            <ion-button color="danger" (click)="presentAlertConfirm(item)" expand="block"> Delete </ion-button>
+          </div>
+        </div>
       </ion-card-content>
 
     </ion-card>

@@ -1,8 +1,11 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FunctionService } from 'src/app/core/function.service';
 import { EventEmitterService } from 'src/app/core/event-emitter.service';
+import { ModalController } from '@ionic/angular';
+import { ListBarangModalComponent } from 'src/app/pages/modal/list-barang-modal/list-barang-modal.component';
 
 @Component({
   selector: 'app-barangkeluaredit',
@@ -21,7 +24,9 @@ export class BarangkeluareditComponent implements OnInit {
     private router: Router,
     private func: FunctionService,
     private actr: ActivatedRoute,
-    private eventEmitter: EventEmitterService
+    private eventEmitter: EventEmitterService,
+    private dpipe: DatePipe,
+    private ModalCtrl: ModalController
   ) { 
     this.barangbarukeluar = this.fb.group({
       no_spm: ['', Validators.required],
@@ -42,14 +47,15 @@ export class BarangkeluareditComponent implements OnInit {
   ngOnInit() {
     this.loadSingleBarang();
     this.editmode = false;
+    
   }
 
   async loadSingleBarang(){
     await this.func.getDataWithParams(this.id,'barangkeluarsingle/').toPromise().then(
-      resp => {
+      async resp => {
         if (resp['success']){
-          this.old_value = resp['data'];
-
+          this.old_value = await resp['data'];
+          // console.log(this.old_value);
           this.barangbarukeluar.controls['no_spm'].setValue(this.old_value.no_spm);
           this.barangbarukeluar.controls['proyek'].setValue(this.old_value.proyek);
           this.barangbarukeluar.controls['no_order'].setValue(this.old_value.no_order);
@@ -68,27 +74,84 @@ export class BarangkeluareditComponent implements OnInit {
     );
   }
 
+  async openModalNmr() {
+    const modal = await this.ModalCtrl.create({
+      component: ListBarangModalComponent
+    });
+    modal.onDidDismiss().then(
+      () => {
+        this.barangbarukeluar.controls['nomor_barang'].setValue(this.func.brgSelected.nomor_barang);
+      }
+    );
+    return await modal.present();
+  }
+
   async Simpan(val){
     // console.log(val);
+    val.tgl_keluar = this.dpipe.transform(val.tgl_keluar, 'yyyy-MM-dd HH:mm:ss');
     val.id = this.id;
     await this.func.postData(val, "barangkeluarupdate").toPromise().then(
       async resp=>{
         if (resp['success']){
-          await this.Audits(val);
-          await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary", 3000);
-          this.eventEmitter.onFirstComponentButtonClick();
+          // await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary", 3000);
+          // this.eventEmitter.onFirstComponentButtonClick();
           // this.router.navigateByUrl("/menu/barangkeluar");
-          this.func.backClicked();
+          // this.func.backClicked();
         }
       }
     );
+    await this.updateStock(val);
+    await this.Audits(val);
+  }
+
+  async updateStock(valnew) {
+
+    var selisih = valnew.jml_klr_angka - this.old_value.jml_klr_angka;
+    if (valnew.nomor_barang == this.old_value.nomor_barang) {
+      // console.log('nomor barang sama');
+      if (selisih != 0){
+        valnew.kuantitas = selisih * -1;
+        await this.func.postData(valnew, 'barangupdateq').toPromise().then(
+          async resp => {
+            if(resp['success']){
+              await this.func.presentToast("Data Berhasil Diedit", "text-center", "primary");
+              this.eventEmitter.onFirstComponentButtonClick();
+              this.router.navigateByUrl('/menu/barangkeluar');
+            }
+          }
+        );
+      }
+
+    } else {
+      // console.log('nomor barang tidak sama');
+      this.old_value.kuantitas = -this.old_value.jml_klr_angka * -1;
+      await this.func.postData(this.old_value, 'barangupdateq').toPromise().then(
+        async resp => {
+          if(resp['success']){
+            valnew.kuantitas = -valnew.jml_klr_angka;
+            await this.func.postData(valnew, 'barangupdateq').toPromise().then(
+              async resp => {
+                if(resp['success']){
+                  await this.func.presentToast("Data Berhasil Diedit", "text-center", "primary");
+                  this.eventEmitter.onFirstComponentButtonClick();
+                  this.router.navigateByUrl('/menu/barangkeluar');
+                }
+              }
+            );
+
+          }
+        }
+      );
+      
+
+    }
   }
 
   async Audits(val){
     
-    this.old_value = JSON.stringify(this.old_value);
+    var oldval = JSON.stringify(this.old_value);
     val = JSON.stringify(val);
-    await this.func.Audits('Edit Barang Keluar', val, this.old_value).then(
+    await this.func.Audits('Edit Barang Keluar', val, oldval).then(
       async resp => { return true }
     );
 

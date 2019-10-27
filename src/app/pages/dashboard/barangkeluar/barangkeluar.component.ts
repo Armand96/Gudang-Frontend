@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Renderer } from '@angular/core';
 import { Router } from '@angular/router';
 import { FunctionService } from 'src/app/core/function.service';
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController } from '@ionic/angular';
 import { EventEmitterService } from 'src/app/core/event-emitter.service';
 
 @Component({
@@ -26,7 +26,8 @@ export class BarangkeluarComponent implements OnInit, OnDestroy {
   constructor( 
     private func:FunctionService,
     private plat:Platform,
-    private eventEmitterService:EventEmitterService 
+    private eventEmitterService:EventEmitterService,
+    private alertController:AlertController 
   ) {}
 
   ngOnInit() {
@@ -59,7 +60,7 @@ export class BarangkeluarComponent implements OnInit, OnDestroy {
 
     // filter our data
     const temp = this.temp.filter((o)=>{
-      return ['proyek', 'no_order', 'no_spm', 'kode_pekerjaan'].some(
+      return ['proyek', 'no_order', 'no_spm', 'kode_pekerjaan', 'tgl_keluar', 'jml_klr_angka'].some(
         (k)=>{
           return o[k].toString().toLowerCase().indexOf(val) !== -1 || !val;
         }
@@ -97,6 +98,46 @@ export class BarangkeluarComponent implements OnInit, OnDestroy {
         
     //   }
     // );
+  }
+
+  async updateStock(val){
+    await this.func.postData(val, 'barangupdateq').toPromise().then();
+  }
+
+  async Audits(oldval){
+    oldval = JSON.stringify(oldval);
+    await this.func.Audits('Hapus Barang Keluar', '', oldval).then();
+  }
+
+  async presentAlertConfirm(val) {
+    val.kuantitas = val.jml_klr_angka;
+    const alert = await this.alertController.create({
+      header: 'Perhatian!',
+      message: 'Anda yakin ingin menghapus data ini?',
+      buttons: [
+        {
+          text: 'Batal',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Ya',
+          handler: async () => {
+            await this.func.getDataWithParams(val.id, 'barangkeluardelete/').toPromise().then(
+              async resp => {
+                if (resp['success']){
+                  await this.updateStock(val);
+                  await this.Audits(val);
+                  this.func.presentToast('Data berhasil dihapus', 'text-center', 'success');
+                  await this.reinit();
+                }
+              }
+            );
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

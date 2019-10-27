@@ -25,7 +25,8 @@ export class SspeditComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private datepipe: DatePipe,
-    private eventEmitter: EventEmitterService
+    private eventEmitter: EventEmitterService,
+    private dpipe: DatePipe
   ) {
     this.editspp = this.fb.group({
       no_spp: ['', Validators.required],
@@ -45,9 +46,10 @@ export class SspeditComponent implements OnInit {
 
   async loadSingleSPP(){
     await this.func.getDataWithParams(this.id, 'pengadaansingle/').toPromise().then(
-      resp => {
+      async resp => {
         if (resp['success']){
-          this.old_value = resp['data'];
+          this.old_value = await resp['data'];
+          // console.log(this.old_value);
           this.editspp.controls['no_spp'].setValue(this.old_value.no_spp);
           this.editspp.controls['proyek'].setValue(this.old_value.proyek);
           this.editspp.controls['no_order'].setValue(this.old_value.no_order);
@@ -62,7 +64,7 @@ export class SspeditComponent implements OnInit {
   }
 
   Edit(val) {
-    
+    val.tgl_penerimaan = this.dpipe.transform(val.tgl_penerimaan, 'yyyy-MM-dd HH:mm:ss');
     val.id = this.id;
     this.func.postData(val, 'pengadaanupdate').toPromise().then(
       async resp => {

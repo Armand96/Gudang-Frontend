@@ -72,7 +72,7 @@ export class NomorbarangmasukComponent implements OnInit, OnDestroy {
       resp=>{
         if (resp['success'] && resp['data'] != null){
           this.list_nomor_barang = resp['data'];
-          console.log(this.list_nomor_barang);
+          // console.log(this.list_nomor_barang);
         }
       }
     )

@@ -15,20 +15,20 @@
 
           <ion-item>
             <ion-label position="floating">No. SPP</ion-label>
-            <ion-input type="text" name="no_spp" maxlength="10" clearInput formControlName="no_spp" required disabled>
+            <ion-input type="text" name="no_spp" maxlength="10" clearInput formControlName="no_spp" required [disabled]="!editmode">
             </ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Proyek</ion-label>
             <ion-input type="text" name="proyek" maxlength="30" clearInput formControlName="proyek" read-only required
-              disabled>
+              [disabled]="!editmode">
             </ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">No Order</ion-label>
-            <ion-select formControlName="no_order" name="no_order" disabled>
+            <ion-select formControlName="no_order" name="no_order" [selectedText]="old_value.no_order" [disabled]="!editmode" *ngIf="old_value">
               <ion-select-option *ngFor="let ord of NoOrder" value="{{ord.no_order}}">{{ord.no_order}} - {{ord.bengkel}}
               </ion-select-option>
             </ion-select>
@@ -38,7 +38,7 @@
           <ion-item>
             <ion-label position="floating">Tgl Penerimaan yang Diharapakan</ion-label>
             <ion-datetime displayFormat="DD MMMM YYYY" placeholder="Pilih Tanggal" name="tgl_penerimaan"
-              formControlName="tgl_penerimaan" required disabled></ion-datetime>
+              formControlName="tgl_penerimaan" required [disabled]="!editmode"></ion-datetime>
           </ion-item>
 
           <ion-item>

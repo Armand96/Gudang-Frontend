@@ -46,9 +46,10 @@
             {{row.bengkel}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Details" headerClass="bg-primary text-white">
+        <ngx-datatable-column name="Actions" headerClass="bg-primary text-white">
           <ng-template let-row="row" ngx-datatable-cell-template>
             <ion-button routerLink="/menu/noorderedit/{{row.no_order}}"> Edit </ion-button>
+            <ion-button color="danger" (click)="presentAlertConfirm(row)"> Delete </ion-button>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
@@ -60,7 +61,7 @@
 
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
-    <ion-card *ngFor="let item of data | paginate: { itemsPerPage: 5, currentPage: p }" routerLink="/menu/noorderedit/{{item.no_order}}">
+    <ion-card *ngFor="let item of data | paginate: { itemsPerPage: 5, currentPage: p }" >
       
       <ion-card-header color="primary" class="p-2">
         <ion-card-title>
@@ -72,6 +73,16 @@
         <ion-label >
           <h4> <b>Bengkel: </b>  {{item.bengkel}}</h4>
         </ion-label>
+
+        <div class="row ">
+          <div class="col p-0 pl-2">
+            <ion-button routerLink="/menu/noorderedit/{{item.no_order}}" expand="block"> Edit </ion-button>
+          </div>
+
+          <div class="col p-0 pr-2">
+            <ion-button color="danger" (click)="presentAlertConfirm(item)" expand="block"> Delete </ion-button>
+          </div>
+        </div>
       </ion-card-content>
 
     </ion-card>

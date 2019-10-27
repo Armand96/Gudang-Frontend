@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FunctionService } from 'src/app/core/function.service';
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController } from '@ionic/angular';
 import { EventEmitterService } from 'src/app/core/event-emitter.service';
 
 @Component({
@@ -24,7 +24,8 @@ export class NoorderlistComponent implements OnInit, OnDestroy {
   constructor(
     private func:FunctionService,
     private plat:Platform,
-    private eventEmitterService:EventEmitterService
+    private eventEmitterService:EventEmitterService,
+    private alertController:AlertController
   ) { }
 
   updateFilter(event) {
@@ -65,6 +66,41 @@ export class NoorderlistComponent implements OnInit, OnDestroy {
     this.func.landscape.next(this.plat.isLandscape());
     await this.LoadData();
     this.temp = [...this.data];
+  }
+
+  async Audits(oldval){
+    oldval = JSON.stringify(oldval);
+    await this.func.Audits('Hapus Nomor Order', '', oldval).then();
+  }
+
+  async presentAlertConfirm(val) {
+    
+    const alert = await this.alertController.create({
+      header: 'Perhatian!',
+      message: 'Anda yakin ingin menghapus data ini?',
+      buttons: [
+        {
+          text: 'Batal',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Ya',
+          handler: async () => {
+            await this.func.postData(val, 'noorderdelete').toPromise().then(
+              async resp => {
+                if (resp['success']){
+                  await this.Audits(val);
+                  this.func.presentToast('Data berhasil dihapus', 'text-center', 'success');
+                  await this.reinit();
+                }
+              }
+            );
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   async LoadData(){

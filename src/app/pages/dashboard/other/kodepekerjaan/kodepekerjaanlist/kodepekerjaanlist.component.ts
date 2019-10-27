@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FunctionService } from 'src/app/core/function.service';
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController } from '@ionic/angular';
 import { EventEmitterService } from 'src/app/core/event-emitter.service';
 
 @Component({
@@ -24,7 +24,8 @@ export class KodepekerjaanlistComponent implements OnInit, OnDestroy {
   constructor(
     private func:FunctionService,
     private plat:Platform,
-    private eventEmitterService:EventEmitterService
+    private eventEmitterService:EventEmitterService,
+    private alertController:AlertController
   ) { }
 
   updateFilter(event) {
@@ -80,6 +81,41 @@ export class KodepekerjaanlistComponent implements OnInit, OnDestroy {
         // }
       }
     );
+  }
+
+  async Audits(oldval){
+    oldval = JSON.stringify(oldval);
+    await this.func.Audits('Hapus Kode Pekerjaan', '', oldval).then();
+  }
+
+  async presentAlertConfirm(val) {
+    val.kuantitas = val.jml_klr_angka;
+    const alert = await this.alertController.create({
+      header: 'Perhatian!',
+      message: 'Anda yakin ingin menghapus data ini?',
+      buttons: [
+        {
+          text: 'Batal',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Ya',
+          handler: async () => {
+            await this.func.postData(val, 'kodepekerjaanrdelete').toPromise().then(
+              async resp => {
+                if (resp['success']){
+                  await this.Audits(val);
+                  this.func.presentToast('Data berhasil dihapus', 'text-center', 'success');
+                  await this.reinit();
+                }
+              }
+            );
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

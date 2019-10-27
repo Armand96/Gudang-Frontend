@@ -66,9 +66,9 @@ export class NoordereditComponent implements OnInit {
 
   async Audits(val){
     delete val.no_order_old;
-    this.old_value = JSON.stringify(this.old_value);
+    var oldval = JSON.stringify(this.old_value);
     val = JSON.stringify(val);
-    await this.func.Audits('Edit No. Order', val, this.old_value).then(
+    await this.func.Audits('Edit No. Order', val, oldval).then(
       async resp => { return true }
     );
   }

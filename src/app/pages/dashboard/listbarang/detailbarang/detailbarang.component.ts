@@ -73,9 +73,9 @@ export class DetailbarangComponent implements OnInit {
 
   async Audits(val){
     delete this.old_value.dibuat_oleh;
-    this.old_value = JSON.stringify(this.old_value);
+    var oldval = JSON.stringify(this.old_value);
     val = JSON.stringify(val);
-    await this.func.Audits('Edit Barang', val, this.old_value).then(
+    await this.func.Audits('Edit Barang', val, oldval).then(
       async resp => { return true }
     );
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Renderer, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FunctionService } from 'src/app/core/function.service';
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController } from '@ionic/angular';
 import { EventEmitterService } from 'src/app/core/event-emitter.service';
 
 @Component({
@@ -27,7 +27,8 @@ export class BarangmasukComponent implements OnInit, OnDestroy {
   constructor(
     private func:FunctionService,
     private plat:Platform,
-    private eventEmitterService:EventEmitterService
+    private eventEmitterService:EventEmitterService,
+    private alertController: AlertController
   ) {
    }
 
@@ -49,7 +50,6 @@ export class BarangmasukComponent implements OnInit, OnDestroy {
 
   async reinit(){
     this.landscape = this.plat.isLandscape();
-    // (this.landscape) ? this.descktop() : this.mobile();
     this.descktop();
     await this.func.delay(1000);
     this.temp = [...this.data];
@@ -82,11 +82,52 @@ export class BarangmasukComponent implements OnInit, OnDestroy {
     // this.func.customReportBrgMasuk();
   }
 
+  async updateStock(val){
+    await this.func.postData(val, 'barangupdateq').toPromise().then();
+  }
+
+  async Audits(oldval){
+    oldval = JSON.stringify(oldval);
+    await this.func.Audits('Hapus Barang Masuk', '', oldval).then();
+  }
+
+  async presentAlertConfirm(val) {
+    val.kuantitas = -val.jml_msk_angka;
+    const alert = await this.alertController.create({
+      header: 'Perhatian!',
+      message: 'Anda yakin ingin menghapus data ini?',
+      buttons: [
+        {
+          text: 'Batal',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Ya',
+          handler: async () => {
+            await this.func.getDataWithParams(val.id, 'barangmasukdelete/').toPromise().then(
+              async resp => {
+                if (resp['success']){
+                  await this.updateStock(val);
+                  await this.Audits(val);
+                  this.func.presentToast('Data berhasil dihapus', 'text-center', 'success');
+                  await this.reinit();
+                }
+              }
+            );
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   async descktop() {
     await this.func.getDataWithoutParams('barangmasukshowall').toPromise().then(
       resp => {
         if (resp['success']){
           this.data = resp['data'];
+          // console.log(this.data);
         }
       }
     );
@@ -98,48 +139,5 @@ export class BarangmasukComponent implements OnInit, OnDestroy {
     //   }
     // );
   }
-
-  // desktop(){
-  //   this.dtOptions = {
-  //     ajax: {
-  //       url:this.func.url+"barangmasukshowall",
-  //       type:"GET",
-  //       headers: this.func.dtHeaders
-  //     },
-  //     columnDefs:[
-  //       {
-  //         className: "dt-center",
-  //         targets: "_all",
-  //         type: 'date-eu'
-  //       }
-  //     ],
-  //     columns: [
-  //       {data:"nomor_barang"},
-  //       {
-  //         data: "tgl_masuk",
-  //         render: (data)=>{
-  //           return this.datepipe.transform(data, "dd MMMM yyyy");
-  //         }
-  //       },
-  //       {data:"no_kontrak"},
-  //       {data:"asal_barang"},
-  //       {data:"jml_msk_angka"},
-  //       {
-  //         data:"id",
-  //         render: function (data: any, type: any, full: any) {
-  //           return '<td> <ion-button detailid="'+data+'"> Detail </ion-button> </td>';
-  //         }
-  //       },
-  //     ]
-  //   }
-  // }
-
-  // ngAfterViewInit(): void {
-  //   this.renderer.listen('document', 'click', (event) => {
-  //     if (event.target.hasAttribute("detailid")) {
-  //       this.router.navigateByUrl("/menu/editbarangmasuk/"+ event.target.getAttribute("detailid"));
-  //     }
-  //   });
-  // }
 
 }
