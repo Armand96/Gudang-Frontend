@@ -1,0 +1,83 @@
+<ion-content scroll-x="true">
+  <div class="container-fluid" class="m-3">
+
+    <div class="row">
+      <div class="col text-center">
+        <h3> <b>LIST BENGKEL</b> </h3>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col text-center text-sm-left">
+        <ion-button shape="round" routerLink="/menu/bengkelcreate">
+          <ion-icon slot="start" name="add"></ion-icon>
+          Tambah Bengkel Baru
+        </ion-button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col text-center text-sm-left">
+        <ion-button shape="round" (click)="exportAsXLSX()" color="success">
+          <ion-icon slot="start" name="save"></ion-icon>
+          Simpan ke Excel
+        </ion-button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <ion-item>
+          <ion-label position="floating">Pencarian</ion-label>
+          <ion-input type="text" (keyup)="updateFilter($event)"></ion-input>
+        </ion-item>
+      </div>
+    </div>
+
+    <div *ngIf="isLandScape">
+      <ngx-datatable [headerHeight]="50" [footerHeight]="50" [rowHeight]="auto" class="material striped" [rows]="data"
+        reorderable="true" [columnMode]="'force'" [limit]="10">
+
+        <ngx-datatable-column name="Nama Bengkel" prop="nama_bengkel" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row.nama_bengkel}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Actions" headerClass="bg-primary text-white">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <ion-button routerLink="/menu/bengkeledit/{{row.id}}"> Edit </ion-button>
+            <ion-button color="danger" (click)="presentAlertConfirm(row)"> Delete </ion-button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+
+  </div>
+
+  <ion-list lines="full" *ngIf="!isLandScape">
+
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+    <ion-card *ngFor="let item of data | paginate: { itemsPerPage: 5, currentPage: p }">
+
+      <ion-card-header color="primary" class="p-2">
+        <ion-card-title>
+          <h6 class="mb-0"> <b>Nama Bengkel:</b> {{item.nama_bengkel}}</h6>
+        </ion-card-title>
+      </ion-card-header>
+
+      <!-- <ion-card-content>
+        <ion-label>
+          <h4> <b>Nama Barang: </b> {{item.nama_barang}}</h4>
+          <h4> <b>Satuan : </b> {{item.satuan}}</h4>
+          <h4> <b>Kuantitas : </b> {{item.kuantitas}}</h4>
+        </ion-label>
+      </ion-card-content> -->
+
+    </ion-card>
+
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+  </ion-list>
+
+</ion-content>

@@ -18,7 +18,7 @@ export class BarangkeluareditComponent implements OnInit {
   editmode:Boolean = false;
   id = this.actr.snapshot.params['id'];
   old_value;
-  NomorBarang;
+  bengkelarray;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -32,7 +32,7 @@ export class BarangkeluareditComponent implements OnInit {
       no_spm: ['', Validators.required],
       proyek: ['', Validators.required],
       no_order: ['', Validators.required],
-      // bengkel: ['', Validators.required],
+      bengkel: ['', Validators.required],
       // pekerjaan: ['', Validators.required],
       kode_pekerjaan: ['', Validators.required],
       tgl_keluar: [, Validators.required],
@@ -45,9 +45,19 @@ export class BarangkeluareditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadBengkel();
     this.loadSingleBarang();
     this.editmode = false;
     
+  }
+  async loadBengkel(){
+    await this.func.getDataWithoutParams('bengkelall').toPromise().then(
+      resp => {
+        if (resp['success']){
+          this.bengkelarray = resp['data'];
+        }
+      }
+    );
   }
 
   async loadSingleBarang(){
@@ -55,11 +65,11 @@ export class BarangkeluareditComponent implements OnInit {
       async resp => {
         if (resp['success']){
           this.old_value = await resp['data'];
-          // console.log(this.old_value);
+          console.log(this.old_value);
           this.barangbarukeluar.controls['no_spm'].setValue(this.old_value.no_spm);
           this.barangbarukeluar.controls['proyek'].setValue(this.old_value.proyek);
           this.barangbarukeluar.controls['no_order'].setValue(this.old_value.no_order);
-          // this.barangbarukeluar.controls['bengkel'].setValue(this.old_value.bengkel);
+          this.barangbarukeluar.controls['bengkel'].setValue(this.old_value.bengkel);
           // this.barangbarukeluar.controls['pekerjaan'].setValue(this.old_value.pekerjaan);
           this.barangbarukeluar.controls['kode_pekerjaan'].setValue(this.old_value.kode_pekerjaan);
           this.barangbarukeluar.controls['tgl_keluar'].setValue(this.old_value.tgl_keluar);
@@ -93,9 +103,9 @@ export class BarangkeluareditComponent implements OnInit {
     await this.func.postData(val, "barangkeluarupdate").toPromise().then(
       async resp=>{
         if (resp['success']){
-          // await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary", 3000);
-          // this.eventEmitter.onFirstComponentButtonClick();
-          // this.router.navigateByUrl("/menu/barangkeluar");
+          await this.func.presentToast("Data Berhasil Disimpan", "text-center", "primary", 3000);
+          this.eventEmitter.onFirstComponentButtonClick();
+          this.router.navigateByUrl("/menu/barangkeluar");
           // this.func.backClicked();
         }
       }

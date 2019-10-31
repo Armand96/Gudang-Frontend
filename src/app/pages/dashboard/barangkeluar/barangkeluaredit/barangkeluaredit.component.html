@@ -1,98 +1,114 @@
 <ion-content class="container-fluid">
 
-    <div class="row d-flex justify-content-center m-2">
-      <ion-card class="col-lg-5 p-0">
-  
-        <ion-card-header color="primary p-2">
-          <ion-card-title>
-            <h3 class="text-center">Barang Keluar</h3>
-          </ion-card-title>
-        </ion-card-header>
-  
-        <ion-card-content>
-  
-          <form [formGroup]="barangbarukeluar" (ngSubmit)="Simpan(barangbarukeluar.value)">
-  
-            <ion-item>
-              <ion-label position="floating">No. SPM</ion-label>
-              <ion-input type="text" name="no_spm" maxlength="10" clearInput formControlName="no_spm" required [disabled]="!editmode"></ion-input>
-            </ion-item>
+  <div class="row d-flex justify-content-center m-2">
+    <ion-card class="col-lg-5 p-0">
 
-            <ion-item>
-              <ion-label position="floating">Proyek</ion-label>
-              <ion-input type="text" name="proyek" maxlength="30" clearInput formControlName="proyek" [disabled]="!editmode" required></ion-input>
-            </ion-item>
-  
-            <ion-item>
-              <ion-label position="floating">No Order</ion-label>
-              <ion-select formControlName="no_order" name="no_order" [selectedText]="old_value.no_order" [disabled]="!editmode" *ngIf="old_value">
+      <ion-card-header color="primary p-2">
+        <ion-card-title>
+          <h3 class="text-center">Barang Keluar</h3>
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <form [formGroup]="barangbarukeluar" (ngSubmit)="Simpan(barangbarukeluar.value)">
+
+          <ion-item>
+            <ion-label position="floating">No. SPM</ion-label>
+            <ion-input type="text" name="no_spm" maxlength="10" clearInput formControlName="no_spm" required
+              [disabled]="!editmode"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Proyek</ion-label>
+            <ion-input type="text" name="proyek" maxlength="30" clearInput formControlName="proyek"
+              [disabled]="!editmode" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">No Order</ion-label>
+            <!-- <ion-select formControlName="no_order" name="no_order" [selectedText]="old_value.no_order" [disabled]="!editmode" *ngIf="old_value">
                 <ion-select-option *ngFor="let ord of NoOrder" value="{{ord.no_order}}">{{ord.no_order}} - {{ord.bengkel}}
                 </ion-select-option>
-              </ion-select>
-              <!-- <ion-input type="number" inputmode="numeric" name="no_order" min="0" clearInput formControlName="no_order" [disabled]="!editmode" required></ion-input> -->
-            </ion-item>
-  
-            <!-- <ion-item>
-              <ion-label position="floating">Bengkel</ion-label>
-              <ion-input type="text" name="bengkel" maxlength="30" clearInput formControlName="bengkel" [disabled]="!editmode" required></ion-input>
-            </ion-item>
-  
-            <ion-item>
+              </ion-select> -->
+            <ion-input type="text" name="no_order" clearInput formControlName="no_order" [disabled]="!editmode"
+              required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Bengkel</ion-label>
+            <!-- <ion-input type="text" name="bengkel" maxlength="30" clearInput formControlName="bengkel" [disabled]="!editmode" required></ion-input> -->
+            <ion-select formControlName="bengkel" name="bengkel" [selectedText]="old_value.bengkel" *ngIf="old_value" [disabled]="!editmode">
+              <ion-select-option *ngFor="let bkl of bengkelarray" value="{{bkl.nama_bengkel}}" required>{{bkl.nama_bengkel}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <!-- <ion-item>
               <ion-label position="floating">Pekerjaan</ion-label>
               <ion-input type="text" name="pekerjaan" maxlength="30" clearInput formControlName="pekerjaan" [disabled]="!editmode" required></ion-input>
             </ion-item> -->
-  
-            <ion-item>
-              <ion-label position="floating">Kode Pekerjaan</ion-label>
-              <ion-input type="number" inputmode="numeric" name="kode_pekerjaan" min="0" clearInput formControlName="kode_pekerjaan" [disabled]="!editmode" required></ion-input>
-            </ion-item>
-  
-            <ion-item (click)="openModalNmr()">
-              <ion-label position="floating">Nomor Barang</ion-label>
-              <ion-input type="text" formControlName="nomor_barang" name="nomor_barang" read-only required [disabled]="!editmode"></ion-input>
-            </ion-item>
 
-            <ion-item>
-              <ion-label position="floating">Tgl Keluar</ion-label>
-              <ion-datetime displayFormat="DD MMMM YYYY" placeholder="Select Date" name="tgl_keluar" formControlName="tgl_keluar" required [disabled]="!editmode"></ion-datetime>
-            </ion-item>
-  
-            <ion-item>
-              <ion-label position="floating">Jumlah Keluar (Angka)</ion-label>
-              <ion-input type="number" inputmode="numeric" name="jml_klr_angka" min="0" clearInput formControlName="jml_klr_angka" required [disabled]="!editmode" (change)="konversi(barangbarukeluar.value.jml_klr_angka)"></ion-input>
-            </ion-item>
-  
-            <ion-item>
-              <ion-label position="floating">Jumlah Keluar (Huruf)</ion-label>
-              <ion-input type="text" name="jml_klr_huruf" clearInput formControlName="jml_klr_huruf" required disabled></ion-input>
-            </ion-item>
-  
-            <ion-item>
-              <ion-label position="floating">Jumlah Permintaan Keluar (Angka)</ion-label>
-              <ion-input type="number" inputmode="numeric" name="jml_klr_permintaan_angka" min="0" clearInput formControlName="jml_klr_permintaan_angka" required [disabled]="!editmode" (change)="konversi2(barangbarukeluar.value.jml_klr_permintaan_angka)"></ion-input>
-            </ion-item>
-  
-            <ion-item>
-              <ion-label position="floating">Jumlah Permintaan Keluar (Huruf)</ion-label>
-              <ion-input type="text" name="jml_klr_permintaan_huruf" clearInput formControlName="jml_klr_permintaan_huruf" required disabled></ion-input>
-            </ion-item>
-  
-            <br>
-  
-            <ion-button expand="block" type="button" color="primary" [disabled]="editmode" (click)="editmode = true">
-              Edit
-            </ion-button>
+          <ion-item>
+            <ion-label position="floating">Kode Pekerjaan</ion-label>
+            <ion-input type="number" inputmode="numeric" name="kode_pekerjaan" min="0" clearInput
+              formControlName="kode_pekerjaan" [disabled]="!editmode" required></ion-input>
+          </ion-item>
 
-            <ion-button expand="block" type="submit" color="primary" [disabled]="!barangbarukeluar.valid || !editmode">
-              Simpan
-            </ion-button>
-  
-          </form>
-  
-        </ion-card-content>
-  
-      </ion-card>
-    </div>
-    
-  
-  </ion-content>
+          <ion-item (click)="openModalNmr()">
+            <ion-label position="floating">Nomor Barang</ion-label>
+            <ion-input type="text" formControlName="nomor_barang" name="nomor_barang" read-only required
+              [disabled]="!editmode"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Tgl Keluar</ion-label>
+            <ion-datetime displayFormat="DD MMMM YYYY" placeholder="Select Date" name="tgl_keluar"
+              formControlName="tgl_keluar" required [disabled]="!editmode"></ion-datetime>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Jumlah Keluar (Angka)</ion-label>
+            <ion-input type="number" inputmode="numeric" name="jml_klr_angka" min="0" clearInput
+              formControlName="jml_klr_angka" required [disabled]="!editmode"
+              (change)="konversi(barangbarukeluar.value.jml_klr_angka)"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Jumlah Keluar (Huruf)</ion-label>
+            <ion-input type="text" name="jml_klr_huruf" clearInput formControlName="jml_klr_huruf" required disabled>
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Jumlah Permintaan Keluar (Angka)</ion-label>
+            <ion-input type="number" inputmode="numeric" name="jml_klr_permintaan_angka" min="0" clearInput
+              formControlName="jml_klr_permintaan_angka" required [disabled]="!editmode"
+              (change)="konversi2(barangbarukeluar.value.jml_klr_permintaan_angka)"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Jumlah Permintaan Keluar (Huruf)</ion-label>
+            <ion-input type="text" name="jml_klr_permintaan_huruf" clearInput formControlName="jml_klr_permintaan_huruf"
+              required disabled></ion-input>
+          </ion-item>
+
+          <br>
+
+          <ion-button expand="block" type="button" color="primary" [disabled]="editmode" (click)="editmode = true">
+            Edit
+          </ion-button>
+
+          <ion-button expand="block" type="submit" color="primary" [disabled]="!barangbarukeluar.valid || !editmode">
+            Simpan
+          </ion-button>
+
+        </form>
+
+      </ion-card-content>
+
+    </ion-card>
+  </div>
+
+
+</ion-content>

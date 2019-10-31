@@ -27,17 +27,27 @@
 
           <ion-item>
             <ion-label position="floating">No Order</ion-label>
-            <ion-select formControlName="no_order" name="no_order">
-              <ion-select-option *ngFor="let ord of NoOrder" value="{{ord.no_order}}">{{ord.no_order}} - {{ord.bengkel}}
+            <!-- <ion-select formControlName="no_order" name="no_order">
+              <ion-select-option *ngFor="let ord of NoOrder" value="{{ord.no_order}}">{{ord.no_order}} - {{ord.bengkel}} </ion-select-option>
+            </ion-select> -->
+            <ion-input type="text" name="no_order" clearInput formControlName="no_order" read-only required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Bengkel</ion-label>
+            <!-- <ion-input type="text" name="bengkel" maxlength="30" clearInput formControlName="bengkel" read-only required></ion-input> -->
+            <ion-select formControlName="bengkel" name="bengkel">
+              <ion-select-option *ngFor="let bkl of bengkelarray" value="{{bkl.nama_bengkel}}" required>{{bkl.nama_bengkel}}
               </ion-select-option>
             </ion-select>
-            <!-- <ion-input type="text" name="no_order" clearInput formControlName="no_order" read-only required></ion-input> -->
+            
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Kode Pekerjaan</ion-label>
             <ion-select formControlName="kode_pekerjaan" name="kode_pekerjaan">
-              <ion-select-option *ngFor="let kpr of KodePkr" value="{{kpr.kode_pekerjaan}}">{{kpr.kode_pekerjaan}} - {{kpr.pekerjaan}}
+              <ion-select-option *ngFor="let kpr of KodePkr" value="{{kpr.kode_pekerjaan}}">{{kpr.kode_pekerjaan}} -
+                {{kpr.pekerjaan}}
               </ion-select-option>
             </ion-select>
             <!-- <ion-input type="number" inputmode="numeric" name="kode_pekerjaan" min="0" clearInput formControlName="kode_pekerjaan" required></ion-input> -->

@@ -106,14 +106,19 @@ export class DashboardPage implements OnInit, OnDestroy {
         },
       ]
     },
-    {
-      title: 'Nomor Order',
-      url: '/menu/noorder',
-      icon: 'filing'
-    },
+    // {
+    //   title: 'Nomor Order',
+    //   url: '/menu/noorder',
+    //   icon: 'filing'
+    // },
     {
       title: 'Kode Pekerjaan',
       url: '/menu/kodepekerjaan',
+      icon: 'filing'
+    },
+    {
+      title: 'Bengkel',
+      url: '/menu/bengkel',
       icon: 'filing'
     },
     {

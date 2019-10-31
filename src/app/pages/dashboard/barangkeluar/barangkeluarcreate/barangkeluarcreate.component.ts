@@ -19,7 +19,7 @@ export class BarangkeluarcreateComponent implements OnInit {
   NomorBarang: any;
   KodePkr;
   NoOrder;
-
+  bengkelarray;
   constructor(
     private func: FunctionService,
     private fb: FormBuilder,
@@ -32,7 +32,7 @@ export class BarangkeluarcreateComponent implements OnInit {
       no_spm: ['', Validators.required],
       proyek: ['', Validators.required],
       no_order: ['', Validators.required],
-      // bengkel: ['', Validators.required],
+      bengkel: ['', Validators.required],
       // pekerjaan: ['', Validators.required],
       kode_pekerjaan: ['', Validators.required],
       nomor_barang: ['', Validators.required],
@@ -45,17 +45,28 @@ export class BarangkeluarcreateComponent implements OnInit {
 
   ngOnInit() {
     this.loadKodePkr();
-    this.loadOrder();
+    this.loadBengkel();
+    // this.loadOrder();
   }
 
-  async loadOrder() {
-    await this.func.getDataWithoutParams('noorderall').toPromise().then(
+  // async loadOrder() {
+  //   await this.func.getDataWithoutParams('noorderall').toPromise().then(
+  //     resp => {
+  //       if (resp['success']) {
+  //         this.NoOrder = resp['data'];
+  //       }
+  //     },
+  //     err => { }
+  //   );
+  // }
+
+  async loadBengkel(){
+    await this.func.getDataWithoutParams('bengkelall').toPromise().then(
       resp => {
-        if (resp['success']) {
-          this.NoOrder = resp['data'];
+        if (resp['success']){
+          this.bengkelarray = resp['data'];
         }
-      },
-      err => { }
+      }
     );
   }
 

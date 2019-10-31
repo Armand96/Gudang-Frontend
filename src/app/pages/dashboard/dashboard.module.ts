@@ -1,3 +1,4 @@
+import { BengkellistComponent } from './../bengkellist/bengkellist.component';
 import { SspprintComponent } from './printable/sspprint/sspprint.component';
 import { SspinfoComponent } from './../modal/sspinfo/sspinfo.component';
 import { SspreadComponent } from './ssp/sspread/sspread.component';
@@ -43,15 +44,17 @@ import { BrgmasukinfoComponent } from '../modal/brgmasukinfo/brgmasukinfo.compon
 import { ListBarangModalComponent } from '../modal/list-barang-modal/list-barang-modal.component';
 import { NospmComponent } from './barangkeluar/barangkeluarread/nospm/nospm.component';
 import { NobapmComponent } from './barangmasuk/barangmasukread/nobapm/nobapm.component';
-import { NoorderlistComponent } from './other/noorder/noorderlist/noorderlist.component';
-import { NoordercreateComponent } from './other/noorder/noordercreate/noordercreate.component';
+// import { NoorderlistComponent } from './other/noorder/noorderlist/noorderlist.component';
+// import { NoordercreateComponent } from './other/noorder/noordercreate/noordercreate.component';
 import { KodepekerjaanlistComponent } from './other/kodepekerjaan/kodepekerjaanlist/kodepekerjaanlist.component';
 import { KodepekerjaancreateComponent } from './other/kodepekerjaan/kodepekerjaancreate/kodepekerjaancreate.component';
-import { NoordereditComponent } from './other/noorder/noorderedit/noorderedit.component';
+// import { NoordereditComponent } from './other/noorder/noorderedit/noorderedit.component';
 import { KodepekerjaaneditComponent } from './kodepekerjaan/kodepekerjaanedit/kodepekerjaanedit.component';
 import { SspComponent } from './ssp/ssp.component';
 import { SspcreateComponent } from './ssp/sspcreate/sspcreate.component';
 import { SspeditComponent } from './ssp/sspedit/sspedit.component';
+import { BengkelcreateComponent } from '../bengkellist/bengkelcreate/bengkelcreate.component';
+import { BengkeleditComponent } from '../bengkellist/bengkeledit/bengkeledit.component';
 // =================================================== PAGES ===================================================
 
 const routes: Routes = [
@@ -78,7 +81,7 @@ const routes: Routes = [
       {path:'editbarangkeluar/:id',component:BarangkeluareditComponent},
       {path:'nomorbarangkeluar',component:NomorbarangkeluarComponent},
       {path:'proyek',component:ProyekComponent},
-      {path:'bengkel',component:BengkelComponent},
+      // {path:'bengkel',component:BengkelComponent},
       {path:'nospm',component:NospmComponent},
       // ========================== USER ==========================
       {path:'adduser',component:AdduserComponent},
@@ -86,9 +89,9 @@ const routes: Routes = [
       {path:'audits',component:AuditlistComponent},
       {path:'auditdetail/:id',component:AuditdetailComponent},
       // ========================== Other ==========================
-      {path:'noorder', component:NoorderlistComponent},
-      {path:'noordercreate', component:NoordercreateComponent},
-      {path:'noorderedit/:id', component:NoordereditComponent},
+      // {path:'noorder', component:NoorderlistComponent},
+      // {path:'noordercreate', component:NoordercreateComponent},
+      // {path:'noorderedit/:id', component:NoordereditComponent},
       //--------------------------------
       {path:'kodepekerjaan', component:KodepekerjaanlistComponent},
       {path:'kodepekerjaancreate', component:KodepekerjaancreateComponent},
@@ -97,11 +100,15 @@ const routes: Routes = [
       {path:'barangmasukexc',component:BarangmasukprintComponent},
       {path:'barangkeluarexc',component:BarangkeluarprintComponent},
       {path:'sspexc',component:SspprintComponent},
-      // ========================== SSP ==========================
+      // ========================== SPP ==========================
       {path:'ssp',component:SspComponent},
       {path:'sspcreate',component:SspcreateComponent},
       {path:'sspread',component:SspreadComponent},
       {path:'sspedit/:id',component:SspeditComponent},
+      // ========================== Bengkel ==========================
+      {path:'bengkel',component:BengkellistComponent},
+      {path:'bengkelcreate',component:BengkelcreateComponent},
+      {path:'bengkeledit/:id',component:BengkeleditComponent},
       // ========================== Wild Card ==========================
       {path:'**', redirectTo:'dashboard'}
     ]
@@ -123,13 +130,12 @@ const routes: Routes = [
     BarangmasukeditComponent, BarangkeluarcreateComponent, BarangkeluarComponent,
     BarangkeluareditComponent, AsalbarangComponent, NomorbarangmasukComponent, 
     NomorbarangkeluarComponent, ProyekComponent, BengkelComponent, AdduserComponent,
-    AuditlistComponent, AuditdetailComponent, BarangmasukprintComponent,
+    AuditlistComponent, AuditdetailComponent, BarangmasukprintComponent, BengkellistComponent,
     BarangkeluarprintComponent, BrgkeluarinfoComponent, BrgmasukinfoComponent,
     ListBarangModalComponent, NokontrakComponent, NospmComponent, NobapmComponent,
-    NoorderlistComponent, NoordercreateComponent, KodepekerjaanlistComponent, 
-    NoordereditComponent, KodepekerjaancreateComponent, KodepekerjaaneditComponent,
+    KodepekerjaanlistComponent, KodepekerjaancreateComponent, KodepekerjaaneditComponent,
     OthersComponent, SspComponent, SspcreateComponent, SspeditComponent, SspreadComponent, 
-    SspinfoComponent, SspprintComponent
+    SspinfoComponent, SspprintComponent, BengkelComponent, BengkelcreateComponent, BengkeleditComponent
   ],
   exports:[
     ListbarangComponent, HomeComponent, TambahbarangComponent,
