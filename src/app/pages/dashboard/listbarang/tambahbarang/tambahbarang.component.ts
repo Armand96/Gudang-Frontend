@@ -13,6 +13,9 @@ import { EventEmitterService } from 'src/app/core/event-emitter.service';
 export class TambahbarangComponent implements OnInit {
 
   barangbaru: FormGroup;
+  fileData: File = null;
+  previewUrl:any = null;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -25,18 +28,52 @@ export class TambahbarangComponent implements OnInit {
       satuan: ['', Validators.required],
       // kuantitas: ['', Validators.required],
       harga_satuan: ['', Validators.required],
+      foto: [''],
     })
    }
 
   ngOnInit() {}
 
+  fileProgress(fileInput: any) {
+    this.func.plat.isPortrait();
+    this.fileData = <File>fileInput.target.files[0];
+    this.preview();
+}
+
+  preview() {
+    // Show preview 
+    var mimeType = this.fileData.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+
+    var reader = new FileReader();      
+    reader.readAsDataURL(this.fileData); 
+    reader.onload = (_event) => { 
+      this.previewUrl = reader.result; 
+    }
+  }
+
   Tambah(val){
     
+    var frmData = new FormData();
+    frmData.append('nama_barang', val.nama_barang);
+    frmData.append('nomor_barang', val.nomor_barang);
+    frmData.append('satuan', val.satuan);
+    frmData.append('kuantitas', "0");
+    frmData.append('harga_satuan', val.harga_satuan);
+    frmData.append('dibuat_oleh', this.func.user);
+    frmData.append('foto', this.fileData );
+
     val.dibuat_oleh = this.func.user;
     val.kuantitas = 0;
-    // console.log(JSON.stringify(val));
-    this.func.postData(val, 'baranginsert').toPromise().then(
+    val.foto = this.fileData.name.replace(' ', '_');
+    
+    console.log(val); 
+    
+    this.func.postData(frmData, 'baranginsert').toPromise().then(
       async resp =>{
+        console.log(resp);
         if (resp['success']){
           await this.Audits(val);
         }

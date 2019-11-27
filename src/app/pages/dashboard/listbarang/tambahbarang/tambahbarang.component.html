@@ -38,6 +38,15 @@
             <ion-input type="number" inputmode="numeric" name="harga_satuan" clearInput formControlName="harga_satuan" required></ion-input>
           </ion-item>
 
+          <ion-item>
+            <ion-label position="fixed">Gambar</ion-label>
+            <input type="file" name="foto" clearInput formControlName="foto" accept="image/*" (change)="fileProgress($event)">
+          </ion-item>
+
+          <div class="image-preview mt-3 d-flex justify-content-center" *ngIf="previewUrl">
+            <img [src]="previewUrl" style="max-height: 200px; max-width: 200px;"/>                 
+          </div>
+
           <br>
 
           <ion-button expand="block" type="submit" color="primary" [disabled]="!barangbaru.valid">

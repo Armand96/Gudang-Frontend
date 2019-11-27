@@ -24,7 +24,7 @@ export class FunctionService {
   public url:string = isDevMode() ? "http://localhost/data/api/" : window.location.origin+"/data/api/";
   public dtHeaders = {
     'Authorization':'apl '+this.api_token,
-    'Content-Type':'application/json'
+    // 'Content-Type':'application/json'
   }
   // ================================================ END OF HTTP SEND REQUEST SETTING ================================================
 
